@@ -1,0 +1,22 @@
+{
+  "kind": "collectionType",
+  "collectionName": "community_professionals_links",
+  "info": {
+    "name": "communityProfessionalsLink"
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true,
+    "draftAndPublish": true
+  },
+  "attributes": {
+    "communityId": {
+      "type": "integer",
+      "required": true
+    },
+    "professionalId": {
+      "type": "integer",
+      "required": true
+    }
+  }
+}

@@ -1,0 +1,87 @@
+{
+  "kind": "collectionType",
+  "collectionName": "patients",
+  "info": {
+    "name": "Patient",
+    "description": ""
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true,
+    "draftAndPublish": false
+  },
+  "attributes": {
+    "dateOfBirth": {
+      "type": "date",
+      "required": true
+    },
+    "race": {
+      "type": "string",
+      "required": true
+    },
+    "ethnicity": {
+      "type": "string",
+      "required": true
+    },
+    "educationalLevel": {
+      "type": "enumeration",
+      "enum": [
+        "SEC",
+        "HS",
+        "ASSOC",
+        "SCOL",
+        "BD",
+        "GD",
+        "POSTG"
+      ],
+      "required": true
+    },
+    "heatlhProfileID": {
+      "type": "string",
+      "required": true
+    },
+    "personDetail": {
+      "type": "component",
+      "repeatable": false,
+      "component": "person.user-detail",
+      "required": true
+    },
+    "patientEmailAddress": {
+      "type": "email",
+      "required": true,
+      "unique": true
+    },
+    "peopleHousehold": {
+      "type": "integer",
+      "required": true,
+      "default": 1
+    },
+    "familyIncomeLevel": {
+      "type": "enumeration",
+      "enum": [
+        "A",
+        "B",
+        "C",
+        "D",
+        "E",
+        "F",
+        "G",
+        "H",
+        "I"
+      ],
+      "required": true
+    },
+    "insurance": {
+      "type": "enumeration",
+      "enum": [
+        "E",
+        "D",
+        "MC",
+        "MA",
+        "MG",
+        "N"
+      ],
+      "required": true
+    }
+  }
+}

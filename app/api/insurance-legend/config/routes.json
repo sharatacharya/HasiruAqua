@@ -1,0 +1,52 @@
+{
+  "routes": [
+    {
+      "method": "GET",
+      "path": "/insurance-legends",
+      "handler": "insurance-legend.find",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/insurance-legends/count",
+      "handler": "insurance-legend.count",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/insurance-legends/:id",
+      "handler": "insurance-legend.findOne",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/insurance-legends",
+      "handler": "insurance-legend.create",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "PUT",
+      "path": "/insurance-legends/:id",
+      "handler": "insurance-legend.update",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "DELETE",
+      "path": "/insurance-legends/:id",
+      "handler": "insurance-legend.delete",
+      "config": {
+        "policies": []
+      }
+    }
+  ]
+}

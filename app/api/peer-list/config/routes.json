@@ -1,0 +1,52 @@
+{
+  "routes": [
+    {
+      "method": "GET",
+      "path": "/peer-lists",
+      "handler": "peer-list.find",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/peer-lists/count",
+      "handler": "peer-list.count",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/peer-lists/:id",
+      "handler": "peer-list.findOne",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/peer-lists",
+      "handler": "peer-list.create",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "PUT",
+      "path": "/peer-lists/:id",
+      "handler": "peer-list.update",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "DELETE",
+      "path": "/peer-lists/:id",
+      "handler": "peer-list.delete",
+      "config": {
+        "policies": []
+      }
+    }
+  ]
+}

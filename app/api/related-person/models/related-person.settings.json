@@ -1,0 +1,33 @@
+{
+  "kind": "collectionType",
+  "collectionName": "related_people",
+  "info": {
+    "name": "relatedPerson",
+    "description": ""
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true,
+    "draftAndPublish": true
+  },
+  "attributes": {
+    "personDetail": {
+      "type": "component",
+      "repeatable": false,
+      "component": "person.user-detail",
+      "required": true
+    },
+    "patient": {
+      "model": "patient"
+    },
+    "relationshipToPatient": {
+      "type": "string",
+      "required": true
+    },
+    "relatedPersonEmailAddress": {
+      "type": "email",
+      "required": true,
+      "unique": true
+    }
+  }
+}

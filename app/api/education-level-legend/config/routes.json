@@ -1,0 +1,52 @@
+{
+  "routes": [
+    {
+      "method": "GET",
+      "path": "/education-level-legends",
+      "handler": "education-level-legend.find",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/education-level-legends/count",
+      "handler": "education-level-legend.count",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/education-level-legends/:id",
+      "handler": "education-level-legend.findOne",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/education-level-legends",
+      "handler": "education-level-legend.create",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "PUT",
+      "path": "/education-level-legends/:id",
+      "handler": "education-level-legend.update",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "DELETE",
+      "path": "/education-level-legends/:id",
+      "handler": "education-level-legend.delete",
+      "config": {
+        "policies": []
+      }
+    }
+  ]
+}

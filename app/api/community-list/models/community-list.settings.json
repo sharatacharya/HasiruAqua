@@ -1,0 +1,28 @@
+{
+  "kind": "collectionType",
+  "collectionName": "community_lists",
+  "info": {
+    "name": "communityList",
+    "description": ""
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true,
+    "draftAndPublish": true
+  },
+  "attributes": {
+    "communityName": {
+      "type": "string",
+      "required": true,
+      "unique": false
+    },
+    "communityDescription": {
+      "type": "text",
+      "required": false
+    },
+    "posts": {
+      "via": "community_lists",
+      "collection": "post"
+    }
+  }
+}

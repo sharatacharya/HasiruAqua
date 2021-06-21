@@ -1,0 +1,52 @@
+{
+  "routes": [
+    {
+      "method": "GET",
+      "path": "/community-patients-links",
+      "handler": "community-patients-link.find",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/community-patients-links/count",
+      "handler": "community-patients-link.count",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/community-patients-links/:id",
+      "handler": "community-patients-link.findOne",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/community-patients-links",
+      "handler": "community-patients-link.create",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "PUT",
+      "path": "/community-patients-links/:id",
+      "handler": "community-patients-link.update",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "DELETE",
+      "path": "/community-patients-links/:id",
+      "handler": "community-patients-link.delete",
+      "config": {
+        "policies": []
+      }
+    }
+  ]
+}

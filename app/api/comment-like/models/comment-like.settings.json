@@ -1,0 +1,18 @@
+{
+  "kind": "collectionType",
+  "collectionName": "comment_likes",
+  "info": {
+    "name": "comment_Like"
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true,
+    "draftAndPublish": true
+  },
+  "attributes": {
+    "comment_Liked_By_Name": {
+      "type": "string",
+      "required": true
+    }
+  }
+}

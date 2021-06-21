@@ -1,0 +1,52 @@
+{
+  "routes": [
+    {
+      "method": "GET",
+      "path": "/community-professionals-links",
+      "handler": "community-professionals-link.find",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/community-professionals-links/count",
+      "handler": "community-professionals-link.count",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/community-professionals-links/:id",
+      "handler": "community-professionals-link.findOne",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/community-professionals-links",
+      "handler": "community-professionals-link.create",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "PUT",
+      "path": "/community-professionals-links/:id",
+      "handler": "community-professionals-link.update",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "DELETE",
+      "path": "/community-professionals-links/:id",
+      "handler": "community-professionals-link.delete",
+      "config": {
+        "policies": []
+      }
+    }
+  ]
+}

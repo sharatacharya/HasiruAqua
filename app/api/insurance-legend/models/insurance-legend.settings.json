@@ -1,0 +1,29 @@
+{
+  "kind": "collectionType",
+  "collectionName": "insurance_legends",
+  "info": {
+    "name": "InsuranceLegend"
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true,
+    "draftAndPublish": true
+  },
+  "attributes": {
+    "Name": {
+      "type": "string",
+      "required": true
+    },
+    "Value": {
+      "type": "enumeration",
+      "enum": [
+        "E",
+        "D",
+        "MC",
+        "MA",
+        "MG",
+        "N"
+      ]
+    }
+  }
+}

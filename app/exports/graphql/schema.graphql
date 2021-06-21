@@ -1,0 +1,2958 @@
+input PostsQueryWithUserIDInput {
+  userid: ID!
+}
+
+input QuestionsQueryWithUserIDInput {
+  userid: ID!
+}
+
+input FileInfoInput {
+  name: String
+  alternativeText: String
+  caption: String
+}
+
+type UsersPermissionsMe {
+  id: ID!
+  username: String!
+  email: String!
+  confirmed: Boolean
+  blocked: Boolean
+  role: UsersPermissionsMeRole
+}
+
+type UsersPermissionsMeRole {
+  id: ID!
+  name: String!
+  description: String
+  type: String
+}
+
+input UsersPermissionsRegisterInput {
+  username: String!
+  email: String!
+  password: String!
+}
+
+input UsersPermissionsLoginInput {
+  identifier: String!
+  password: String!
+  provider: String = "local"
+}
+
+type UsersPermissionsLoginPayload {
+  jwt: String
+  user: UsersPermissionsMe!
+}
+
+type UserPermissionsPasswordPayload {
+  ok: Boolean!
+}
+
+type CommentLike {
+  id: ID!
+  created_at: DateTime!
+  updated_at: DateTime!
+  comment_Liked_By_Name: String!
+  published_at: DateTime
+}
+
+type CommentLikeConnection {
+  values: [CommentLike]
+  groupBy: CommentLikeGroupBy
+  aggregate: CommentLikeAggregator
+}
+
+type CommentLikeAggregator {
+  count: Int
+  totalCount: Int
+}
+
+type CommentLikeGroupBy {
+  id: [CommentLikeConnectionId]
+  created_at: [CommentLikeConnectionCreated_at]
+  updated_at: [CommentLikeConnectionUpdated_at]
+  comment_Liked_By_Name: [CommentLikeConnectionComment_Liked_By_Name]
+  published_at: [CommentLikeConnectionPublished_at]
+}
+
+type CommentLikeConnectionId {
+  key: ID
+  connection: CommentLikeConnection
+}
+
+type CommentLikeConnectionCreated_at {
+  key: DateTime
+  connection: CommentLikeConnection
+}
+
+type CommentLikeConnectionUpdated_at {
+  key: DateTime
+  connection: CommentLikeConnection
+}
+
+type CommentLikeConnectionComment_Liked_By_Name {
+  key: String
+  connection: CommentLikeConnection
+}
+
+type CommentLikeConnectionPublished_at {
+  key: DateTime
+  connection: CommentLikeConnection
+}
+
+input CommentLikeInput {
+  comment_Liked_By_Name: String!
+  published_at: DateTime
+  created_by: ID
+  updated_by: ID
+}
+
+input editCommentLikeInput {
+  comment_Liked_By_Name: String
+  published_at: DateTime
+  created_by: ID
+  updated_by: ID
+}
+
+input createCommentLikeInput {
+  data: CommentLikeInput
+}
+
+type createCommentLikePayload {
+  commentLike: CommentLike
+}
+
+input updateCommentLikeInput {
+  where: InputID
+  data: editCommentLikeInput
+}
+
+type updateCommentLikePayload {
+  commentLike: CommentLike
+}
+
+input deleteCommentLikeInput {
+  where: InputID
+}
+
+type deleteCommentLikePayload {
+  commentLike: CommentLike
+}
+
+type CommunityList {
+  id: ID!
+  created_at: DateTime!
+  updated_at: DateTime!
+  communityName: String!
+  communityDescription: String
+  published_at: DateTime
+  posts(sort: String, limit: Int, start: Int, where: JSON): [Post]
+}
+
+type CommunityListConnection {
+  values: [CommunityList]
+  groupBy: CommunityListGroupBy
+  aggregate: CommunityListAggregator
+}
+
+type CommunityListAggregator {
+  count: Int
+  totalCount: Int
+}
+
+type CommunityListGroupBy {
+  id: [CommunityListConnectionId]
+  created_at: [CommunityListConnectionCreated_at]
+  updated_at: [CommunityListConnectionUpdated_at]
+  communityName: [CommunityListConnectionCommunityName]
+  communityDescription: [CommunityListConnectionCommunityDescription]
+  published_at: [CommunityListConnectionPublished_at]
+}
+
+type CommunityListConnectionId {
+  key: ID
+  connection: CommunityListConnection
+}
+
+type CommunityListConnectionCreated_at {
+  key: DateTime
+  connection: CommunityListConnection
+}
+
+type CommunityListConnectionUpdated_at {
+  key: DateTime
+  connection: CommunityListConnection
+}
+
+type CommunityListConnectionCommunityName {
+  key: String
+  connection: CommunityListConnection
+}
+
+type CommunityListConnectionCommunityDescription {
+  key: String
+  connection: CommunityListConnection
+}
+
+type CommunityListConnectionPublished_at {
+  key: DateTime
+  connection: CommunityListConnection
+}
+
+input CommunityListInput {
+  communityName: String!
+  communityDescription: String
+  posts: [ID]
+  published_at: DateTime
+  created_by: ID
+  updated_by: ID
+}
+
+input editCommunityListInput {
+  communityName: String
+  communityDescription: String
+  posts: [ID]
+  published_at: DateTime
+  created_by: ID
+  updated_by: ID
+}
+
+input createCommunityListInput {
+  data: CommunityListInput
+}
+
+type createCommunityListPayload {
+  communityList: CommunityList
+}
+
+input updateCommunityListInput {
+  where: InputID
+  data: editCommunityListInput
+}
+
+type updateCommunityListPayload {
+  communityList: CommunityList
+}
+
+input deleteCommunityListInput {
+  where: InputID
+}
+
+type deleteCommunityListPayload {
+  communityList: CommunityList
+}
+
+type CommunityPatientsLink {
+  id: ID!
+  created_at: DateTime!
+  updated_at: DateTime!
+  communityId: Int!
+  patientId: Int!
+  published_at: DateTime
+}
+
+type CommunityPatientsLinkConnection {
+  values: [CommunityPatientsLink]
+  groupBy: CommunityPatientsLinkGroupBy
+  aggregate: CommunityPatientsLinkAggregator
+}
+
+type CommunityPatientsLinkAggregator {
+  count: Int
+  totalCount: Int
+  sum: CommunityPatientsLinkAggregatorSum
+  avg: CommunityPatientsLinkAggregatorAvg
+  min: CommunityPatientsLinkAggregatorMin
+  max: CommunityPatientsLinkAggregatorMax
+}
+
+type CommunityPatientsLinkAggregatorSum {
+  communityId: Float
+  patientId: Float
+}
+
+type CommunityPatientsLinkAggregatorAvg {
+  communityId: Float
+  patientId: Float
+}
+
+type CommunityPatientsLinkAggregatorMin {
+  communityId: Float
+  patientId: Float
+}
+
+type CommunityPatientsLinkAggregatorMax {
+  communityId: Float
+  patientId: Float
+}
+
+type CommunityPatientsLinkGroupBy {
+  id: [CommunityPatientsLinkConnectionId]
+  created_at: [CommunityPatientsLinkConnectionCreated_at]
+  updated_at: [CommunityPatientsLinkConnectionUpdated_at]
+  communityId: [CommunityPatientsLinkConnectionCommunityId]
+  patientId: [CommunityPatientsLinkConnectionPatientId]
+  published_at: [CommunityPatientsLinkConnectionPublished_at]
+}
+
+type CommunityPatientsLinkConnectionId {
+  key: ID
+  connection: CommunityPatientsLinkConnection
+}
+
+type CommunityPatientsLinkConnectionCreated_at {
+  key: DateTime
+  connection: CommunityPatientsLinkConnection
+}
+
+type CommunityPatientsLinkConnectionUpdated_at {
+  key: DateTime
+  connection: CommunityPatientsLinkConnection
+}
+
+type CommunityPatientsLinkConnectionCommunityId {
+  key: Int
+  connection: CommunityPatientsLinkConnection
+}
+
+type CommunityPatientsLinkConnectionPatientId {
+  key: Int
+  connection: CommunityPatientsLinkConnection
+}
+
+type CommunityPatientsLinkConnectionPublished_at {
+  key: DateTime
+  connection: CommunityPatientsLinkConnection
+}
+
+input CommunityPatientsLinkInput {
+  communityId: Int!
+  patientId: Int!
+  published_at: DateTime
+  created_by: ID
+  updated_by: ID
+}
+
+input editCommunityPatientsLinkInput {
+  communityId: Int
+  patientId: Int
+  published_at: DateTime
+  created_by: ID
+  updated_by: ID
+}
+
+input createCommunityPatientsLinkInput {
+  data: CommunityPatientsLinkInput
+}
+
+type createCommunityPatientsLinkPayload {
+  communityPatientsLink: CommunityPatientsLink
+}
+
+input updateCommunityPatientsLinkInput {
+  where: InputID
+  data: editCommunityPatientsLinkInput
+}
+
+type updateCommunityPatientsLinkPayload {
+  communityPatientsLink: CommunityPatientsLink
+}
+
+input deleteCommunityPatientsLinkInput {
+  where: InputID
+}
+
+type deleteCommunityPatientsLinkPayload {
+  communityPatientsLink: CommunityPatientsLink
+}
+
+type CommunityProfessionalsLink {
+  id: ID!
+  created_at: DateTime!
+  updated_at: DateTime!
+  communityId: Int!
+  professionalId: Int!
+  published_at: DateTime
+}
+
+type CommunityProfessionalsLinkConnection {
+  values: [CommunityProfessionalsLink]
+  groupBy: CommunityProfessionalsLinkGroupBy
+  aggregate: CommunityProfessionalsLinkAggregator
+}
+
+type CommunityProfessionalsLinkAggregator {
+  count: Int
+  totalCount: Int
+  sum: CommunityProfessionalsLinkAggregatorSum
+  avg: CommunityProfessionalsLinkAggregatorAvg
+  min: CommunityProfessionalsLinkAggregatorMin
+  max: CommunityProfessionalsLinkAggregatorMax
+}
+
+type CommunityProfessionalsLinkAggregatorSum {
+  communityId: Float
+  professionalId: Float
+}
+
+type CommunityProfessionalsLinkAggregatorAvg {
+  communityId: Float
+  professionalId: Float
+}
+
+type CommunityProfessionalsLinkAggregatorMin {
+  communityId: Float
+  professionalId: Float
+}
+
+type CommunityProfessionalsLinkAggregatorMax {
+  communityId: Float
+  professionalId: Float
+}
+
+type CommunityProfessionalsLinkGroupBy {
+  id: [CommunityProfessionalsLinkConnectionId]
+  created_at: [CommunityProfessionalsLinkConnectionCreated_at]
+  updated_at: [CommunityProfessionalsLinkConnectionUpdated_at]
+  communityId: [CommunityProfessionalsLinkConnectionCommunityId]
+  professionalId: [CommunityProfessionalsLinkConnectionProfessionalId]
+  published_at: [CommunityProfessionalsLinkConnectionPublished_at]
+}
+
+type CommunityProfessionalsLinkConnectionId {
+  key: ID
+  connection: CommunityProfessionalsLinkConnection
+}
+
+type CommunityProfessionalsLinkConnectionCreated_at {
+  key: DateTime
+  connection: CommunityProfessionalsLinkConnection
+}
+
+type CommunityProfessionalsLinkConnectionUpdated_at {
+  key: DateTime
+  connection: CommunityProfessionalsLinkConnection
+}
+
+type CommunityProfessionalsLinkConnectionCommunityId {
+  key: Int
+  connection: CommunityProfessionalsLinkConnection
+}
+
+type CommunityProfessionalsLinkConnectionProfessionalId {
+  key: Int
+  connection: CommunityProfessionalsLinkConnection
+}
+
+type CommunityProfessionalsLinkConnectionPublished_at {
+  key: DateTime
+  connection: CommunityProfessionalsLinkConnection
+}
+
+input CommunityProfessionalsLinkInput {
+  communityId: Int!
+  professionalId: Int!
+  published_at: DateTime
+  created_by: ID
+  updated_by: ID
+}
+
+input editCommunityProfessionalsLinkInput {
+  communityId: Int
+  professionalId: Int
+  published_at: DateTime
+  created_by: ID
+  updated_by: ID
+}
+
+input createCommunityProfessionalsLinkInput {
+  data: CommunityProfessionalsLinkInput
+}
+
+type createCommunityProfessionalsLinkPayload {
+  communityProfessionalsLink: CommunityProfessionalsLink
+}
+
+input updateCommunityProfessionalsLinkInput {
+  where: InputID
+  data: editCommunityProfessionalsLinkInput
+}
+
+type updateCommunityProfessionalsLinkPayload {
+  communityProfessionalsLink: CommunityProfessionalsLink
+}
+
+input deleteCommunityProfessionalsLinkInput {
+  where: InputID
+}
+
+type deleteCommunityProfessionalsLinkPayload {
+  communityProfessionalsLink: CommunityProfessionalsLink
+}
+
+type CommunityRelatedPersonLink {
+  id: ID!
+  created_at: DateTime!
+  updated_at: DateTime!
+  communityId: Int!
+  relatedPersonId: Int!
+  published_at: DateTime
+}
+
+type CommunityRelatedPersonLinkConnection {
+  values: [CommunityRelatedPersonLink]
+  groupBy: CommunityRelatedPersonLinkGroupBy
+  aggregate: CommunityRelatedPersonLinkAggregator
+}
+
+type CommunityRelatedPersonLinkAggregator {
+  count: Int
+  totalCount: Int
+  sum: CommunityRelatedPersonLinkAggregatorSum
+  avg: CommunityRelatedPersonLinkAggregatorAvg
+  min: CommunityRelatedPersonLinkAggregatorMin
+  max: CommunityRelatedPersonLinkAggregatorMax
+}
+
+type CommunityRelatedPersonLinkAggregatorSum {
+  communityId: Float
+  relatedPersonId: Float
+}
+
+type CommunityRelatedPersonLinkAggregatorAvg {
+  communityId: Float
+  relatedPersonId: Float
+}
+
+type CommunityRelatedPersonLinkAggregatorMin {
+  communityId: Float
+  relatedPersonId: Float
+}
+
+type CommunityRelatedPersonLinkAggregatorMax {
+  communityId: Float
+  relatedPersonId: Float
+}
+
+type CommunityRelatedPersonLinkGroupBy {
+  id: [CommunityRelatedPersonLinkConnectionId]
+  created_at: [CommunityRelatedPersonLinkConnectionCreated_at]
+  updated_at: [CommunityRelatedPersonLinkConnectionUpdated_at]
+  communityId: [CommunityRelatedPersonLinkConnectionCommunityId]
+  relatedPersonId: [CommunityRelatedPersonLinkConnectionRelatedPersonId]
+  published_at: [CommunityRelatedPersonLinkConnectionPublished_at]
+}
+
+type CommunityRelatedPersonLinkConnectionId {
+  key: ID
+  connection: CommunityRelatedPersonLinkConnection
+}
+
+type CommunityRelatedPersonLinkConnectionCreated_at {
+  key: DateTime
+  connection: CommunityRelatedPersonLinkConnection
+}
+
+type CommunityRelatedPersonLinkConnectionUpdated_at {
+  key: DateTime
+  connection: CommunityRelatedPersonLinkConnection
+}
+
+type CommunityRelatedPersonLinkConnectionCommunityId {
+  key: Int
+  connection: CommunityRelatedPersonLinkConnection
+}
+
+type CommunityRelatedPersonLinkConnectionRelatedPersonId {
+  key: Int
+  connection: CommunityRelatedPersonLinkConnection
+}
+
+type CommunityRelatedPersonLinkConnectionPublished_at {
+  key: DateTime
+  connection: CommunityRelatedPersonLinkConnection
+}
+
+input CommunityRelatedPersonLinkInput {
+  communityId: Int!
+  relatedPersonId: Int!
+  published_at: DateTime
+  created_by: ID
+  updated_by: ID
+}
+
+input editCommunityRelatedPersonLinkInput {
+  communityId: Int
+  relatedPersonId: Int
+  published_at: DateTime
+  created_by: ID
+  updated_by: ID
+}
+
+input createCommunityRelatedPersonLinkInput {
+  data: CommunityRelatedPersonLinkInput
+}
+
+type createCommunityRelatedPersonLinkPayload {
+  communityRelatedPersonLink: CommunityRelatedPersonLink
+}
+
+input updateCommunityRelatedPersonLinkInput {
+  where: InputID
+  data: editCommunityRelatedPersonLinkInput
+}
+
+type updateCommunityRelatedPersonLinkPayload {
+  communityRelatedPersonLink: CommunityRelatedPersonLink
+}
+
+input deleteCommunityRelatedPersonLinkInput {
+  where: InputID
+}
+
+type deleteCommunityRelatedPersonLinkPayload {
+  communityRelatedPersonLink: CommunityRelatedPersonLink
+}
+
+enum ENUM_EDUCATIONLEVELLEGEND_VALUE {
+  SEC
+  HS
+  ASSOC
+  SCOL
+  BD
+  GD
+  POSTG
+}
+
+type EducationLevelLegend {
+  id: ID!
+  created_at: DateTime!
+  updated_at: DateTime!
+  Name: String!
+  Value: ENUM_EDUCATIONLEVELLEGEND_VALUE!
+  published_at: DateTime
+}
+
+type EducationLevelLegendConnection {
+  values: [EducationLevelLegend]
+  groupBy: EducationLevelLegendGroupBy
+  aggregate: EducationLevelLegendAggregator
+}
+
+type EducationLevelLegendAggregator {
+  count: Int
+  totalCount: Int
+}
+
+type EducationLevelLegendGroupBy {
+  id: [EducationLevelLegendConnectionId]
+  created_at: [EducationLevelLegendConnectionCreated_at]
+  updated_at: [EducationLevelLegendConnectionUpdated_at]
+  Name: [EducationLevelLegendConnectionName]
+  Value: [EducationLevelLegendConnectionValue]
+  published_at: [EducationLevelLegendConnectionPublished_at]
+}
+
+type EducationLevelLegendConnectionId {
+  key: ID
+  connection: EducationLevelLegendConnection
+}
+
+type EducationLevelLegendConnectionCreated_at {
+  key: DateTime
+  connection: EducationLevelLegendConnection
+}
+
+type EducationLevelLegendConnectionUpdated_at {
+  key: DateTime
+  connection: EducationLevelLegendConnection
+}
+
+type EducationLevelLegendConnectionName {
+  key: String
+  connection: EducationLevelLegendConnection
+}
+
+type EducationLevelLegendConnectionValue {
+  key: String
+  connection: EducationLevelLegendConnection
+}
+
+type EducationLevelLegendConnectionPublished_at {
+  key: DateTime
+  connection: EducationLevelLegendConnection
+}
+
+input EducationLevelLegendInput {
+  Name: String!
+  Value: ENUM_EDUCATIONLEVELLEGEND_VALUE!
+  published_at: DateTime
+  created_by: ID
+  updated_by: ID
+}
+
+input editEducationLevelLegendInput {
+  Name: String
+  Value: ENUM_EDUCATIONLEVELLEGEND_VALUE
+  published_at: DateTime
+  created_by: ID
+  updated_by: ID
+}
+
+input createEducationLevelLegendInput {
+  data: EducationLevelLegendInput
+}
+
+type createEducationLevelLegendPayload {
+  educationLevelLegend: EducationLevelLegend
+}
+
+input updateEducationLevelLegendInput {
+  where: InputID
+  data: editEducationLevelLegendInput
+}
+
+type updateEducationLevelLegendPayload {
+  educationLevelLegend: EducationLevelLegend
+}
+
+input deleteEducationLevelLegendInput {
+  where: InputID
+}
+
+type deleteEducationLevelLegendPayload {
+  educationLevelLegend: EducationLevelLegend
+}
+
+enum ENUM_FAMILYINCOMELEVELLEGEND_VALUE {
+  A
+  B
+  C
+  D
+  E
+  F
+  G
+  H
+  I
+}
+
+type FamilyIncomeLevelLegend {
+  id: ID!
+  created_at: DateTime!
+  updated_at: DateTime!
+  Name: String!
+  Value: ENUM_FAMILYINCOMELEVELLEGEND_VALUE!
+  published_at: DateTime
+}
+
+type FamilyIncomeLevelLegendConnection {
+  values: [FamilyIncomeLevelLegend]
+  groupBy: FamilyIncomeLevelLegendGroupBy
+  aggregate: FamilyIncomeLevelLegendAggregator
+}
+
+type FamilyIncomeLevelLegendAggregator {
+  count: Int
+  totalCount: Int
+}
+
+type FamilyIncomeLevelLegendGroupBy {
+  id: [FamilyIncomeLevelLegendConnectionId]
+  created_at: [FamilyIncomeLevelLegendConnectionCreated_at]
+  updated_at: [FamilyIncomeLevelLegendConnectionUpdated_at]
+  Name: [FamilyIncomeLevelLegendConnectionName]
+  Value: [FamilyIncomeLevelLegendConnectionValue]
+  published_at: [FamilyIncomeLevelLegendConnectionPublished_at]
+}
+
+type FamilyIncomeLevelLegendConnectionId {
+  key: ID
+  connection: FamilyIncomeLevelLegendConnection
+}
+
+type FamilyIncomeLevelLegendConnectionCreated_at {
+  key: DateTime
+  connection: FamilyIncomeLevelLegendConnection
+}
+
+type FamilyIncomeLevelLegendConnectionUpdated_at {
+  key: DateTime
+  connection: FamilyIncomeLevelLegendConnection
+}
+
+type FamilyIncomeLevelLegendConnectionName {
+  key: String
+  connection: FamilyIncomeLevelLegendConnection
+}
+
+type FamilyIncomeLevelLegendConnectionValue {
+  key: String
+  connection: FamilyIncomeLevelLegendConnection
+}
+
+type FamilyIncomeLevelLegendConnectionPublished_at {
+  key: DateTime
+  connection: FamilyIncomeLevelLegendConnection
+}
+
+input FamilyIncomeLevelLegendInput {
+  Name: String!
+  Value: ENUM_FAMILYINCOMELEVELLEGEND_VALUE!
+  published_at: DateTime
+  created_by: ID
+  updated_by: ID
+}
+
+input editFamilyIncomeLevelLegendInput {
+  Name: String
+  Value: ENUM_FAMILYINCOMELEVELLEGEND_VALUE
+  published_at: DateTime
+  created_by: ID
+  updated_by: ID
+}
+
+input createFamilyIncomeLevelLegendInput {
+  data: FamilyIncomeLevelLegendInput
+}
+
+type createFamilyIncomeLevelLegendPayload {
+  familyIncomeLevelLegend: FamilyIncomeLevelLegend
+}
+
+input updateFamilyIncomeLevelLegendInput {
+  where: InputID
+  data: editFamilyIncomeLevelLegendInput
+}
+
+type updateFamilyIncomeLevelLegendPayload {
+  familyIncomeLevelLegend: FamilyIncomeLevelLegend
+}
+
+input deleteFamilyIncomeLevelLegendInput {
+  where: InputID
+}
+
+type deleteFamilyIncomeLevelLegendPayload {
+  familyIncomeLevelLegend: FamilyIncomeLevelLegend
+}
+
+enum ENUM_GENDERIDENTITYLEGEND_VALUE {
+  male
+  female
+  nonbinary
+  transgendermale
+  transgenderfemale
+  other
+  nondisclose
+}
+
+type GenderIdentityLegend {
+  id: ID!
+  created_at: DateTime!
+  updated_at: DateTime!
+  Name: String!
+  Value: ENUM_GENDERIDENTITYLEGEND_VALUE
+  published_at: DateTime
+}
+
+type GenderIdentityLegendConnection {
+  values: [GenderIdentityLegend]
+  groupBy: GenderIdentityLegendGroupBy
+  aggregate: GenderIdentityLegendAggregator
+}
+
+type GenderIdentityLegendAggregator {
+  count: Int
+  totalCount: Int
+}
+
+type GenderIdentityLegendGroupBy {
+  id: [GenderIdentityLegendConnectionId]
+  created_at: [GenderIdentityLegendConnectionCreated_at]
+  updated_at: [GenderIdentityLegendConnectionUpdated_at]
+  Name: [GenderIdentityLegendConnectionName]
+  Value: [GenderIdentityLegendConnectionValue]
+  published_at: [GenderIdentityLegendConnectionPublished_at]
+}
+
+type GenderIdentityLegendConnectionId {
+  key: ID
+  connection: GenderIdentityLegendConnection
+}
+
+type GenderIdentityLegendConnectionCreated_at {
+  key: DateTime
+  connection: GenderIdentityLegendConnection
+}
+
+type GenderIdentityLegendConnectionUpdated_at {
+  key: DateTime
+  connection: GenderIdentityLegendConnection
+}
+
+type GenderIdentityLegendConnectionName {
+  key: String
+  connection: GenderIdentityLegendConnection
+}
+
+type GenderIdentityLegendConnectionValue {
+  key: String
+  connection: GenderIdentityLegendConnection
+}
+
+type GenderIdentityLegendConnectionPublished_at {
+  key: DateTime
+  connection: GenderIdentityLegendConnection
+}
+
+input GenderIdentityLegendInput {
+  Name: String!
+  Value: ENUM_GENDERIDENTITYLEGEND_VALUE
+  published_at: DateTime
+  created_by: ID
+  updated_by: ID
+}
+
+input editGenderIdentityLegendInput {
+  Name: String
+  Value: ENUM_GENDERIDENTITYLEGEND_VALUE
+  published_at: DateTime
+  created_by: ID
+  updated_by: ID
+}
+
+input createGenderIdentityLegendInput {
+  data: GenderIdentityLegendInput
+}
+
+type createGenderIdentityLegendPayload {
+  genderIdentityLegend: GenderIdentityLegend
+}
+
+input updateGenderIdentityLegendInput {
+  where: InputID
+  data: editGenderIdentityLegendInput
+}
+
+type updateGenderIdentityLegendPayload {
+  genderIdentityLegend: GenderIdentityLegend
+}
+
+input deleteGenderIdentityLegendInput {
+  where: InputID
+}
+
+type deleteGenderIdentityLegendPayload {
+  genderIdentityLegend: GenderIdentityLegend
+}
+
+enum ENUM_INSURANCELEGEND_VALUE {
+  E
+  D
+  MC
+  MA
+  MG
+  N
+}
+
+type InsuranceLegend {
+  id: ID!
+  created_at: DateTime!
+  updated_at: DateTime!
+  Name: String!
+  Value: ENUM_INSURANCELEGEND_VALUE
+  published_at: DateTime
+}
+
+type InsuranceLegendConnection {
+  values: [InsuranceLegend]
+  groupBy: InsuranceLegendGroupBy
+  aggregate: InsuranceLegendAggregator
+}
+
+type InsuranceLegendAggregator {
+  count: Int
+  totalCount: Int
+}
+
+type InsuranceLegendGroupBy {
+  id: [InsuranceLegendConnectionId]
+  created_at: [InsuranceLegendConnectionCreated_at]
+  updated_at: [InsuranceLegendConnectionUpdated_at]
+  Name: [InsuranceLegendConnectionName]
+  Value: [InsuranceLegendConnectionValue]
+  published_at: [InsuranceLegendConnectionPublished_at]
+}
+
+type InsuranceLegendConnectionId {
+  key: ID
+  connection: InsuranceLegendConnection
+}
+
+type InsuranceLegendConnectionCreated_at {
+  key: DateTime
+  connection: InsuranceLegendConnection
+}
+
+type InsuranceLegendConnectionUpdated_at {
+  key: DateTime
+  connection: InsuranceLegendConnection
+}
+
+type InsuranceLegendConnectionName {
+  key: String
+  connection: InsuranceLegendConnection
+}
+
+type InsuranceLegendConnectionValue {
+  key: String
+  connection: InsuranceLegendConnection
+}
+
+type InsuranceLegendConnectionPublished_at {
+  key: DateTime
+  connection: InsuranceLegendConnection
+}
+
+input InsuranceLegendInput {
+  Name: String!
+  Value: ENUM_INSURANCELEGEND_VALUE
+  published_at: DateTime
+  created_by: ID
+  updated_by: ID
+}
+
+input editInsuranceLegendInput {
+  Name: String
+  Value: ENUM_INSURANCELEGEND_VALUE
+  published_at: DateTime
+  created_by: ID
+  updated_by: ID
+}
+
+input createInsuranceLegendInput {
+  data: InsuranceLegendInput
+}
+
+type createInsuranceLegendPayload {
+  insuranceLegend: InsuranceLegend
+}
+
+input updateInsuranceLegendInput {
+  where: InputID
+  data: editInsuranceLegendInput
+}
+
+type updateInsuranceLegendPayload {
+  insuranceLegend: InsuranceLegend
+}
+
+input deleteInsuranceLegendInput {
+  where: InputID
+}
+
+type deleteInsuranceLegendPayload {
+  insuranceLegend: InsuranceLegend
+}
+
+enum ENUM_PATIENT_EDUCATIONALLEVEL {
+  SEC
+  HS
+  ASSOC
+  SCOL
+  BD
+  GD
+  POSTG
+}
+
+enum ENUM_PATIENT_FAMILYINCOMELEVEL {
+  A
+  B
+  C
+  D
+  E
+  F
+  G
+  H
+  I
+}
+
+enum ENUM_PATIENT_INSURANCE {
+  E
+  D
+  MC
+  MA
+  MG
+  N
+}
+
+type Patient {
+  id: ID!
+  created_at: DateTime!
+  updated_at: DateTime!
+  dateOfBirth: Date!
+  race: String!
+  ethnicity: String!
+  educationalLevel: ENUM_PATIENT_EDUCATIONALLEVEL!
+  heatlhProfileID: String!
+  personDetail: ComponentPersonUserDetail
+  patientEmailAddress: String!
+  peopleHousehold: Int!
+  familyIncomeLevel: ENUM_PATIENT_FAMILYINCOMELEVEL!
+  insurance: ENUM_PATIENT_INSURANCE!
+}
+
+type PatientConnection {
+  values: [Patient]
+  groupBy: PatientGroupBy
+  aggregate: PatientAggregator
+}
+
+type PatientAggregator {
+  count: Int
+  totalCount: Int
+  sum: PatientAggregatorSum
+  avg: PatientAggregatorAvg
+  min: PatientAggregatorMin
+  max: PatientAggregatorMax
+}
+
+type PatientAggregatorSum {
+  peopleHousehold: Float
+}
+
+type PatientAggregatorAvg {
+  peopleHousehold: Float
+}
+
+type PatientAggregatorMin {
+  peopleHousehold: Float
+}
+
+type PatientAggregatorMax {
+  peopleHousehold: Float
+}
+
+type PatientGroupBy {
+  id: [PatientConnectionId]
+  created_at: [PatientConnectionCreated_at]
+  updated_at: [PatientConnectionUpdated_at]
+  dateOfBirth: [PatientConnectionDateOfBirth]
+  race: [PatientConnectionRace]
+  ethnicity: [PatientConnectionEthnicity]
+  educationalLevel: [PatientConnectionEducationalLevel]
+  heatlhProfileID: [PatientConnectionHeatlhProfileID]
+  personDetail: [PatientConnectionPersonDetail]
+  patientEmailAddress: [PatientConnectionPatientEmailAddress]
+  peopleHousehold: [PatientConnectionPeopleHousehold]
+  familyIncomeLevel: [PatientConnectionFamilyIncomeLevel]
+  insurance: [PatientConnectionInsurance]
+}
+
+type PatientConnectionId {
+  key: ID
+  connection: PatientConnection
+}
+
+type PatientConnectionCreated_at {
+  key: DateTime
+  connection: PatientConnection
+}
+
+type PatientConnectionUpdated_at {
+  key: DateTime
+  connection: PatientConnection
+}
+
+type PatientConnectionDateOfBirth {
+  key: ID
+  connection: PatientConnection
+}
+
+type PatientConnectionRace {
+  key: String
+  connection: PatientConnection
+}
+
+type PatientConnectionEthnicity {
+  key: String
+  connection: PatientConnection
+}
+
+type PatientConnectionEducationalLevel {
+  key: String
+  connection: PatientConnection
+}
+
+type PatientConnectionHeatlhProfileID {
+  key: String
+  connection: PatientConnection
+}
+
+type PatientConnectionPersonDetail {
+  key: ID
+  connection: PatientConnection
+}
+
+type PatientConnectionPatientEmailAddress {
+  key: String
+  connection: PatientConnection
+}
+
+type PatientConnectionPeopleHousehold {
+  key: Int
+  connection: PatientConnection
+}
+
+type PatientConnectionFamilyIncomeLevel {
+  key: String
+  connection: PatientConnection
+}
+
+type PatientConnectionInsurance {
+  key: String
+  connection: PatientConnection
+}
+
+input PatientInput {
+  dateOfBirth: Date!
+  race: String!
+  ethnicity: String!
+  educationalLevel: ENUM_PATIENT_EDUCATIONALLEVEL!
+  heatlhProfileID: String!
+  personDetail: ComponentPersonUserDetailInput!
+  patientEmailAddress: String!
+  peopleHousehold: Int
+  familyIncomeLevel: ENUM_PATIENT_FAMILYINCOMELEVEL!
+  insurance: ENUM_PATIENT_INSURANCE!
+  created_by: ID
+  updated_by: ID
+}
+
+input editPatientInput {
+  dateOfBirth: Date
+  race: String
+  ethnicity: String
+  educationalLevel: ENUM_PATIENT_EDUCATIONALLEVEL
+  heatlhProfileID: String
+  personDetail: editComponentPersonUserDetailInput
+  patientEmailAddress: String
+  peopleHousehold: Int
+  familyIncomeLevel: ENUM_PATIENT_FAMILYINCOMELEVEL
+  insurance: ENUM_PATIENT_INSURANCE
+  created_by: ID
+  updated_by: ID
+}
+
+input createPatientInput {
+  data: PatientInput
+}
+
+type createPatientPayload {
+  patient: Patient
+}
+
+input updatePatientInput {
+  where: InputID
+  data: editPatientInput
+}
+
+type updatePatientPayload {
+  patient: Patient
+}
+
+input deletePatientInput {
+  where: InputID
+}
+
+type deletePatientPayload {
+  patient: Patient
+}
+
+type PeerList {
+  id: ID!
+  created_at: DateTime!
+  updated_at: DateTime!
+  patientId: Int!
+  peerId: Int!
+  ageSimilarityScore: String!
+  genderSimilarityScore: String!
+  raceSimilarityScore: String!
+  ethnicSimilarityScore: String!
+  educationSimilarityScore: String!
+  healthInsuranceSimilarityScore: String!
+  adjustedIncomeSimilarityScore: String!
+  medicalHxScore: String!
+  overallSocioEconomicScore: String!
+  overallDemographicScore: String!
+  overallScore: String!
+  published_at: DateTime
+}
+
+type PeerListConnection {
+  values: [PeerList]
+  groupBy: PeerListGroupBy
+  aggregate: PeerListAggregator
+}
+
+type PeerListAggregator {
+  count: Int
+  totalCount: Int
+  sum: PeerListAggregatorSum
+  avg: PeerListAggregatorAvg
+  min: PeerListAggregatorMin
+  max: PeerListAggregatorMax
+}
+
+type PeerListAggregatorSum {
+  patientId: Float
+  peerId: Float
+}
+
+type PeerListAggregatorAvg {
+  patientId: Float
+  peerId: Float
+}
+
+type PeerListAggregatorMin {
+  patientId: Float
+  peerId: Float
+}
+
+type PeerListAggregatorMax {
+  patientId: Float
+  peerId: Float
+}
+
+type PeerListGroupBy {
+  id: [PeerListConnectionId]
+  created_at: [PeerListConnectionCreated_at]
+  updated_at: [PeerListConnectionUpdated_at]
+  patientId: [PeerListConnectionPatientId]
+  peerId: [PeerListConnectionPeerId]
+  ageSimilarityScore: [PeerListConnectionAgeSimilarityScore]
+  genderSimilarityScore: [PeerListConnectionGenderSimilarityScore]
+  raceSimilarityScore: [PeerListConnectionRaceSimilarityScore]
+  ethnicSimilarityScore: [PeerListConnectionEthnicSimilarityScore]
+  educationSimilarityScore: [PeerListConnectionEducationSimilarityScore]
+  healthInsuranceSimilarityScore: [PeerListConnectionHealthInsuranceSimilarityScore]
+  adjustedIncomeSimilarityScore: [PeerListConnectionAdjustedIncomeSimilarityScore]
+  medicalHxScore: [PeerListConnectionMedicalHxScore]
+  overallSocioEconomicScore: [PeerListConnectionOverallSocioEconomicScore]
+  overallDemographicScore: [PeerListConnectionOverallDemographicScore]
+  overallScore: [PeerListConnectionOverallScore]
+  published_at: [PeerListConnectionPublished_at]
+}
+
+type PeerListConnectionId {
+  key: ID
+  connection: PeerListConnection
+}
+
+type PeerListConnectionCreated_at {
+  key: DateTime
+  connection: PeerListConnection
+}
+
+type PeerListConnectionUpdated_at {
+  key: DateTime
+  connection: PeerListConnection
+}
+
+type PeerListConnectionPatientId {
+  key: Int
+  connection: PeerListConnection
+}
+
+type PeerListConnectionPeerId {
+  key: Int
+  connection: PeerListConnection
+}
+
+type PeerListConnectionAgeSimilarityScore {
+  key: String
+  connection: PeerListConnection
+}
+
+type PeerListConnectionGenderSimilarityScore {
+  key: String
+  connection: PeerListConnection
+}
+
+type PeerListConnectionRaceSimilarityScore {
+  key: String
+  connection: PeerListConnection
+}
+
+type PeerListConnectionEthnicSimilarityScore {
+  key: String
+  connection: PeerListConnection
+}
+
+type PeerListConnectionEducationSimilarityScore {
+  key: String
+  connection: PeerListConnection
+}
+
+type PeerListConnectionHealthInsuranceSimilarityScore {
+  key: String
+  connection: PeerListConnection
+}
+
+type PeerListConnectionAdjustedIncomeSimilarityScore {
+  key: String
+  connection: PeerListConnection
+}
+
+type PeerListConnectionMedicalHxScore {
+  key: String
+  connection: PeerListConnection
+}
+
+type PeerListConnectionOverallSocioEconomicScore {
+  key: String
+  connection: PeerListConnection
+}
+
+type PeerListConnectionOverallDemographicScore {
+  key: String
+  connection: PeerListConnection
+}
+
+type PeerListConnectionOverallScore {
+  key: String
+  connection: PeerListConnection
+}
+
+type PeerListConnectionPublished_at {
+  key: DateTime
+  connection: PeerListConnection
+}
+
+input PeerListInput {
+  patientId: Int!
+  peerId: Int!
+  ageSimilarityScore: String!
+  genderSimilarityScore: String!
+  raceSimilarityScore: String!
+  ethnicSimilarityScore: String!
+  educationSimilarityScore: String!
+  healthInsuranceSimilarityScore: String!
+  adjustedIncomeSimilarityScore: String!
+  medicalHxScore: String!
+  overallSocioEconomicScore: String!
+  overallDemographicScore: String!
+  overallScore: String!
+  published_at: DateTime
+  created_by: ID
+  updated_by: ID
+}
+
+input editPeerListInput {
+  patientId: Int
+  peerId: Int
+  ageSimilarityScore: String
+  genderSimilarityScore: String
+  raceSimilarityScore: String
+  ethnicSimilarityScore: String
+  educationSimilarityScore: String
+  healthInsuranceSimilarityScore: String
+  adjustedIncomeSimilarityScore: String
+  medicalHxScore: String
+  overallSocioEconomicScore: String
+  overallDemographicScore: String
+  overallScore: String
+  published_at: DateTime
+  created_by: ID
+  updated_by: ID
+}
+
+input createPeerListInput {
+  data: PeerListInput
+}
+
+type createPeerListPayload {
+  peerList: PeerList
+}
+
+input updatePeerListInput {
+  where: InputID
+  data: editPeerListInput
+}
+
+type updatePeerListPayload {
+  peerList: PeerList
+}
+
+input deletePeerListInput {
+  where: InputID
+}
+
+type deletePeerListPayload {
+  peerList: PeerList
+}
+
+type PostComment {
+  id: ID!
+  created_at: DateTime!
+  updated_at: DateTime!
+  comment_Text: String
+  comment_Name: String!
+  published_at: DateTime
+  comment_likes(sort: String, limit: Int, start: Int, where: JSON): [CommentLike]
+}
+
+type PostCommentConnection {
+  values: [PostComment]
+  groupBy: PostCommentGroupBy
+  aggregate: PostCommentAggregator
+}
+
+type PostCommentAggregator {
+  count: Int
+  totalCount: Int
+}
+
+type PostCommentGroupBy {
+  id: [PostCommentConnectionId]
+  created_at: [PostCommentConnectionCreated_at]
+  updated_at: [PostCommentConnectionUpdated_at]
+  comment_Text: [PostCommentConnectionComment_Text]
+  comment_Name: [PostCommentConnectionComment_Name]
+  published_at: [PostCommentConnectionPublished_at]
+}
+
+type PostCommentConnectionId {
+  key: ID
+  connection: PostCommentConnection
+}
+
+type PostCommentConnectionCreated_at {
+  key: DateTime
+  connection: PostCommentConnection
+}
+
+type PostCommentConnectionUpdated_at {
+  key: DateTime
+  connection: PostCommentConnection
+}
+
+type PostCommentConnectionComment_Text {
+  key: String
+  connection: PostCommentConnection
+}
+
+type PostCommentConnectionComment_Name {
+  key: String
+  connection: PostCommentConnection
+}
+
+type PostCommentConnectionPublished_at {
+  key: DateTime
+  connection: PostCommentConnection
+}
+
+input PostCommentInput {
+  comment_Text: String
+  comment_likes: [ID]
+  comment_Name: String!
+  published_at: DateTime
+  created_by: ID
+  updated_by: ID
+}
+
+input editPostCommentInput {
+  comment_Text: String
+  comment_likes: [ID]
+  comment_Name: String
+  published_at: DateTime
+  created_by: ID
+  updated_by: ID
+}
+
+input createPostCommentInput {
+  data: PostCommentInput
+}
+
+type createPostCommentPayload {
+  postComment: PostComment
+}
+
+input updatePostCommentInput {
+  where: InputID
+  data: editPostCommentInput
+}
+
+type updatePostCommentPayload {
+  postComment: PostComment
+}
+
+input deletePostCommentInput {
+  where: InputID
+}
+
+type deletePostCommentPayload {
+  postComment: PostComment
+}
+
+type Post {
+  id: ID!
+  created_at: DateTime!
+  updated_at: DateTime!
+  post_Text: String
+  post_URL: String
+  users_permissions_user: UsersPermissionsUser
+  published_at: DateTime
+  post_Attachments(sort: String, limit: Int, start: Int, where: JSON): [UploadFile]
+  post_comments(sort: String, limit: Int, start: Int, where: JSON): [PostComment]
+  community_lists(sort: String, limit: Int, start: Int, where: JSON): [CommunityList]
+}
+
+type PostConnection {
+  values: [Post]
+  groupBy: PostGroupBy
+  aggregate: PostAggregator
+}
+
+type PostAggregator {
+  count: Int
+  totalCount: Int
+}
+
+type PostGroupBy {
+  id: [PostConnectionId]
+  created_at: [PostConnectionCreated_at]
+  updated_at: [PostConnectionUpdated_at]
+  post_Text: [PostConnectionPost_Text]
+  post_URL: [PostConnectionPost_URL]
+  users_permissions_user: [PostConnectionUsers_permissions_user]
+  published_at: [PostConnectionPublished_at]
+}
+
+type PostConnectionId {
+  key: ID
+  connection: PostConnection
+}
+
+type PostConnectionCreated_at {
+  key: DateTime
+  connection: PostConnection
+}
+
+type PostConnectionUpdated_at {
+  key: DateTime
+  connection: PostConnection
+}
+
+type PostConnectionPost_Text {
+  key: String
+  connection: PostConnection
+}
+
+type PostConnectionPost_URL {
+  key: String
+  connection: PostConnection
+}
+
+type PostConnectionUsers_permissions_user {
+  key: ID
+  connection: PostConnection
+}
+
+type PostConnectionPublished_at {
+  key: DateTime
+  connection: PostConnection
+}
+
+input PostInput {
+  post_Text: String
+  post_URL: String
+  post_Attachments: [ID]
+  post_comments: [ID]
+  community_lists: [ID]
+  users_permissions_user: ID
+  published_at: DateTime
+  created_by: ID
+  updated_by: ID
+}
+
+input editPostInput {
+  post_Text: String
+  post_URL: String
+  post_Attachments: [ID]
+  post_comments: [ID]
+  community_lists: [ID]
+  users_permissions_user: ID
+  published_at: DateTime
+  created_by: ID
+  updated_by: ID
+}
+
+input createPostInput {
+  data: PostInput
+}
+
+type createPostPayload {
+  post: Post
+}
+
+input updatePostInput {
+  where: InputID
+  data: editPostInput
+}
+
+type updatePostPayload {
+  post: Post
+}
+
+input deletePostInput {
+  where: InputID
+}
+
+type deletePostPayload {
+  post: Post
+}
+
+type Professional {
+  id: ID!
+  created_at: DateTime!
+  updated_at: DateTime!
+  firstName: String!
+  lastName: String!
+  organization: String!
+  healthInterestId: String!
+  personDetail: ComponentPersonUserDetail
+  professionalEmailAddress: String!
+  published_at: DateTime
+}
+
+type ProfessionalConnection {
+  values: [Professional]
+  groupBy: ProfessionalGroupBy
+  aggregate: ProfessionalAggregator
+}
+
+type ProfessionalAggregator {
+  count: Int
+  totalCount: Int
+}
+
+type ProfessionalGroupBy {
+  id: [ProfessionalConnectionId]
+  created_at: [ProfessionalConnectionCreated_at]
+  updated_at: [ProfessionalConnectionUpdated_at]
+  firstName: [ProfessionalConnectionFirstName]
+  lastName: [ProfessionalConnectionLastName]
+  organization: [ProfessionalConnectionOrganization]
+  healthInterestId: [ProfessionalConnectionHealthInterestId]
+  personDetail: [ProfessionalConnectionPersonDetail]
+  professionalEmailAddress: [ProfessionalConnectionProfessionalEmailAddress]
+  published_at: [ProfessionalConnectionPublished_at]
+}
+
+type ProfessionalConnectionId {
+  key: ID
+  connection: ProfessionalConnection
+}
+
+type ProfessionalConnectionCreated_at {
+  key: DateTime
+  connection: ProfessionalConnection
+}
+
+type ProfessionalConnectionUpdated_at {
+  key: DateTime
+  connection: ProfessionalConnection
+}
+
+type ProfessionalConnectionFirstName {
+  key: String
+  connection: ProfessionalConnection
+}
+
+type ProfessionalConnectionLastName {
+  key: String
+  connection: ProfessionalConnection
+}
+
+type ProfessionalConnectionOrganization {
+  key: String
+  connection: ProfessionalConnection
+}
+
+type ProfessionalConnectionHealthInterestId {
+  key: String
+  connection: ProfessionalConnection
+}
+
+type ProfessionalConnectionPersonDetail {
+  key: ID
+  connection: ProfessionalConnection
+}
+
+type ProfessionalConnectionProfessionalEmailAddress {
+  key: String
+  connection: ProfessionalConnection
+}
+
+type ProfessionalConnectionPublished_at {
+  key: DateTime
+  connection: ProfessionalConnection
+}
+
+input ProfessionalInput {
+  firstName: String!
+  lastName: String!
+  organization: String!
+  healthInterestId: String!
+  personDetail: ComponentPersonUserDetailInput!
+  professionalEmailAddress: String!
+  published_at: DateTime
+  created_by: ID
+  updated_by: ID
+}
+
+input editProfessionalInput {
+  firstName: String
+  lastName: String
+  organization: String
+  healthInterestId: String
+  personDetail: editComponentPersonUserDetailInput
+  professionalEmailAddress: String
+  published_at: DateTime
+  created_by: ID
+  updated_by: ID
+}
+
+input createProfessionalInput {
+  data: ProfessionalInput
+}
+
+type createProfessionalPayload {
+  professional: Professional
+}
+
+input updateProfessionalInput {
+  where: InputID
+  data: editProfessionalInput
+}
+
+type updateProfessionalPayload {
+  professional: Professional
+}
+
+input deleteProfessionalInput {
+  where: InputID
+}
+
+type deleteProfessionalPayload {
+  professional: Professional
+}
+
+type QuestionResponse {
+  id: ID!
+  created_at: DateTime!
+  updated_at: DateTime!
+  response: String
+  response_Name: String!
+  published_at: DateTime
+  response_upvotes(sort: String, limit: Int, start: Int, where: JSON): [ResponseUpvote]
+}
+
+type QuestionResponseConnection {
+  values: [QuestionResponse]
+  groupBy: QuestionResponseGroupBy
+  aggregate: QuestionResponseAggregator
+}
+
+type QuestionResponseAggregator {
+  count: Int
+  totalCount: Int
+}
+
+type QuestionResponseGroupBy {
+  id: [QuestionResponseConnectionId]
+  created_at: [QuestionResponseConnectionCreated_at]
+  updated_at: [QuestionResponseConnectionUpdated_at]
+  response: [QuestionResponseConnectionResponse]
+  response_Name: [QuestionResponseConnectionResponse_Name]
+  published_at: [QuestionResponseConnectionPublished_at]
+}
+
+type QuestionResponseConnectionId {
+  key: ID
+  connection: QuestionResponseConnection
+}
+
+type QuestionResponseConnectionCreated_at {
+  key: DateTime
+  connection: QuestionResponseConnection
+}
+
+type QuestionResponseConnectionUpdated_at {
+  key: DateTime
+  connection: QuestionResponseConnection
+}
+
+type QuestionResponseConnectionResponse {
+  key: String
+  connection: QuestionResponseConnection
+}
+
+type QuestionResponseConnectionResponse_Name {
+  key: String
+  connection: QuestionResponseConnection
+}
+
+type QuestionResponseConnectionPublished_at {
+  key: DateTime
+  connection: QuestionResponseConnection
+}
+
+input QuestionResponseInput {
+  response: String
+  response_upvotes: [ID]
+  response_Name: String!
+  published_at: DateTime
+  created_by: ID
+  updated_by: ID
+}
+
+input editQuestionResponseInput {
+  response: String
+  response_upvotes: [ID]
+  response_Name: String
+  published_at: DateTime
+  created_by: ID
+  updated_by: ID
+}
+
+input createQuestionResponseInput {
+  data: QuestionResponseInput
+}
+
+type createQuestionResponsePayload {
+  questionResponse: QuestionResponse
+}
+
+input updateQuestionResponseInput {
+  where: InputID
+  data: editQuestionResponseInput
+}
+
+type updateQuestionResponsePayload {
+  questionResponse: QuestionResponse
+}
+
+input deleteQuestionResponseInput {
+  where: InputID
+}
+
+type deleteQuestionResponsePayload {
+  questionResponse: QuestionResponse
+}
+
+type Question {
+  id: ID!
+  created_at: DateTime!
+  updated_at: DateTime!
+  question_Text: String
+  question_URL: String
+  users_permissions_user: UsersPermissionsUser
+  published_at: DateTime
+  question_Attachments(sort: String, limit: Int, start: Int, where: JSON): [UploadFile]
+  question_responses(sort: String, limit: Int, start: Int, where: JSON): [QuestionResponse]
+}
+
+type QuestionConnection {
+  values: [Question]
+  groupBy: QuestionGroupBy
+  aggregate: QuestionAggregator
+}
+
+type QuestionAggregator {
+  count: Int
+  totalCount: Int
+}
+
+type QuestionGroupBy {
+  id: [QuestionConnectionId]
+  created_at: [QuestionConnectionCreated_at]
+  updated_at: [QuestionConnectionUpdated_at]
+  question_Text: [QuestionConnectionQuestion_Text]
+  question_URL: [QuestionConnectionQuestion_URL]
+  users_permissions_user: [QuestionConnectionUsers_permissions_user]
+  published_at: [QuestionConnectionPublished_at]
+}
+
+type QuestionConnectionId {
+  key: ID
+  connection: QuestionConnection
+}
+
+type QuestionConnectionCreated_at {
+  key: DateTime
+  connection: QuestionConnection
+}
+
+type QuestionConnectionUpdated_at {
+  key: DateTime
+  connection: QuestionConnection
+}
+
+type QuestionConnectionQuestion_Text {
+  key: String
+  connection: QuestionConnection
+}
+
+type QuestionConnectionQuestion_URL {
+  key: String
+  connection: QuestionConnection
+}
+
+type QuestionConnectionUsers_permissions_user {
+  key: ID
+  connection: QuestionConnection
+}
+
+type QuestionConnectionPublished_at {
+  key: DateTime
+  connection: QuestionConnection
+}
+
+input QuestionInput {
+  question_Text: String
+  question_URL: String
+  question_Attachments: [ID]
+  question_responses: [ID]
+  users_permissions_user: ID
+  published_at: DateTime
+  created_by: ID
+  updated_by: ID
+}
+
+input editQuestionInput {
+  question_Text: String
+  question_URL: String
+  question_Attachments: [ID]
+  question_responses: [ID]
+  users_permissions_user: ID
+  published_at: DateTime
+  created_by: ID
+  updated_by: ID
+}
+
+input createQuestionInput {
+  data: QuestionInput
+}
+
+type createQuestionPayload {
+  question: Question
+}
+
+input updateQuestionInput {
+  where: InputID
+  data: editQuestionInput
+}
+
+type updateQuestionPayload {
+  question: Question
+}
+
+input deleteQuestionInput {
+  where: InputID
+}
+
+type deleteQuestionPayload {
+  question: Question
+}
+
+type RelatedPerson {
+  id: ID!
+  created_at: DateTime!
+  updated_at: DateTime!
+  personDetail: ComponentPersonUserDetail
+  patient: Patient
+  relationshipToPatient: String!
+  relatedPersonEmailAddress: String!
+  published_at: DateTime
+}
+
+type RelatedPersonConnection {
+  values: [RelatedPerson]
+  groupBy: RelatedPersonGroupBy
+  aggregate: RelatedPersonAggregator
+}
+
+type RelatedPersonAggregator {
+  count: Int
+  totalCount: Int
+}
+
+type RelatedPersonGroupBy {
+  id: [RelatedPersonConnectionId]
+  created_at: [RelatedPersonConnectionCreated_at]
+  updated_at: [RelatedPersonConnectionUpdated_at]
+  personDetail: [RelatedPersonConnectionPersonDetail]
+  patient: [RelatedPersonConnectionPatient]
+  relationshipToPatient: [RelatedPersonConnectionRelationshipToPatient]
+  relatedPersonEmailAddress: [RelatedPersonConnectionRelatedPersonEmailAddress]
+  published_at: [RelatedPersonConnectionPublished_at]
+}
+
+type RelatedPersonConnectionId {
+  key: ID
+  connection: RelatedPersonConnection
+}
+
+type RelatedPersonConnectionCreated_at {
+  key: DateTime
+  connection: RelatedPersonConnection
+}
+
+type RelatedPersonConnectionUpdated_at {
+  key: DateTime
+  connection: RelatedPersonConnection
+}
+
+type RelatedPersonConnectionPersonDetail {
+  key: ID
+  connection: RelatedPersonConnection
+}
+
+type RelatedPersonConnectionPatient {
+  key: ID
+  connection: RelatedPersonConnection
+}
+
+type RelatedPersonConnectionRelationshipToPatient {
+  key: String
+  connection: RelatedPersonConnection
+}
+
+type RelatedPersonConnectionRelatedPersonEmailAddress {
+  key: String
+  connection: RelatedPersonConnection
+}
+
+type RelatedPersonConnectionPublished_at {
+  key: DateTime
+  connection: RelatedPersonConnection
+}
+
+input RelatedPersonInput {
+  personDetail: ComponentPersonUserDetailInput!
+  patient: ID
+  relationshipToPatient: String!
+  relatedPersonEmailAddress: String!
+  published_at: DateTime
+  created_by: ID
+  updated_by: ID
+}
+
+input editRelatedPersonInput {
+  personDetail: editComponentPersonUserDetailInput
+  patient: ID
+  relationshipToPatient: String
+  relatedPersonEmailAddress: String
+  published_at: DateTime
+  created_by: ID
+  updated_by: ID
+}
+
+input createRelatedPersonInput {
+  data: RelatedPersonInput
+}
+
+type createRelatedPersonPayload {
+  relatedPerson: RelatedPerson
+}
+
+input updateRelatedPersonInput {
+  where: InputID
+  data: editRelatedPersonInput
+}
+
+type updateRelatedPersonPayload {
+  relatedPerson: RelatedPerson
+}
+
+input deleteRelatedPersonInput {
+  where: InputID
+}
+
+type deleteRelatedPersonPayload {
+  relatedPerson: RelatedPerson
+}
+
+type ResponseUpvote {
+  id: ID!
+  created_at: DateTime!
+  updated_at: DateTime!
+  upvote_Name: String!
+  published_at: DateTime
+}
+
+type ResponseUpvoteConnection {
+  values: [ResponseUpvote]
+  groupBy: ResponseUpvoteGroupBy
+  aggregate: ResponseUpvoteAggregator
+}
+
+type ResponseUpvoteAggregator {
+  count: Int
+  totalCount: Int
+}
+
+type ResponseUpvoteGroupBy {
+  id: [ResponseUpvoteConnectionId]
+  created_at: [ResponseUpvoteConnectionCreated_at]
+  updated_at: [ResponseUpvoteConnectionUpdated_at]
+  upvote_Name: [ResponseUpvoteConnectionUpvote_Name]
+  published_at: [ResponseUpvoteConnectionPublished_at]
+}
+
+type ResponseUpvoteConnectionId {
+  key: ID
+  connection: ResponseUpvoteConnection
+}
+
+type ResponseUpvoteConnectionCreated_at {
+  key: DateTime
+  connection: ResponseUpvoteConnection
+}
+
+type ResponseUpvoteConnectionUpdated_at {
+  key: DateTime
+  connection: ResponseUpvoteConnection
+}
+
+type ResponseUpvoteConnectionUpvote_Name {
+  key: String
+  connection: ResponseUpvoteConnection
+}
+
+type ResponseUpvoteConnectionPublished_at {
+  key: DateTime
+  connection: ResponseUpvoteConnection
+}
+
+input ResponseUpvoteInput {
+  upvote_Name: String!
+  published_at: DateTime
+  created_by: ID
+  updated_by: ID
+}
+
+input editResponseUpvoteInput {
+  upvote_Name: String
+  published_at: DateTime
+  created_by: ID
+  updated_by: ID
+}
+
+input createResponseUpvoteInput {
+  data: ResponseUpvoteInput
+}
+
+type createResponseUpvotePayload {
+  responseUpvote: ResponseUpvote
+}
+
+input updateResponseUpvoteInput {
+  where: InputID
+  data: editResponseUpvoteInput
+}
+
+type updateResponseUpvotePayload {
+  responseUpvote: ResponseUpvote
+}
+
+input deleteResponseUpvoteInput {
+  where: InputID
+}
+
+type deleteResponseUpvotePayload {
+  responseUpvote: ResponseUpvote
+}
+
+type UploadFile {
+  id: ID!
+  created_at: DateTime!
+  updated_at: DateTime!
+  name: String!
+  alternativeText: String
+  caption: String
+  width: Int
+  height: Int
+  formats: JSON
+  hash: String!
+  ext: String
+  mime: String!
+  size: Float!
+  url: String!
+  previewUrl: String
+  provider: String!
+  provider_metadata: JSON
+  related(sort: String, limit: Int, start: Int, where: JSON): [Morph]
+}
+
+type UploadFileConnection {
+  values: [UploadFile]
+  groupBy: UploadFileGroupBy
+  aggregate: UploadFileAggregator
+}
+
+type UploadFileAggregator {
+  count: Int
+  totalCount: Int
+  sum: UploadFileAggregatorSum
+  avg: UploadFileAggregatorAvg
+  min: UploadFileAggregatorMin
+  max: UploadFileAggregatorMax
+}
+
+type UploadFileAggregatorSum {
+  width: Float
+  height: Float
+  size: Float
+}
+
+type UploadFileAggregatorAvg {
+  width: Float
+  height: Float
+  size: Float
+}
+
+type UploadFileAggregatorMin {
+  width: Float
+  height: Float
+  size: Float
+}
+
+type UploadFileAggregatorMax {
+  width: Float
+  height: Float
+  size: Float
+}
+
+type UploadFileGroupBy {
+  id: [UploadFileConnectionId]
+  created_at: [UploadFileConnectionCreated_at]
+  updated_at: [UploadFileConnectionUpdated_at]
+  name: [UploadFileConnectionName]
+  alternativeText: [UploadFileConnectionAlternativeText]
+  caption: [UploadFileConnectionCaption]
+  width: [UploadFileConnectionWidth]
+  height: [UploadFileConnectionHeight]
+  formats: [UploadFileConnectionFormats]
+  hash: [UploadFileConnectionHash]
+  ext: [UploadFileConnectionExt]
+  mime: [UploadFileConnectionMime]
+  size: [UploadFileConnectionSize]
+  url: [UploadFileConnectionUrl]
+  previewUrl: [UploadFileConnectionPreviewUrl]
+  provider: [UploadFileConnectionProvider]
+  provider_metadata: [UploadFileConnectionProvider_metadata]
+}
+
+type UploadFileConnectionId {
+  key: ID
+  connection: UploadFileConnection
+}
+
+type UploadFileConnectionCreated_at {
+  key: DateTime
+  connection: UploadFileConnection
+}
+
+type UploadFileConnectionUpdated_at {
+  key: DateTime
+  connection: UploadFileConnection
+}
+
+type UploadFileConnectionName {
+  key: String
+  connection: UploadFileConnection
+}
+
+type UploadFileConnectionAlternativeText {
+  key: String
+  connection: UploadFileConnection
+}
+
+type UploadFileConnectionCaption {
+  key: String
+  connection: UploadFileConnection
+}
+
+type UploadFileConnectionWidth {
+  key: Int
+  connection: UploadFileConnection
+}
+
+type UploadFileConnectionHeight {
+  key: Int
+  connection: UploadFileConnection
+}
+
+type UploadFileConnectionFormats {
+  key: JSON
+  connection: UploadFileConnection
+}
+
+type UploadFileConnectionHash {
+  key: String
+  connection: UploadFileConnection
+}
+
+type UploadFileConnectionExt {
+  key: String
+  connection: UploadFileConnection
+}
+
+type UploadFileConnectionMime {
+  key: String
+  connection: UploadFileConnection
+}
+
+type UploadFileConnectionSize {
+  key: Float
+  connection: UploadFileConnection
+}
+
+type UploadFileConnectionUrl {
+  key: String
+  connection: UploadFileConnection
+}
+
+type UploadFileConnectionPreviewUrl {
+  key: String
+  connection: UploadFileConnection
+}
+
+type UploadFileConnectionProvider {
+  key: String
+  connection: UploadFileConnection
+}
+
+type UploadFileConnectionProvider_metadata {
+  key: JSON
+  connection: UploadFileConnection
+}
+
+input FileInput {
+  name: String!
+  alternativeText: String
+  caption: String
+  width: Int
+  height: Int
+  formats: JSON
+  hash: String!
+  ext: String
+  mime: String!
+  size: Float!
+  url: String!
+  previewUrl: String
+  provider: String!
+  provider_metadata: JSON
+  related: [ID]
+  created_by: ID
+  updated_by: ID
+}
+
+input editFileInput {
+  name: String
+  alternativeText: String
+  caption: String
+  width: Int
+  height: Int
+  formats: JSON
+  hash: String
+  ext: String
+  mime: String
+  size: Float
+  url: String
+  previewUrl: String
+  provider: String
+  provider_metadata: JSON
+  related: [ID]
+  created_by: ID
+  updated_by: ID
+}
+
+input deleteFileInput {
+  where: InputID
+}
+
+type deleteFilePayload {
+  file: UploadFile
+}
+
+type UsersPermissionsPermission {
+  id: ID!
+  type: String!
+  controller: String!
+  action: String!
+  enabled: Boolean!
+  policy: String
+  role: UsersPermissionsRole
+}
+
+type UsersPermissionsRole {
+  id: ID!
+  name: String!
+  description: String
+  type: String
+  permissions(sort: String, limit: Int, start: Int, where: JSON): [UsersPermissionsPermission]
+  users(sort: String, limit: Int, start: Int, where: JSON): [UsersPermissionsUser]
+}
+
+type UsersPermissionsRoleConnection {
+  values: [UsersPermissionsRole]
+  groupBy: UsersPermissionsRoleGroupBy
+  aggregate: UsersPermissionsRoleAggregator
+}
+
+type UsersPermissionsRoleAggregator {
+  count: Int
+  totalCount: Int
+}
+
+type UsersPermissionsRoleGroupBy {
+  id: [UsersPermissionsRoleConnectionId]
+  name: [UsersPermissionsRoleConnectionName]
+  description: [UsersPermissionsRoleConnectionDescription]
+  type: [UsersPermissionsRoleConnectionType]
+}
+
+type UsersPermissionsRoleConnectionId {
+  key: ID
+  connection: UsersPermissionsRoleConnection
+}
+
+type UsersPermissionsRoleConnectionName {
+  key: String
+  connection: UsersPermissionsRoleConnection
+}
+
+type UsersPermissionsRoleConnectionDescription {
+  key: String
+  connection: UsersPermissionsRoleConnection
+}
+
+type UsersPermissionsRoleConnectionType {
+  key: String
+  connection: UsersPermissionsRoleConnection
+}
+
+input RoleInput {
+  name: String!
+  description: String
+  type: String
+  permissions: [ID]
+  users: [ID]
+  created_by: ID
+  updated_by: ID
+}
+
+input editRoleInput {
+  name: String
+  description: String
+  type: String
+  permissions: [ID]
+  users: [ID]
+  created_by: ID
+  updated_by: ID
+}
+
+input createRoleInput {
+  data: RoleInput
+}
+
+type createRolePayload {
+  role: UsersPermissionsRole
+}
+
+input updateRoleInput {
+  where: InputID
+  data: editRoleInput
+}
+
+type updateRolePayload {
+  role: UsersPermissionsRole
+}
+
+input deleteRoleInput {
+  where: InputID
+}
+
+type deleteRolePayload {
+  role: UsersPermissionsRole
+}
+
+type UsersPermissionsUser {
+  id: ID!
+  created_at: DateTime!
+  updated_at: DateTime!
+  username: String!
+  email: String!
+  provider: String
+  confirmed: Boolean
+  blocked: Boolean
+  role: UsersPermissionsRole
+  posts(sort: String, limit: Int, start: Int, where: JSON): [Post]
+  questions(sort: String, limit: Int, start: Int, where: JSON): [Question]
+}
+
+type UsersPermissionsUserConnection {
+  values: [UsersPermissionsUser]
+  groupBy: UsersPermissionsUserGroupBy
+  aggregate: UsersPermissionsUserAggregator
+}
+
+type UsersPermissionsUserAggregator {
+  count: Int
+  totalCount: Int
+}
+
+type UsersPermissionsUserGroupBy {
+  id: [UsersPermissionsUserConnectionId]
+  created_at: [UsersPermissionsUserConnectionCreated_at]
+  updated_at: [UsersPermissionsUserConnectionUpdated_at]
+  username: [UsersPermissionsUserConnectionUsername]
+  email: [UsersPermissionsUserConnectionEmail]
+  provider: [UsersPermissionsUserConnectionProvider]
+  confirmed: [UsersPermissionsUserConnectionConfirmed]
+  blocked: [UsersPermissionsUserConnectionBlocked]
+  role: [UsersPermissionsUserConnectionRole]
+}
+
+type UsersPermissionsUserConnectionId {
+  key: ID
+  connection: UsersPermissionsUserConnection
+}
+
+type UsersPermissionsUserConnectionCreated_at {
+  key: DateTime
+  connection: UsersPermissionsUserConnection
+}
+
+type UsersPermissionsUserConnectionUpdated_at {
+  key: DateTime
+  connection: UsersPermissionsUserConnection
+}
+
+type UsersPermissionsUserConnectionUsername {
+  key: String
+  connection: UsersPermissionsUserConnection
+}
+
+type UsersPermissionsUserConnectionEmail {
+  key: String
+  connection: UsersPermissionsUserConnection
+}
+
+type UsersPermissionsUserConnectionProvider {
+  key: String
+  connection: UsersPermissionsUserConnection
+}
+
+type UsersPermissionsUserConnectionConfirmed {
+  key: Boolean
+  connection: UsersPermissionsUserConnection
+}
+
+type UsersPermissionsUserConnectionBlocked {
+  key: Boolean
+  connection: UsersPermissionsUserConnection
+}
+
+type UsersPermissionsUserConnectionRole {
+  key: ID
+  connection: UsersPermissionsUserConnection
+}
+
+input UserInput {
+  username: String!
+  email: String!
+  provider: String
+  password: String
+  resetPasswordToken: String
+  confirmationToken: String
+  confirmed: Boolean
+  blocked: Boolean
+  role: ID
+  posts: [ID]
+  questions: [ID]
+  created_by: ID
+  updated_by: ID
+}
+
+input editUserInput {
+  username: String
+  email: String
+  provider: String
+  password: String
+  resetPasswordToken: String
+  confirmationToken: String
+  confirmed: Boolean
+  blocked: Boolean
+  role: ID
+  posts: [ID]
+  questions: [ID]
+  created_by: ID
+  updated_by: ID
+}
+
+input createUserInput {
+  data: UserInput
+}
+
+type createUserPayload {
+  user: UsersPermissionsUser
+}
+
+input updateUserInput {
+  where: InputID
+  data: editUserInput
+}
+
+type updateUserPayload {
+  user: UsersPermissionsUser
+}
+
+input deleteUserInput {
+  where: InputID
+}
+
+type deleteUserPayload {
+  user: UsersPermissionsUser
+}
+
+type ComponentPersonUserDetail {
+  id: ID!
+  displayName: String!
+  genderIdentity: String!
+  mobilePhone: String!
+  zipCode: String!
+  users_permissions_role: UsersPermissionsRole
+}
+
+input ComponentPersonUserDetailInput {
+  displayName: String!
+  genderIdentity: String!
+  mobilePhone: String!
+  zipCode: String!
+  users_permissions_role: ID
+}
+
+input editComponentPersonUserDetailInput {
+  id: ID
+  displayName: String
+  genderIdentity: String
+  mobilePhone: String
+  zipCode: String
+  users_permissions_role: ID
+}
+
+union Morph = UsersPermissionsMe | UsersPermissionsMeRole | UsersPermissionsLoginPayload | UserPermissionsPasswordPayload | CommentLike | CommentLikeConnection | CommentLikeAggregator | CommentLikeGroupBy | CommentLikeConnectionId | CommentLikeConnectionCreated_at | CommentLikeConnectionUpdated_at | CommentLikeConnectionComment_Liked_By_Name | CommentLikeConnectionPublished_at | createCommentLikePayload | updateCommentLikePayload | deleteCommentLikePayload | CommunityList | CommunityListConnection | CommunityListAggregator | CommunityListGroupBy | CommunityListConnectionId | CommunityListConnectionCreated_at | CommunityListConnectionUpdated_at | CommunityListConnectionCommunityName | CommunityListConnectionCommunityDescription | CommunityListConnectionPublished_at | createCommunityListPayload | updateCommunityListPayload | deleteCommunityListPayload | CommunityPatientsLink | CommunityPatientsLinkConnection | CommunityPatientsLinkAggregator | CommunityPatientsLinkAggregatorSum | CommunityPatientsLinkAggregatorAvg | CommunityPatientsLinkAggregatorMin | CommunityPatientsLinkAggregatorMax | CommunityPatientsLinkGroupBy | CommunityPatientsLinkConnectionId | CommunityPatientsLinkConnectionCreated_at | CommunityPatientsLinkConnectionUpdated_at | CommunityPatientsLinkConnectionCommunityId | CommunityPatientsLinkConnectionPatientId | CommunityPatientsLinkConnectionPublished_at | createCommunityPatientsLinkPayload | updateCommunityPatientsLinkPayload | deleteCommunityPatientsLinkPayload | CommunityProfessionalsLink | CommunityProfessionalsLinkConnection | CommunityProfessionalsLinkAggregator | CommunityProfessionalsLinkAggregatorSum | CommunityProfessionalsLinkAggregatorAvg | CommunityProfessionalsLinkAggregatorMin | CommunityProfessionalsLinkAggregatorMax | CommunityProfessionalsLinkGroupBy | CommunityProfessionalsLinkConnectionId | CommunityProfessionalsLinkConnectionCreated_at | CommunityProfessionalsLinkConnectionUpdated_at | CommunityProfessionalsLinkConnectionCommunityId | CommunityProfessionalsLinkConnectionProfessionalId | CommunityProfessionalsLinkConnectionPublished_at | createCommunityProfessionalsLinkPayload | updateCommunityProfessionalsLinkPayload | deleteCommunityProfessionalsLinkPayload | CommunityRelatedPersonLink | CommunityRelatedPersonLinkConnection | CommunityRelatedPersonLinkAggregator | CommunityRelatedPersonLinkAggregatorSum | CommunityRelatedPersonLinkAggregatorAvg | CommunityRelatedPersonLinkAggregatorMin | CommunityRelatedPersonLinkAggregatorMax | CommunityRelatedPersonLinkGroupBy | CommunityRelatedPersonLinkConnectionId | CommunityRelatedPersonLinkConnectionCreated_at | CommunityRelatedPersonLinkConnectionUpdated_at | CommunityRelatedPersonLinkConnectionCommunityId | CommunityRelatedPersonLinkConnectionRelatedPersonId | CommunityRelatedPersonLinkConnectionPublished_at | createCommunityRelatedPersonLinkPayload | updateCommunityRelatedPersonLinkPayload | deleteCommunityRelatedPersonLinkPayload | EducationLevelLegend | EducationLevelLegendConnection | EducationLevelLegendAggregator | EducationLevelLegendGroupBy | EducationLevelLegendConnectionId | EducationLevelLegendConnectionCreated_at | EducationLevelLegendConnectionUpdated_at | EducationLevelLegendConnectionName | EducationLevelLegendConnectionValue | EducationLevelLegendConnectionPublished_at | createEducationLevelLegendPayload | updateEducationLevelLegendPayload | deleteEducationLevelLegendPayload | FamilyIncomeLevelLegend | FamilyIncomeLevelLegendConnection | FamilyIncomeLevelLegendAggregator | FamilyIncomeLevelLegendGroupBy | FamilyIncomeLevelLegendConnectionId | FamilyIncomeLevelLegendConnectionCreated_at | FamilyIncomeLevelLegendConnectionUpdated_at | FamilyIncomeLevelLegendConnectionName | FamilyIncomeLevelLegendConnectionValue | FamilyIncomeLevelLegendConnectionPublished_at | createFamilyIncomeLevelLegendPayload | updateFamilyIncomeLevelLegendPayload | deleteFamilyIncomeLevelLegendPayload | GenderIdentityLegend | GenderIdentityLegendConnection | GenderIdentityLegendAggregator | GenderIdentityLegendGroupBy | GenderIdentityLegendConnectionId | GenderIdentityLegendConnectionCreated_at | GenderIdentityLegendConnectionUpdated_at | GenderIdentityLegendConnectionName | GenderIdentityLegendConnectionValue | GenderIdentityLegendConnectionPublished_at | createGenderIdentityLegendPayload | updateGenderIdentityLegendPayload | deleteGenderIdentityLegendPayload | InsuranceLegend | InsuranceLegendConnection | InsuranceLegendAggregator | InsuranceLegendGroupBy | InsuranceLegendConnectionId | InsuranceLegendConnectionCreated_at | InsuranceLegendConnectionUpdated_at | InsuranceLegendConnectionName | InsuranceLegendConnectionValue | InsuranceLegendConnectionPublished_at | createInsuranceLegendPayload | updateInsuranceLegendPayload | deleteInsuranceLegendPayload | Patient | PatientConnection | PatientAggregator | PatientAggregatorSum | PatientAggregatorAvg | PatientAggregatorMin | PatientAggregatorMax | PatientGroupBy | PatientConnectionId | PatientConnectionCreated_at | PatientConnectionUpdated_at | PatientConnectionDateOfBirth | PatientConnectionRace | PatientConnectionEthnicity | PatientConnectionEducationalLevel | PatientConnectionHeatlhProfileID | PatientConnectionPersonDetail | PatientConnectionPatientEmailAddress | PatientConnectionPeopleHousehold | PatientConnectionFamilyIncomeLevel | PatientConnectionInsurance | createPatientPayload | updatePatientPayload | deletePatientPayload | PeerList | PeerListConnection | PeerListAggregator | PeerListAggregatorSum | PeerListAggregatorAvg | PeerListAggregatorMin | PeerListAggregatorMax | PeerListGroupBy | PeerListConnectionId | PeerListConnectionCreated_at | PeerListConnectionUpdated_at | PeerListConnectionPatientId | PeerListConnectionPeerId | PeerListConnectionAgeSimilarityScore | PeerListConnectionGenderSimilarityScore | PeerListConnectionRaceSimilarityScore | PeerListConnectionEthnicSimilarityScore | PeerListConnectionEducationSimilarityScore | PeerListConnectionHealthInsuranceSimilarityScore | PeerListConnectionAdjustedIncomeSimilarityScore | PeerListConnectionMedicalHxScore | PeerListConnectionOverallSocioEconomicScore | PeerListConnectionOverallDemographicScore | PeerListConnectionOverallScore | PeerListConnectionPublished_at | createPeerListPayload | updatePeerListPayload | deletePeerListPayload | PostComment | PostCommentConnection | PostCommentAggregator | PostCommentGroupBy | PostCommentConnectionId | PostCommentConnectionCreated_at | PostCommentConnectionUpdated_at | PostCommentConnectionComment_Text | PostCommentConnectionComment_Name | PostCommentConnectionPublished_at | createPostCommentPayload | updatePostCommentPayload | deletePostCommentPayload | Post | PostConnection | PostAggregator | PostGroupBy | PostConnectionId | PostConnectionCreated_at | PostConnectionUpdated_at | PostConnectionPost_Text | PostConnectionPost_URL | PostConnectionUsers_permissions_user | PostConnectionPublished_at | createPostPayload | updatePostPayload | deletePostPayload | Professional | ProfessionalConnection | ProfessionalAggregator | ProfessionalGroupBy | ProfessionalConnectionId | ProfessionalConnectionCreated_at | ProfessionalConnectionUpdated_at | ProfessionalConnectionFirstName | ProfessionalConnectionLastName | ProfessionalConnectionOrganization | ProfessionalConnectionHealthInterestId | ProfessionalConnectionPersonDetail | ProfessionalConnectionProfessionalEmailAddress | ProfessionalConnectionPublished_at | createProfessionalPayload | updateProfessionalPayload | deleteProfessionalPayload | QuestionResponse | QuestionResponseConnection | QuestionResponseAggregator | QuestionResponseGroupBy | QuestionResponseConnectionId | QuestionResponseConnectionCreated_at | QuestionResponseConnectionUpdated_at | QuestionResponseConnectionResponse | QuestionResponseConnectionResponse_Name | QuestionResponseConnectionPublished_at | createQuestionResponsePayload | updateQuestionResponsePayload | deleteQuestionResponsePayload | Question | QuestionConnection | QuestionAggregator | QuestionGroupBy | QuestionConnectionId | QuestionConnectionCreated_at | QuestionConnectionUpdated_at | QuestionConnectionQuestion_Text | QuestionConnectionQuestion_URL | QuestionConnectionUsers_permissions_user | QuestionConnectionPublished_at | createQuestionPayload | updateQuestionPayload | deleteQuestionPayload | RelatedPerson | RelatedPersonConnection | RelatedPersonAggregator | RelatedPersonGroupBy | RelatedPersonConnectionId | RelatedPersonConnectionCreated_at | RelatedPersonConnectionUpdated_at | RelatedPersonConnectionPersonDetail | RelatedPersonConnectionPatient | RelatedPersonConnectionRelationshipToPatient | RelatedPersonConnectionRelatedPersonEmailAddress | RelatedPersonConnectionPublished_at | createRelatedPersonPayload | updateRelatedPersonPayload | deleteRelatedPersonPayload | ResponseUpvote | ResponseUpvoteConnection | ResponseUpvoteAggregator | ResponseUpvoteGroupBy | ResponseUpvoteConnectionId | ResponseUpvoteConnectionCreated_at | ResponseUpvoteConnectionUpdated_at | ResponseUpvoteConnectionUpvote_Name | ResponseUpvoteConnectionPublished_at | createResponseUpvotePayload | updateResponseUpvotePayload | deleteResponseUpvotePayload | UploadFile | UploadFileConnection | UploadFileAggregator | UploadFileAggregatorSum | UploadFileAggregatorAvg | UploadFileAggregatorMin | UploadFileAggregatorMax | UploadFileGroupBy | UploadFileConnectionId | UploadFileConnectionCreated_at | UploadFileConnectionUpdated_at | UploadFileConnectionName | UploadFileConnectionAlternativeText | UploadFileConnectionCaption | UploadFileConnectionWidth | UploadFileConnectionHeight | UploadFileConnectionFormats | UploadFileConnectionHash | UploadFileConnectionExt | UploadFileConnectionMime | UploadFileConnectionSize | UploadFileConnectionUrl | UploadFileConnectionPreviewUrl | UploadFileConnectionProvider | UploadFileConnectionProvider_metadata | deleteFilePayload | UsersPermissionsPermission | UsersPermissionsRole | UsersPermissionsRoleConnection | UsersPermissionsRoleAggregator | UsersPermissionsRoleGroupBy | UsersPermissionsRoleConnectionId | UsersPermissionsRoleConnectionName | UsersPermissionsRoleConnectionDescription | UsersPermissionsRoleConnectionType | createRolePayload | updateRolePayload | deleteRolePayload | UsersPermissionsUser | UsersPermissionsUserConnection | UsersPermissionsUserAggregator | UsersPermissionsUserGroupBy | UsersPermissionsUserConnectionId | UsersPermissionsUserConnectionCreated_at | UsersPermissionsUserConnectionUpdated_at | UsersPermissionsUserConnectionUsername | UsersPermissionsUserConnectionEmail | UsersPermissionsUserConnectionProvider | UsersPermissionsUserConnectionConfirmed | UsersPermissionsUserConnectionBlocked | UsersPermissionsUserConnectionRole | createUserPayload | updateUserPayload | deleteUserPayload | ComponentPersonUserDetail
+
+input InputID {
+  id: ID!
+}
+
+enum PublicationState {
+  LIVE
+  PREVIEW
+}
+
+type AdminUser {
+  id: ID!
+  username: String
+  firstname: String!
+  lastname: String!
+}
+
+type Query {
+  commentLike(id: ID!, publicationState: PublicationState): CommentLike
+  commentLikes(sort: String, limit: Int, start: Int, where: JSON, publicationState: PublicationState): [CommentLike]
+  commentLikesConnection(sort: String, limit: Int, start: Int, where: JSON): CommentLikeConnection
+  communityList(id: ID!, publicationState: PublicationState): CommunityList
+  communityLists(sort: String, limit: Int, start: Int, where: JSON, publicationState: PublicationState): [CommunityList]
+  communityListsConnection(sort: String, limit: Int, start: Int, where: JSON): CommunityListConnection
+  communityPatientsLink(id: ID!, publicationState: PublicationState): CommunityPatientsLink
+  communityPatientsLinks(sort: String, limit: Int, start: Int, where: JSON, publicationState: PublicationState): [CommunityPatientsLink]
+  communityPatientsLinksConnection(sort: String, limit: Int, start: Int, where: JSON): CommunityPatientsLinkConnection
+  communityProfessionalsLink(id: ID!, publicationState: PublicationState): CommunityProfessionalsLink
+  communityProfessionalsLinks(sort: String, limit: Int, start: Int, where: JSON, publicationState: PublicationState): [CommunityProfessionalsLink]
+  communityProfessionalsLinksConnection(sort: String, limit: Int, start: Int, where: JSON): CommunityProfessionalsLinkConnection
+  communityRelatedPersonLink(id: ID!, publicationState: PublicationState): CommunityRelatedPersonLink
+  communityRelatedPersonLinks(sort: String, limit: Int, start: Int, where: JSON, publicationState: PublicationState): [CommunityRelatedPersonLink]
+  communityRelatedPersonLinksConnection(sort: String, limit: Int, start: Int, where: JSON): CommunityRelatedPersonLinkConnection
+  educationLevelLegend(id: ID!, publicationState: PublicationState): EducationLevelLegend
+  educationLevelLegends(sort: String, limit: Int, start: Int, where: JSON, publicationState: PublicationState): [EducationLevelLegend]
+  educationLevelLegendsConnection(sort: String, limit: Int, start: Int, where: JSON): EducationLevelLegendConnection
+  familyIncomeLevelLegend(id: ID!, publicationState: PublicationState): FamilyIncomeLevelLegend
+  familyIncomeLevelLegends(sort: String, limit: Int, start: Int, where: JSON, publicationState: PublicationState): [FamilyIncomeLevelLegend]
+  familyIncomeLevelLegendsConnection(sort: String, limit: Int, start: Int, where: JSON): FamilyIncomeLevelLegendConnection
+  genderIdentityLegend(id: ID!, publicationState: PublicationState): GenderIdentityLegend
+  genderIdentityLegends(sort: String, limit: Int, start: Int, where: JSON, publicationState: PublicationState): [GenderIdentityLegend]
+  genderIdentityLegendsConnection(sort: String, limit: Int, start: Int, where: JSON): GenderIdentityLegendConnection
+  insuranceLegend(id: ID!, publicationState: PublicationState): InsuranceLegend
+  insuranceLegends(sort: String, limit: Int, start: Int, where: JSON, publicationState: PublicationState): [InsuranceLegend]
+  insuranceLegendsConnection(sort: String, limit: Int, start: Int, where: JSON): InsuranceLegendConnection
+  patient(id: ID!, publicationState: PublicationState): Patient
+  patients(sort: String, limit: Int, start: Int, where: JSON, publicationState: PublicationState): [Patient]
+  patientsConnection(sort: String, limit: Int, start: Int, where: JSON): PatientConnection
+  peerList(id: ID!, publicationState: PublicationState): PeerList
+  peerLists(sort: String, limit: Int, start: Int, where: JSON, publicationState: PublicationState): [PeerList]
+  peerListsConnection(sort: String, limit: Int, start: Int, where: JSON): PeerListConnection
+  postComment(id: ID!, publicationState: PublicationState): PostComment
+  postComments(sort: String, limit: Int, start: Int, where: JSON, publicationState: PublicationState): [PostComment]
+  postCommentsConnection(sort: String, limit: Int, start: Int, where: JSON): PostCommentConnection
+  post(id: ID!, publicationState: PublicationState): Post
+  posts(sort: String, limit: Int, start: Int, where: JSON, publicationState: PublicationState): [Post]
+  postsConnection(sort: String, limit: Int, start: Int, where: JSON): PostConnection
+  professional(id: ID!, publicationState: PublicationState): Professional
+  professionals(sort: String, limit: Int, start: Int, where: JSON, publicationState: PublicationState): [Professional]
+  professionalsConnection(sort: String, limit: Int, start: Int, where: JSON): ProfessionalConnection
+  questionResponse(id: ID!, publicationState: PublicationState): QuestionResponse
+  questionResponses(sort: String, limit: Int, start: Int, where: JSON, publicationState: PublicationState): [QuestionResponse]
+  questionResponsesConnection(sort: String, limit: Int, start: Int, where: JSON): QuestionResponseConnection
+  question(id: ID!, publicationState: PublicationState): Question
+  questions(sort: String, limit: Int, start: Int, where: JSON, publicationState: PublicationState): [Question]
+  questionsConnection(sort: String, limit: Int, start: Int, where: JSON): QuestionConnection
+  relatedPerson(id: ID!, publicationState: PublicationState): RelatedPerson
+  relatedPeople(sort: String, limit: Int, start: Int, where: JSON, publicationState: PublicationState): [RelatedPerson]
+  relatedPeopleConnection(sort: String, limit: Int, start: Int, where: JSON): RelatedPersonConnection
+  responseUpvote(id: ID!, publicationState: PublicationState): ResponseUpvote
+  responseUpvotes(sort: String, limit: Int, start: Int, where: JSON, publicationState: PublicationState): [ResponseUpvote]
+  responseUpvotesConnection(sort: String, limit: Int, start: Int, where: JSON): ResponseUpvoteConnection
+  files(sort: String, limit: Int, start: Int, where: JSON, publicationState: PublicationState): [UploadFile]
+  filesConnection(sort: String, limit: Int, start: Int, where: JSON): UploadFileConnection
+  role(id: ID!, publicationState: PublicationState): UsersPermissionsRole
+
+  """
+  Retrieve all the existing roles. You can't apply filters on this query.
+  """
+  roles(sort: String, limit: Int, start: Int, where: JSON, publicationState: PublicationState): [UsersPermissionsRole]
+  rolesConnection(sort: String, limit: Int, start: Int, where: JSON): UsersPermissionsRoleConnection
+  user(id: ID!, publicationState: PublicationState): UsersPermissionsUser
+  users(sort: String, limit: Int, start: Int, where: JSON, publicationState: PublicationState): [UsersPermissionsUser]
+  usersConnection(sort: String, limit: Int, start: Int, where: JSON): UsersPermissionsUserConnection
+  queryPosts(where: PostsQueryWithUserIDInput!): [Post]
+  queryQuestions(where: QuestionsQueryWithUserIDInput!): [Question]
+  me: UsersPermissionsMe
+}
+
+type Mutation {
+  createCommentLike(input: createCommentLikeInput): createCommentLikePayload
+  updateCommentLike(input: updateCommentLikeInput): updateCommentLikePayload
+  deleteCommentLike(input: deleteCommentLikeInput): deleteCommentLikePayload
+  createCommunityList(input: createCommunityListInput): createCommunityListPayload
+  updateCommunityList(input: updateCommunityListInput): updateCommunityListPayload
+  deleteCommunityList(input: deleteCommunityListInput): deleteCommunityListPayload
+  createCommunityPatientsLink(input: createCommunityPatientsLinkInput): createCommunityPatientsLinkPayload
+  updateCommunityPatientsLink(input: updateCommunityPatientsLinkInput): updateCommunityPatientsLinkPayload
+  deleteCommunityPatientsLink(input: deleteCommunityPatientsLinkInput): deleteCommunityPatientsLinkPayload
+  createCommunityProfessionalsLink(input: createCommunityProfessionalsLinkInput): createCommunityProfessionalsLinkPayload
+  updateCommunityProfessionalsLink(input: updateCommunityProfessionalsLinkInput): updateCommunityProfessionalsLinkPayload
+  deleteCommunityProfessionalsLink(input: deleteCommunityProfessionalsLinkInput): deleteCommunityProfessionalsLinkPayload
+  createCommunityRelatedPersonLink(input: createCommunityRelatedPersonLinkInput): createCommunityRelatedPersonLinkPayload
+  updateCommunityRelatedPersonLink(input: updateCommunityRelatedPersonLinkInput): updateCommunityRelatedPersonLinkPayload
+  deleteCommunityRelatedPersonLink(input: deleteCommunityRelatedPersonLinkInput): deleteCommunityRelatedPersonLinkPayload
+  createEducationLevelLegend(input: createEducationLevelLegendInput): createEducationLevelLegendPayload
+  updateEducationLevelLegend(input: updateEducationLevelLegendInput): updateEducationLevelLegendPayload
+  deleteEducationLevelLegend(input: deleteEducationLevelLegendInput): deleteEducationLevelLegendPayload
+  createFamilyIncomeLevelLegend(input: createFamilyIncomeLevelLegendInput): createFamilyIncomeLevelLegendPayload
+  updateFamilyIncomeLevelLegend(input: updateFamilyIncomeLevelLegendInput): updateFamilyIncomeLevelLegendPayload
+  deleteFamilyIncomeLevelLegend(input: deleteFamilyIncomeLevelLegendInput): deleteFamilyIncomeLevelLegendPayload
+  createGenderIdentityLegend(input: createGenderIdentityLegendInput): createGenderIdentityLegendPayload
+  updateGenderIdentityLegend(input: updateGenderIdentityLegendInput): updateGenderIdentityLegendPayload
+  deleteGenderIdentityLegend(input: deleteGenderIdentityLegendInput): deleteGenderIdentityLegendPayload
+  createInsuranceLegend(input: createInsuranceLegendInput): createInsuranceLegendPayload
+  updateInsuranceLegend(input: updateInsuranceLegendInput): updateInsuranceLegendPayload
+  deleteInsuranceLegend(input: deleteInsuranceLegendInput): deleteInsuranceLegendPayload
+  createPatient(input: createPatientInput): createPatientPayload
+  updatePatient(input: updatePatientInput): updatePatientPayload
+  deletePatient(input: deletePatientInput): deletePatientPayload
+  createPeerList(input: createPeerListInput): createPeerListPayload
+  updatePeerList(input: updatePeerListInput): updatePeerListPayload
+  deletePeerList(input: deletePeerListInput): deletePeerListPayload
+  createPostComment(input: createPostCommentInput): createPostCommentPayload
+  updatePostComment(input: updatePostCommentInput): updatePostCommentPayload
+  deletePostComment(input: deletePostCommentInput): deletePostCommentPayload
+  createPost(input: createPostInput): createPostPayload
+  updatePost(input: updatePostInput): updatePostPayload
+  deletePost(input: deletePostInput): deletePostPayload
+  createProfessional(input: createProfessionalInput): createProfessionalPayload
+  updateProfessional(input: updateProfessionalInput): updateProfessionalPayload
+  deleteProfessional(input: deleteProfessionalInput): deleteProfessionalPayload
+  createQuestionResponse(input: createQuestionResponseInput): createQuestionResponsePayload
+  updateQuestionResponse(input: updateQuestionResponseInput): updateQuestionResponsePayload
+  deleteQuestionResponse(input: deleteQuestionResponseInput): deleteQuestionResponsePayload
+  createQuestion(input: createQuestionInput): createQuestionPayload
+  updateQuestion(input: updateQuestionInput): updateQuestionPayload
+  deleteQuestion(input: deleteQuestionInput): deleteQuestionPayload
+  createRelatedPerson(input: createRelatedPersonInput): createRelatedPersonPayload
+  updateRelatedPerson(input: updateRelatedPersonInput): updateRelatedPersonPayload
+  deleteRelatedPerson(input: deleteRelatedPersonInput): deleteRelatedPersonPayload
+  createResponseUpvote(input: createResponseUpvoteInput): createResponseUpvotePayload
+  updateResponseUpvote(input: updateResponseUpvoteInput): updateResponseUpvotePayload
+  deleteResponseUpvote(input: deleteResponseUpvoteInput): deleteResponseUpvotePayload
+
+  """Delete one file"""
+  deleteFile(input: deleteFileInput): deleteFilePayload
+
+  """Create a new role"""
+  createRole(input: createRoleInput): createRolePayload
+
+  """Update an existing role"""
+  updateRole(input: updateRoleInput): updateRolePayload
+
+  """Delete an existing role"""
+  deleteRole(input: deleteRoleInput): deleteRolePayload
+
+  """Create a new user"""
+  createUser(input: createUserInput): createUserPayload
+
+  """Update an existing user"""
+  updateUser(input: updateUserInput): updateUserPayload
+
+  """Delete an existing user"""
+  deleteUser(input: deleteUserInput): deleteUserPayload
+  upload(refId: ID, ref: String, field: String, source: String, info: FileInfoInput, file: Upload!): UploadFile!
+  multipleUpload(refId: ID, ref: String, field: String, source: String, files: [Upload]!): [UploadFile]!
+  updateFileInfo(id: ID!, info: FileInfoInput!): UploadFile!
+  login(input: UsersPermissionsLoginInput!): UsersPermissionsLoginPayload!
+  register(input: UsersPermissionsRegisterInput!): UsersPermissionsLoginPayload!
+  forgotPassword(email: String!): UserPermissionsPasswordPayload
+  resetPassword(password: String!, passwordConfirmation: String!, code: String!): UsersPermissionsLoginPayload
+  emailConfirmation(confirmation: String!): UsersPermissionsLoginPayload
+}
+
+"""
+The `JSON` scalar type represents JSON values as specified by [ECMA-404](http://www.ecma-international.org/publications/files/ECMA-ST/ECMA-404.pdf).
+"""
+scalar JSON @specifiedBy(url: "http://www.ecma-international.org/publications/files/ECMA-ST/ECMA-404.pdf")
+
+"""
+A date-time string at UTC, such as 2007-12-03T10:15:30Z, compliant with the `date-time` format outlined in section 5.6 of the RFC 3339 profile of the ISO 8601 standard for representation of dates and times using the Gregorian calendar.
+"""
+scalar DateTime
+
+"""A time string with format: HH:mm:ss.SSS"""
+scalar Time
+
+"""
+A date string, such as 2007-12-03, compliant with the `full-date` format outlined in section 5.6 of the RFC 3339 profile of the ISO 8601 standard for representation of dates and times using the Gregorian calendar.
+"""
+scalar Date
+
+"""The `Long` scalar type represents 52-bit integers"""
+scalar Long
+
+"""The `Upload` scalar type represents a file upload."""
+scalar Upload

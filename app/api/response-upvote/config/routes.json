@@ -1,0 +1,52 @@
+{
+  "routes": [
+    {
+      "method": "GET",
+      "path": "/response-upvotes",
+      "handler": "response-upvote.find",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/response-upvotes/count",
+      "handler": "response-upvote.count",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/response-upvotes/:id",
+      "handler": "response-upvote.findOne",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/response-upvotes",
+      "handler": "response-upvote.create",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "PUT",
+      "path": "/response-upvotes/:id",
+      "handler": "response-upvote.update",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "DELETE",
+      "path": "/response-upvotes/:id",
+      "handler": "response-upvote.delete",
+      "config": {
+        "policies": []
+      }
+    }
+  ]
+}

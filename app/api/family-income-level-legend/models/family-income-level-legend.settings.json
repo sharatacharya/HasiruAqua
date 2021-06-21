@@ -1,0 +1,34 @@
+{
+  "kind": "collectionType",
+  "collectionName": "family_income_level_legends",
+  "info": {
+    "name": "FamilyIncomeLevelLegend",
+    "description": ""
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true,
+    "draftAndPublish": true
+  },
+  "attributes": {
+    "Name": {
+      "type": "string",
+      "required": true
+    },
+    "Value": {
+      "type": "enumeration",
+      "enum": [
+        "A",
+        "B",
+        "C",
+        "D",
+        "E",
+        "F",
+        "G",
+        "H",
+        "I"
+      ],
+      "required": true
+    }
+  }
+}

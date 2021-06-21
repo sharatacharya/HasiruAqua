@@ -1,0 +1,52 @@
+{
+  "routes": [
+    {
+      "method": "GET",
+      "path": "/gender-identity-legends",
+      "handler": "gender-identity-legend.find",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/gender-identity-legends/count",
+      "handler": "gender-identity-legend.count",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/gender-identity-legends/:id",
+      "handler": "gender-identity-legend.findOne",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/gender-identity-legends",
+      "handler": "gender-identity-legend.create",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "PUT",
+      "path": "/gender-identity-legends/:id",
+      "handler": "gender-identity-legend.update",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "DELETE",
+      "path": "/gender-identity-legends/:id",
+      "handler": "gender-identity-legend.delete",
+      "config": {
+        "policies": []
+      }
+    }
+  ]
+}

@@ -1,0 +1,67 @@
+{
+  "kind": "collectionType",
+  "collectionName": "peer_lists",
+  "info": {
+    "name": "peerList",
+    "description": ""
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true,
+    "draftAndPublish": true
+  },
+  "attributes": {
+    "patientId": {
+      "type": "integer",
+      "required": true
+    },
+    "peerId": {
+      "type": "integer",
+      "required": true
+    },
+    "ageSimilarityScore": {
+      "type": "string",
+      "required": true
+    },
+    "genderSimilarityScore": {
+      "type": "string",
+      "required": true
+    },
+    "raceSimilarityScore": {
+      "type": "string",
+      "required": true
+    },
+    "ethnicSimilarityScore": {
+      "type": "string",
+      "required": true
+    },
+    "educationSimilarityScore": {
+      "type": "string",
+      "required": true
+    },
+    "healthInsuranceSimilarityScore": {
+      "type": "string",
+      "required": true
+    },
+    "adjustedIncomeSimilarityScore": {
+      "type": "string",
+      "required": true
+    },
+    "medicalHxScore": {
+      "type": "string",
+      "required": true
+    },
+    "overallSocioEconomicScore": {
+      "type": "string",
+      "required": true
+    },
+    "overallDemographicScore": {
+      "type": "string",
+      "required": true
+    },
+    "overallScore": {
+      "type": "string",
+      "required": true
+    }
+  }
+}

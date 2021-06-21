@@ -1,0 +1,52 @@
+{
+  "routes": [
+    {
+      "method": "GET",
+      "path": "/community-related-person-links",
+      "handler": "community-related-person-link.find",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/community-related-person-links/count",
+      "handler": "community-related-person-link.count",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/community-related-person-links/:id",
+      "handler": "community-related-person-link.findOne",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/community-related-person-links",
+      "handler": "community-related-person-link.create",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "PUT",
+      "path": "/community-related-person-links/:id",
+      "handler": "community-related-person-link.update",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "DELETE",
+      "path": "/community-related-person-links/:id",
+      "handler": "community-related-person-link.delete",
+      "config": {
+        "policies": []
+      }
+    }
+  ]
+}

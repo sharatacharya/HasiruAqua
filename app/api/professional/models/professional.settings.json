@@ -1,0 +1,42 @@
+{
+  "kind": "collectionType",
+  "collectionName": "professionals",
+  "info": {
+    "name": "Professional",
+    "description": ""
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true,
+    "draftAndPublish": true
+  },
+  "attributes": {
+    "firstName": {
+      "type": "string",
+      "required": true
+    },
+    "lastName": {
+      "type": "string",
+      "required": true
+    },
+    "organization": {
+      "type": "string",
+      "required": true
+    },
+    "healthInterestId": {
+      "type": "richtext",
+      "required": true
+    },
+    "personDetail": {
+      "type": "component",
+      "repeatable": false,
+      "component": "person.user-detail",
+      "required": true
+    },
+    "professionalEmailAddress": {
+      "type": "email",
+      "required": true,
+      "unique": true
+    }
+  }
+}

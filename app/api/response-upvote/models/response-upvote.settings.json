@@ -1,0 +1,19 @@
+{
+  "kind": "collectionType",
+  "collectionName": "response_upvotes",
+  "info": {
+    "name": "response_Upvote"
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true,
+    "draftAndPublish": true
+  },
+  "attributes": {
+    "upvote_Name": {
+      "type": "string",
+      "required": true,
+      "unique": true
+    }
+  }
+}

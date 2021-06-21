@@ -1,0 +1,22 @@
+{
+  "kind": "collectionType",
+  "collectionName": "community_related_person_links",
+  "info": {
+    "name": "communityRelatedPersonLink"
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true,
+    "draftAndPublish": true
+  },
+  "attributes": {
+    "communityId": {
+      "type": "integer",
+      "required": true
+    },
+    "relatedPersonId": {
+      "type": "integer",
+      "required": true
+    }
+  }
+}

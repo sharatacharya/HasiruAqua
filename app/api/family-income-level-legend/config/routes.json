@@ -1,0 +1,52 @@
+{
+  "routes": [
+    {
+      "method": "GET",
+      "path": "/family-income-level-legends",
+      "handler": "family-income-level-legend.find",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/family-income-level-legends/count",
+      "handler": "family-income-level-legend.count",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/family-income-level-legends/:id",
+      "handler": "family-income-level-legend.findOne",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/family-income-level-legends",
+      "handler": "family-income-level-legend.create",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "PUT",
+      "path": "/family-income-level-legends/:id",
+      "handler": "family-income-level-legend.update",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "DELETE",
+      "path": "/family-income-level-legends/:id",
+      "handler": "family-income-level-legend.delete",
+      "config": {
+        "policies": []
+      }
+    }
+  ]
+}

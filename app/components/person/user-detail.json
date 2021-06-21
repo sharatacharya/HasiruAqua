@@ -1,0 +1,32 @@
+{
+  "collectionName": "components_person_user_details",
+  "info": {
+    "name": "userDetail",
+    "icon": "user-edit",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "displayName": {
+      "type": "string",
+      "required": true
+    },
+    "genderIdentity": {
+      "type": "string",
+      "required": true,
+      "private": false
+    },
+    "mobilePhone": {
+      "type": "string",
+      "required": true
+    },
+    "zipCode": {
+      "type": "string",
+      "required": true
+    },
+    "users_permissions_role": {
+      "plugin": "users-permissions",
+      "model": "role"
+    }
+  }
+}

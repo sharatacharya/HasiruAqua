@@ -1,0 +1,22 @@
+{
+  "kind": "collectionType",
+  "collectionName": "community_patients_links",
+  "info": {
+    "name": "communityPatientsLink"
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true,
+    "draftAndPublish": true
+  },
+  "attributes": {
+    "communityId": {
+      "type": "integer",
+      "required": true
+    },
+    "patientId": {
+      "type": "integer",
+      "required": true
+    }
+  }
+}

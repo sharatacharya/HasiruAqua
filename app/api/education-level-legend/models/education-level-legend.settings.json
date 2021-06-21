@@ -1,0 +1,31 @@
+{
+  "kind": "collectionType",
+  "collectionName": "education_level_legends",
+  "info": {
+    "name": "EducationLevelLegend"
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true,
+    "draftAndPublish": true
+  },
+  "attributes": {
+    "Name": {
+      "type": "string",
+      "required": true
+    },
+    "Value": {
+      "type": "enumeration",
+      "enum": [
+        "SEC",
+        "HS",
+        "ASSOC",
+        "SCOL",
+        "BD",
+        "GD",
+        "POSTG"
+      ],
+      "required": true
+    }
+  }
+}

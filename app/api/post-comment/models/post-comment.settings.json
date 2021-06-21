@@ -1,0 +1,25 @@
+{
+  "kind": "collectionType",
+  "collectionName": "post_comments",
+  "info": {
+    "name": "post_Comment",
+    "description": ""
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true,
+    "draftAndPublish": true
+  },
+  "attributes": {
+    "comment_Text": {
+      "type": "text"
+    },
+    "comment_likes": {
+      "collection": "comment-like"
+    },
+    "comment_Name": {
+      "type": "string",
+      "required": true
+    }
+  }
+}

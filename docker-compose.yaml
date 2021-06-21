@@ -1,0 +1,33 @@
+version: '3.2'
+services:
+  strapi:
+    image: strapi/strapi
+    restart: unless-stopped
+    environment:
+      DATABASE_CLIENT: postgres
+      DATABASE_NAME: HealthPeers
+      DATABASE_HOST: postgres
+      DATABASE_PORT: 5432
+      DATABASE_USERNAME: postgres
+      DATABASE_PASSWORD: Admin999
+    volumes:
+      - ./app:/srv/app
+    ports:
+      - '1337:1337'
+    depends_on:
+      - postgres
+
+  postgres:
+    image: postgres:12
+    restart: always
+    volumes:
+      - type: bind
+        source: ./data
+        target: /var/lib/postgresql/data
+    environment:
+      - POSTGRES_DB=HealthPeers
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=Admin999
+    ports:
+      - "5432:5432"
+    container_name: postgres
