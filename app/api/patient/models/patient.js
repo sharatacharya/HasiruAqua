@@ -25,6 +25,7 @@ module.exports = {
 			//console.log(users);
 			const educationLevelLegend = await strapi.query('education-level-legend').find();
 			const familyIncomeLevelLegend = await strapi.query('family-income-level-legend').find();
+			await strapi.query('peer-list').delete();
 			//const peerList = await strapi.query('peer-list').find();
 			//const peerListEntry = {
   			//	patientId: 0,
@@ -62,10 +63,14 @@ module.exports = {
 				}
 				patients.push(patientData);
 			});
-			var presentPatient = patients.filter(patient => patient.Name === data.personDetail.displayName);
-			var presentUser = users.filter(user => user.username === presentPatient[0].Name);
-			presentPatient[0].Id = presentUser[0].id; //replacing patientId by userid
-			console.log("-----------PeerList Matching Begins-------------- ");
+			for (let user = 0; user < patients.length; user++) {
+				const element = patients[user];
+				var presentPatient = patients.filter(patient => patient.Name === element.Name);
+				var presentUser = users.filter(user => user.username === presentPatient[0].Name);
+				presentPatient[0].Id = presentUser[0].id; //replacing patientId by userid
+
+
+				console.log("-----------PeerList Matching Begins-------------- ");
 			patients.forEach(patient => {
 				presentUser = users.filter(user => user.username === patient.Name);
 				//console.log(presentUser);
@@ -214,6 +219,11 @@ module.exports = {
 						
 				}
 			});
+			}
+			// var presentPatient = patients.filter(patient => patient.Name === data.personDetail.displayName);
+			// var presentUser = users.filter(user => user.username === presentPatient[0].Name);
+			// presentPatient[0].Id = presentUser[0].id; //replacing patientId by userid
+			
 		},
 	},
 };
