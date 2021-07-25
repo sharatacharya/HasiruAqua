@@ -1,0 +1,52 @@
+{
+  "routes": [
+    {
+      "method": "GET",
+      "path": "/medical-terms",
+      "handler": "medical-terms.find",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/medical-terms/count",
+      "handler": "medical-terms.count",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/medical-terms/:id",
+      "handler": "medical-terms.findOne",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/medical-terms",
+      "handler": "medical-terms.create",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "PUT",
+      "path": "/medical-terms/:id",
+      "handler": "medical-terms.update",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "DELETE",
+      "path": "/medical-terms/:id",
+      "handler": "medical-terms.delete",
+      "config": {
+        "policies": []
+      }
+    }
+  ]
+}

@@ -1056,6 +1056,115 @@ type deleteInsuranceLegendPayload {
   insuranceLegend: InsuranceLegend
 }
 
+type MedicalTerms {
+  id: ID!
+  created_at: DateTime!
+  updated_at: DateTime!
+  CUICode: String!
+  CUIName: String!
+  CUIRootSource: String!
+  published_at: DateTime
+}
+
+type MedicalTermsConnection {
+  values: [MedicalTerms]
+  groupBy: MedicalTermsGroupBy
+  aggregate: MedicalTermsAggregator
+}
+
+type MedicalTermsAggregator {
+  count: Int
+  totalCount: Int
+}
+
+type MedicalTermsGroupBy {
+  id: [MedicalTermsConnectionId]
+  created_at: [MedicalTermsConnectionCreated_at]
+  updated_at: [MedicalTermsConnectionUpdated_at]
+  CUICode: [MedicalTermsConnectionCUICode]
+  CUIName: [MedicalTermsConnectionCUIName]
+  CUIRootSource: [MedicalTermsConnectionCUIRootSource]
+  published_at: [MedicalTermsConnectionPublished_at]
+}
+
+type MedicalTermsConnectionId {
+  key: ID
+  connection: MedicalTermsConnection
+}
+
+type MedicalTermsConnectionCreated_at {
+  key: DateTime
+  connection: MedicalTermsConnection
+}
+
+type MedicalTermsConnectionUpdated_at {
+  key: DateTime
+  connection: MedicalTermsConnection
+}
+
+type MedicalTermsConnectionCUICode {
+  key: String
+  connection: MedicalTermsConnection
+}
+
+type MedicalTermsConnectionCUIName {
+  key: String
+  connection: MedicalTermsConnection
+}
+
+type MedicalTermsConnectionCUIRootSource {
+  key: String
+  connection: MedicalTermsConnection
+}
+
+type MedicalTermsConnectionPublished_at {
+  key: DateTime
+  connection: MedicalTermsConnection
+}
+
+input MedicalTermInput {
+  CUICode: String!
+  CUIName: String!
+  CUIRootSource: String!
+  published_at: DateTime
+  created_by: ID
+  updated_by: ID
+}
+
+input editMedicalTermInput {
+  CUICode: String
+  CUIName: String
+  CUIRootSource: String
+  published_at: DateTime
+  created_by: ID
+  updated_by: ID
+}
+
+input createMedicalTermInput {
+  data: MedicalTermInput
+}
+
+type createMedicalTermPayload {
+  medicalTerm: MedicalTerms
+}
+
+input updateMedicalTermInput {
+  where: InputID
+  data: editMedicalTermInput
+}
+
+type updateMedicalTermPayload {
+  medicalTerm: MedicalTerms
+}
+
+input deleteMedicalTermInput {
+  where: InputID
+}
+
+type deleteMedicalTermPayload {
+  medicalTerm: MedicalTerms
+}
+
 enum ENUM_PATIENT_EDUCATIONALLEVEL {
   SEC
   HS
@@ -2757,7 +2866,7 @@ input editComponentPersonUserDetailInput {
   users_permissions_role: ID
 }
 
-union Morph = UsersPermissionsMe | UsersPermissionsMeRole | UsersPermissionsLoginPayload | UserPermissionsPasswordPayload | CommentLike | CommentLikeConnection | CommentLikeAggregator | CommentLikeGroupBy | CommentLikeConnectionId | CommentLikeConnectionCreated_at | CommentLikeConnectionUpdated_at | CommentLikeConnectionComment_Liked_By_Name | CommentLikeConnectionPublished_at | createCommentLikePayload | updateCommentLikePayload | deleteCommentLikePayload | CommunityList | CommunityListConnection | CommunityListAggregator | CommunityListGroupBy | CommunityListConnectionId | CommunityListConnectionCreated_at | CommunityListConnectionUpdated_at | CommunityListConnectionCommunityName | CommunityListConnectionCommunityDescription | CommunityListConnectionPublished_at | createCommunityListPayload | updateCommunityListPayload | deleteCommunityListPayload | CommunityPatientsLink | CommunityPatientsLinkConnection | CommunityPatientsLinkAggregator | CommunityPatientsLinkAggregatorSum | CommunityPatientsLinkAggregatorAvg | CommunityPatientsLinkAggregatorMin | CommunityPatientsLinkAggregatorMax | CommunityPatientsLinkGroupBy | CommunityPatientsLinkConnectionId | CommunityPatientsLinkConnectionCreated_at | CommunityPatientsLinkConnectionUpdated_at | CommunityPatientsLinkConnectionCommunityId | CommunityPatientsLinkConnectionPatientId | CommunityPatientsLinkConnectionPublished_at | createCommunityPatientsLinkPayload | updateCommunityPatientsLinkPayload | deleteCommunityPatientsLinkPayload | CommunityProfessionalsLink | CommunityProfessionalsLinkConnection | CommunityProfessionalsLinkAggregator | CommunityProfessionalsLinkAggregatorSum | CommunityProfessionalsLinkAggregatorAvg | CommunityProfessionalsLinkAggregatorMin | CommunityProfessionalsLinkAggregatorMax | CommunityProfessionalsLinkGroupBy | CommunityProfessionalsLinkConnectionId | CommunityProfessionalsLinkConnectionCreated_at | CommunityProfessionalsLinkConnectionUpdated_at | CommunityProfessionalsLinkConnectionCommunityId | CommunityProfessionalsLinkConnectionProfessionalId | CommunityProfessionalsLinkConnectionPublished_at | createCommunityProfessionalsLinkPayload | updateCommunityProfessionalsLinkPayload | deleteCommunityProfessionalsLinkPayload | CommunityRelatedPersonLink | CommunityRelatedPersonLinkConnection | CommunityRelatedPersonLinkAggregator | CommunityRelatedPersonLinkAggregatorSum | CommunityRelatedPersonLinkAggregatorAvg | CommunityRelatedPersonLinkAggregatorMin | CommunityRelatedPersonLinkAggregatorMax | CommunityRelatedPersonLinkGroupBy | CommunityRelatedPersonLinkConnectionId | CommunityRelatedPersonLinkConnectionCreated_at | CommunityRelatedPersonLinkConnectionUpdated_at | CommunityRelatedPersonLinkConnectionCommunityId | CommunityRelatedPersonLinkConnectionRelatedPersonId | CommunityRelatedPersonLinkConnectionPublished_at | createCommunityRelatedPersonLinkPayload | updateCommunityRelatedPersonLinkPayload | deleteCommunityRelatedPersonLinkPayload | EducationLevelLegend | EducationLevelLegendConnection | EducationLevelLegendAggregator | EducationLevelLegendGroupBy | EducationLevelLegendConnectionId | EducationLevelLegendConnectionCreated_at | EducationLevelLegendConnectionUpdated_at | EducationLevelLegendConnectionName | EducationLevelLegendConnectionValue | EducationLevelLegendConnectionPublished_at | createEducationLevelLegendPayload | updateEducationLevelLegendPayload | deleteEducationLevelLegendPayload | FamilyIncomeLevelLegend | FamilyIncomeLevelLegendConnection | FamilyIncomeLevelLegendAggregator | FamilyIncomeLevelLegendGroupBy | FamilyIncomeLevelLegendConnectionId | FamilyIncomeLevelLegendConnectionCreated_at | FamilyIncomeLevelLegendConnectionUpdated_at | FamilyIncomeLevelLegendConnectionName | FamilyIncomeLevelLegendConnectionValue | FamilyIncomeLevelLegendConnectionPublished_at | createFamilyIncomeLevelLegendPayload | updateFamilyIncomeLevelLegendPayload | deleteFamilyIncomeLevelLegendPayload | GenderIdentityLegend | GenderIdentityLegendConnection | GenderIdentityLegendAggregator | GenderIdentityLegendGroupBy | GenderIdentityLegendConnectionId | GenderIdentityLegendConnectionCreated_at | GenderIdentityLegendConnectionUpdated_at | GenderIdentityLegendConnectionName | GenderIdentityLegendConnectionValue | GenderIdentityLegendConnectionPublished_at | createGenderIdentityLegendPayload | updateGenderIdentityLegendPayload | deleteGenderIdentityLegendPayload | InsuranceLegend | InsuranceLegendConnection | InsuranceLegendAggregator | InsuranceLegendGroupBy | InsuranceLegendConnectionId | InsuranceLegendConnectionCreated_at | InsuranceLegendConnectionUpdated_at | InsuranceLegendConnectionName | InsuranceLegendConnectionValue | InsuranceLegendConnectionPublished_at | createInsuranceLegendPayload | updateInsuranceLegendPayload | deleteInsuranceLegendPayload | Patient | PatientConnection | PatientAggregator | PatientAggregatorSum | PatientAggregatorAvg | PatientAggregatorMin | PatientAggregatorMax | PatientGroupBy | PatientConnectionId | PatientConnectionCreated_at | PatientConnectionUpdated_at | PatientConnectionDateOfBirth | PatientConnectionRace | PatientConnectionEthnicity | PatientConnectionEducationalLevel | PatientConnectionHeatlhProfileID | PatientConnectionPersonDetail | PatientConnectionPatientEmailAddress | PatientConnectionPeopleHousehold | PatientConnectionFamilyIncomeLevel | PatientConnectionInsurance | createPatientPayload | updatePatientPayload | deletePatientPayload | PeerList | PeerListConnection | PeerListAggregator | PeerListAggregatorSum | PeerListAggregatorAvg | PeerListAggregatorMin | PeerListAggregatorMax | PeerListGroupBy | PeerListConnectionId | PeerListConnectionCreated_at | PeerListConnectionUpdated_at | PeerListConnectionPatientId | PeerListConnectionPeerId | PeerListConnectionAgeSimilarityScore | PeerListConnectionGenderSimilarityScore | PeerListConnectionRaceSimilarityScore | PeerListConnectionEthnicSimilarityScore | PeerListConnectionEducationSimilarityScore | PeerListConnectionHealthInsuranceSimilarityScore | PeerListConnectionAdjustedIncomeSimilarityScore | PeerListConnectionMedicalHxScore | PeerListConnectionOverallSocioEconomicScore | PeerListConnectionOverallDemographicScore | PeerListConnectionOverallScore | PeerListConnectionPublished_at | createPeerListPayload | updatePeerListPayload | deletePeerListPayload | PostComment | PostCommentConnection | PostCommentAggregator | PostCommentGroupBy | PostCommentConnectionId | PostCommentConnectionCreated_at | PostCommentConnectionUpdated_at | PostCommentConnectionComment_Text | PostCommentConnectionComment_Name | PostCommentConnectionPublished_at | createPostCommentPayload | updatePostCommentPayload | deletePostCommentPayload | Post | PostConnection | PostAggregator | PostGroupBy | PostConnectionId | PostConnectionCreated_at | PostConnectionUpdated_at | PostConnectionPost_Text | PostConnectionPost_URL | PostConnectionUsers_permissions_user | PostConnectionPublished_at | createPostPayload | updatePostPayload | deletePostPayload | Professional | ProfessionalConnection | ProfessionalAggregator | ProfessionalGroupBy | ProfessionalConnectionId | ProfessionalConnectionCreated_at | ProfessionalConnectionUpdated_at | ProfessionalConnectionFirstName | ProfessionalConnectionLastName | ProfessionalConnectionOrganization | ProfessionalConnectionHealthInterestId | ProfessionalConnectionPersonDetail | ProfessionalConnectionProfessionalEmailAddress | ProfessionalConnectionPublished_at | createProfessionalPayload | updateProfessionalPayload | deleteProfessionalPayload | QuestionResponse | QuestionResponseConnection | QuestionResponseAggregator | QuestionResponseGroupBy | QuestionResponseConnectionId | QuestionResponseConnectionCreated_at | QuestionResponseConnectionUpdated_at | QuestionResponseConnectionResponse | QuestionResponseConnectionResponse_Name | QuestionResponseConnectionPublished_at | createQuestionResponsePayload | updateQuestionResponsePayload | deleteQuestionResponsePayload | Question | QuestionConnection | QuestionAggregator | QuestionGroupBy | QuestionConnectionId | QuestionConnectionCreated_at | QuestionConnectionUpdated_at | QuestionConnectionQuestion_Text | QuestionConnectionQuestion_URL | QuestionConnectionUsers_permissions_user | QuestionConnectionPublished_at | createQuestionPayload | updateQuestionPayload | deleteQuestionPayload | RelatedPerson | RelatedPersonConnection | RelatedPersonAggregator | RelatedPersonGroupBy | RelatedPersonConnectionId | RelatedPersonConnectionCreated_at | RelatedPersonConnectionUpdated_at | RelatedPersonConnectionPersonDetail | RelatedPersonConnectionPatient | RelatedPersonConnectionRelationshipToPatient | RelatedPersonConnectionRelatedPersonEmailAddress | RelatedPersonConnectionPublished_at | createRelatedPersonPayload | updateRelatedPersonPayload | deleteRelatedPersonPayload | ResponseUpvote | ResponseUpvoteConnection | ResponseUpvoteAggregator | ResponseUpvoteGroupBy | ResponseUpvoteConnectionId | ResponseUpvoteConnectionCreated_at | ResponseUpvoteConnectionUpdated_at | ResponseUpvoteConnectionUpvote_Name | ResponseUpvoteConnectionPublished_at | createResponseUpvotePayload | updateResponseUpvotePayload | deleteResponseUpvotePayload | UploadFile | UploadFileConnection | UploadFileAggregator | UploadFileAggregatorSum | UploadFileAggregatorAvg | UploadFileAggregatorMin | UploadFileAggregatorMax | UploadFileGroupBy | UploadFileConnectionId | UploadFileConnectionCreated_at | UploadFileConnectionUpdated_at | UploadFileConnectionName | UploadFileConnectionAlternativeText | UploadFileConnectionCaption | UploadFileConnectionWidth | UploadFileConnectionHeight | UploadFileConnectionFormats | UploadFileConnectionHash | UploadFileConnectionExt | UploadFileConnectionMime | UploadFileConnectionSize | UploadFileConnectionUrl | UploadFileConnectionPreviewUrl | UploadFileConnectionProvider | UploadFileConnectionProvider_metadata | deleteFilePayload | UsersPermissionsPermission | UsersPermissionsRole | UsersPermissionsRoleConnection | UsersPermissionsRoleAggregator | UsersPermissionsRoleGroupBy | UsersPermissionsRoleConnectionId | UsersPermissionsRoleConnectionName | UsersPermissionsRoleConnectionDescription | UsersPermissionsRoleConnectionType | createRolePayload | updateRolePayload | deleteRolePayload | UsersPermissionsUser | UsersPermissionsUserConnection | UsersPermissionsUserAggregator | UsersPermissionsUserGroupBy | UsersPermissionsUserConnectionId | UsersPermissionsUserConnectionCreated_at | UsersPermissionsUserConnectionUpdated_at | UsersPermissionsUserConnectionUsername | UsersPermissionsUserConnectionEmail | UsersPermissionsUserConnectionProvider | UsersPermissionsUserConnectionConfirmed | UsersPermissionsUserConnectionBlocked | UsersPermissionsUserConnectionRole | createUserPayload | updateUserPayload | deleteUserPayload | ComponentPersonUserDetail
+union Morph = UsersPermissionsMe | UsersPermissionsMeRole | UsersPermissionsLoginPayload | UserPermissionsPasswordPayload | CommentLike | CommentLikeConnection | CommentLikeAggregator | CommentLikeGroupBy | CommentLikeConnectionId | CommentLikeConnectionCreated_at | CommentLikeConnectionUpdated_at | CommentLikeConnectionComment_Liked_By_Name | CommentLikeConnectionPublished_at | createCommentLikePayload | updateCommentLikePayload | deleteCommentLikePayload | CommunityList | CommunityListConnection | CommunityListAggregator | CommunityListGroupBy | CommunityListConnectionId | CommunityListConnectionCreated_at | CommunityListConnectionUpdated_at | CommunityListConnectionCommunityName | CommunityListConnectionCommunityDescription | CommunityListConnectionPublished_at | createCommunityListPayload | updateCommunityListPayload | deleteCommunityListPayload | CommunityPatientsLink | CommunityPatientsLinkConnection | CommunityPatientsLinkAggregator | CommunityPatientsLinkAggregatorSum | CommunityPatientsLinkAggregatorAvg | CommunityPatientsLinkAggregatorMin | CommunityPatientsLinkAggregatorMax | CommunityPatientsLinkGroupBy | CommunityPatientsLinkConnectionId | CommunityPatientsLinkConnectionCreated_at | CommunityPatientsLinkConnectionUpdated_at | CommunityPatientsLinkConnectionCommunityId | CommunityPatientsLinkConnectionPatientId | CommunityPatientsLinkConnectionPublished_at | createCommunityPatientsLinkPayload | updateCommunityPatientsLinkPayload | deleteCommunityPatientsLinkPayload | CommunityProfessionalsLink | CommunityProfessionalsLinkConnection | CommunityProfessionalsLinkAggregator | CommunityProfessionalsLinkAggregatorSum | CommunityProfessionalsLinkAggregatorAvg | CommunityProfessionalsLinkAggregatorMin | CommunityProfessionalsLinkAggregatorMax | CommunityProfessionalsLinkGroupBy | CommunityProfessionalsLinkConnectionId | CommunityProfessionalsLinkConnectionCreated_at | CommunityProfessionalsLinkConnectionUpdated_at | CommunityProfessionalsLinkConnectionCommunityId | CommunityProfessionalsLinkConnectionProfessionalId | CommunityProfessionalsLinkConnectionPublished_at | createCommunityProfessionalsLinkPayload | updateCommunityProfessionalsLinkPayload | deleteCommunityProfessionalsLinkPayload | CommunityRelatedPersonLink | CommunityRelatedPersonLinkConnection | CommunityRelatedPersonLinkAggregator | CommunityRelatedPersonLinkAggregatorSum | CommunityRelatedPersonLinkAggregatorAvg | CommunityRelatedPersonLinkAggregatorMin | CommunityRelatedPersonLinkAggregatorMax | CommunityRelatedPersonLinkGroupBy | CommunityRelatedPersonLinkConnectionId | CommunityRelatedPersonLinkConnectionCreated_at | CommunityRelatedPersonLinkConnectionUpdated_at | CommunityRelatedPersonLinkConnectionCommunityId | CommunityRelatedPersonLinkConnectionRelatedPersonId | CommunityRelatedPersonLinkConnectionPublished_at | createCommunityRelatedPersonLinkPayload | updateCommunityRelatedPersonLinkPayload | deleteCommunityRelatedPersonLinkPayload | EducationLevelLegend | EducationLevelLegendConnection | EducationLevelLegendAggregator | EducationLevelLegendGroupBy | EducationLevelLegendConnectionId | EducationLevelLegendConnectionCreated_at | EducationLevelLegendConnectionUpdated_at | EducationLevelLegendConnectionName | EducationLevelLegendConnectionValue | EducationLevelLegendConnectionPublished_at | createEducationLevelLegendPayload | updateEducationLevelLegendPayload | deleteEducationLevelLegendPayload | FamilyIncomeLevelLegend | FamilyIncomeLevelLegendConnection | FamilyIncomeLevelLegendAggregator | FamilyIncomeLevelLegendGroupBy | FamilyIncomeLevelLegendConnectionId | FamilyIncomeLevelLegendConnectionCreated_at | FamilyIncomeLevelLegendConnectionUpdated_at | FamilyIncomeLevelLegendConnectionName | FamilyIncomeLevelLegendConnectionValue | FamilyIncomeLevelLegendConnectionPublished_at | createFamilyIncomeLevelLegendPayload | updateFamilyIncomeLevelLegendPayload | deleteFamilyIncomeLevelLegendPayload | GenderIdentityLegend | GenderIdentityLegendConnection | GenderIdentityLegendAggregator | GenderIdentityLegendGroupBy | GenderIdentityLegendConnectionId | GenderIdentityLegendConnectionCreated_at | GenderIdentityLegendConnectionUpdated_at | GenderIdentityLegendConnectionName | GenderIdentityLegendConnectionValue | GenderIdentityLegendConnectionPublished_at | createGenderIdentityLegendPayload | updateGenderIdentityLegendPayload | deleteGenderIdentityLegendPayload | InsuranceLegend | InsuranceLegendConnection | InsuranceLegendAggregator | InsuranceLegendGroupBy | InsuranceLegendConnectionId | InsuranceLegendConnectionCreated_at | InsuranceLegendConnectionUpdated_at | InsuranceLegendConnectionName | InsuranceLegendConnectionValue | InsuranceLegendConnectionPublished_at | createInsuranceLegendPayload | updateInsuranceLegendPayload | deleteInsuranceLegendPayload | MedicalTerms | MedicalTermsConnection | MedicalTermsAggregator | MedicalTermsGroupBy | MedicalTermsConnectionId | MedicalTermsConnectionCreated_at | MedicalTermsConnectionUpdated_at | MedicalTermsConnectionCUICode | MedicalTermsConnectionCUIName | MedicalTermsConnectionCUIRootSource | MedicalTermsConnectionPublished_at | createMedicalTermPayload | updateMedicalTermPayload | deleteMedicalTermPayload | Patient | PatientConnection | PatientAggregator | PatientAggregatorSum | PatientAggregatorAvg | PatientAggregatorMin | PatientAggregatorMax | PatientGroupBy | PatientConnectionId | PatientConnectionCreated_at | PatientConnectionUpdated_at | PatientConnectionDateOfBirth | PatientConnectionRace | PatientConnectionEthnicity | PatientConnectionEducationalLevel | PatientConnectionHeatlhProfileID | PatientConnectionPersonDetail | PatientConnectionPatientEmailAddress | PatientConnectionPeopleHousehold | PatientConnectionFamilyIncomeLevel | PatientConnectionInsurance | createPatientPayload | updatePatientPayload | deletePatientPayload | PeerList | PeerListConnection | PeerListAggregator | PeerListAggregatorSum | PeerListAggregatorAvg | PeerListAggregatorMin | PeerListAggregatorMax | PeerListGroupBy | PeerListConnectionId | PeerListConnectionCreated_at | PeerListConnectionUpdated_at | PeerListConnectionPatientId | PeerListConnectionPeerId | PeerListConnectionAgeSimilarityScore | PeerListConnectionGenderSimilarityScore | PeerListConnectionRaceSimilarityScore | PeerListConnectionEthnicSimilarityScore | PeerListConnectionEducationSimilarityScore | PeerListConnectionHealthInsuranceSimilarityScore | PeerListConnectionAdjustedIncomeSimilarityScore | PeerListConnectionMedicalHxScore | PeerListConnectionOverallSocioEconomicScore | PeerListConnectionOverallDemographicScore | PeerListConnectionOverallScore | PeerListConnectionPublished_at | createPeerListPayload | updatePeerListPayload | deletePeerListPayload | PostComment | PostCommentConnection | PostCommentAggregator | PostCommentGroupBy | PostCommentConnectionId | PostCommentConnectionCreated_at | PostCommentConnectionUpdated_at | PostCommentConnectionComment_Text | PostCommentConnectionComment_Name | PostCommentConnectionPublished_at | createPostCommentPayload | updatePostCommentPayload | deletePostCommentPayload | Post | PostConnection | PostAggregator | PostGroupBy | PostConnectionId | PostConnectionCreated_at | PostConnectionUpdated_at | PostConnectionPost_Text | PostConnectionPost_URL | PostConnectionUsers_permissions_user | PostConnectionPublished_at | createPostPayload | updatePostPayload | deletePostPayload | Professional | ProfessionalConnection | ProfessionalAggregator | ProfessionalGroupBy | ProfessionalConnectionId | ProfessionalConnectionCreated_at | ProfessionalConnectionUpdated_at | ProfessionalConnectionFirstName | ProfessionalConnectionLastName | ProfessionalConnectionOrganization | ProfessionalConnectionHealthInterestId | ProfessionalConnectionPersonDetail | ProfessionalConnectionProfessionalEmailAddress | ProfessionalConnectionPublished_at | createProfessionalPayload | updateProfessionalPayload | deleteProfessionalPayload | QuestionResponse | QuestionResponseConnection | QuestionResponseAggregator | QuestionResponseGroupBy | QuestionResponseConnectionId | QuestionResponseConnectionCreated_at | QuestionResponseConnectionUpdated_at | QuestionResponseConnectionResponse | QuestionResponseConnectionResponse_Name | QuestionResponseConnectionPublished_at | createQuestionResponsePayload | updateQuestionResponsePayload | deleteQuestionResponsePayload | Question | QuestionConnection | QuestionAggregator | QuestionGroupBy | QuestionConnectionId | QuestionConnectionCreated_at | QuestionConnectionUpdated_at | QuestionConnectionQuestion_Text | QuestionConnectionQuestion_URL | QuestionConnectionUsers_permissions_user | QuestionConnectionPublished_at | createQuestionPayload | updateQuestionPayload | deleteQuestionPayload | RelatedPerson | RelatedPersonConnection | RelatedPersonAggregator | RelatedPersonGroupBy | RelatedPersonConnectionId | RelatedPersonConnectionCreated_at | RelatedPersonConnectionUpdated_at | RelatedPersonConnectionPersonDetail | RelatedPersonConnectionPatient | RelatedPersonConnectionRelationshipToPatient | RelatedPersonConnectionRelatedPersonEmailAddress | RelatedPersonConnectionPublished_at | createRelatedPersonPayload | updateRelatedPersonPayload | deleteRelatedPersonPayload | ResponseUpvote | ResponseUpvoteConnection | ResponseUpvoteAggregator | ResponseUpvoteGroupBy | ResponseUpvoteConnectionId | ResponseUpvoteConnectionCreated_at | ResponseUpvoteConnectionUpdated_at | ResponseUpvoteConnectionUpvote_Name | ResponseUpvoteConnectionPublished_at | createResponseUpvotePayload | updateResponseUpvotePayload | deleteResponseUpvotePayload | UploadFile | UploadFileConnection | UploadFileAggregator | UploadFileAggregatorSum | UploadFileAggregatorAvg | UploadFileAggregatorMin | UploadFileAggregatorMax | UploadFileGroupBy | UploadFileConnectionId | UploadFileConnectionCreated_at | UploadFileConnectionUpdated_at | UploadFileConnectionName | UploadFileConnectionAlternativeText | UploadFileConnectionCaption | UploadFileConnectionWidth | UploadFileConnectionHeight | UploadFileConnectionFormats | UploadFileConnectionHash | UploadFileConnectionExt | UploadFileConnectionMime | UploadFileConnectionSize | UploadFileConnectionUrl | UploadFileConnectionPreviewUrl | UploadFileConnectionProvider | UploadFileConnectionProvider_metadata | deleteFilePayload | UsersPermissionsPermission | UsersPermissionsRole | UsersPermissionsRoleConnection | UsersPermissionsRoleAggregator | UsersPermissionsRoleGroupBy | UsersPermissionsRoleConnectionId | UsersPermissionsRoleConnectionName | UsersPermissionsRoleConnectionDescription | UsersPermissionsRoleConnectionType | createRolePayload | updateRolePayload | deleteRolePayload | UsersPermissionsUser | UsersPermissionsUserConnection | UsersPermissionsUserAggregator | UsersPermissionsUserGroupBy | UsersPermissionsUserConnectionId | UsersPermissionsUserConnectionCreated_at | UsersPermissionsUserConnectionUpdated_at | UsersPermissionsUserConnectionUsername | UsersPermissionsUserConnectionEmail | UsersPermissionsUserConnectionProvider | UsersPermissionsUserConnectionConfirmed | UsersPermissionsUserConnectionBlocked | UsersPermissionsUserConnectionRole | createUserPayload | updateUserPayload | deleteUserPayload | ComponentPersonUserDetail
 
 input InputID {
   id: ID!
@@ -2803,6 +2912,9 @@ type Query {
   insuranceLegend(id: ID!, publicationState: PublicationState): InsuranceLegend
   insuranceLegends(sort: String, limit: Int, start: Int, where: JSON, publicationState: PublicationState): [InsuranceLegend]
   insuranceLegendsConnection(sort: String, limit: Int, start: Int, where: JSON): InsuranceLegendConnection
+  medicalTerm(id: ID!, publicationState: PublicationState): MedicalTerms
+  medicalTerms(sort: String, limit: Int, start: Int, where: JSON, publicationState: PublicationState): [MedicalTerms]
+  medicalTermsConnection(sort: String, limit: Int, start: Int, where: JSON): MedicalTermsConnection
   patient(id: ID!, publicationState: PublicationState): Patient
   patients(sort: String, limit: Int, start: Int, where: JSON, publicationState: PublicationState): [Patient]
   patientsConnection(sort: String, limit: Int, start: Int, where: JSON): PatientConnection
@@ -2842,6 +2954,7 @@ type Query {
   user(id: ID!, publicationState: PublicationState): UsersPermissionsUser
   users(sort: String, limit: Int, start: Int, where: JSON, publicationState: PublicationState): [UsersPermissionsUser]
   usersConnection(sort: String, limit: Int, start: Int, where: JSON): UsersPermissionsUserConnection
+  cuiCount(where: JSON): Int!
   queryPosts(where: PostsQueryWithUserIDInput!): [Post]
   queryQuestions(where: QuestionsQueryWithUserIDInput!): [Question]
   me: UsersPermissionsMe
@@ -2875,6 +2988,9 @@ type Mutation {
   createInsuranceLegend(input: createInsuranceLegendInput): createInsuranceLegendPayload
   updateInsuranceLegend(input: updateInsuranceLegendInput): updateInsuranceLegendPayload
   deleteInsuranceLegend(input: deleteInsuranceLegendInput): deleteInsuranceLegendPayload
+  createMedicalTerm(input: createMedicalTermInput): createMedicalTermPayload
+  updateMedicalTerm(input: updateMedicalTermInput): updateMedicalTermPayload
+  deleteMedicalTerm(input: deleteMedicalTermInput): deleteMedicalTermPayload
   createPatient(input: createPatientInput): createPatientPayload
   updatePatient(input: updatePatientInput): updatePatientPayload
   deletePatient(input: deletePatientInput): deletePatientPayload

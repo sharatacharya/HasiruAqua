@@ -1,0 +1,27 @@
+{
+  "kind": "collectionType",
+  "collectionName": "medical_terms",
+  "info": {
+    "name": "MedicalTerms",
+    "description": ""
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true,
+    "draftAndPublish": true
+  },
+  "attributes": {
+    "CUICode": {
+      "type": "string",
+      "required": true
+    },
+    "CUIName": {
+      "type": "string",
+      "required": true
+    },
+    "CUIRootSource": {
+      "type": "string",
+      "required": true
+    }
+  }
+}
