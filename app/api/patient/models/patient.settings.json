@@ -36,9 +36,13 @@
       ],
       "required": true
     },
-    "heatlhProfileID": {
-      "type": "string",
-      "required": true
+    "healthProfile": {
+      "type": "text",
+      "required": false
+    },
+    "healthProfileCodes": {
+      "type": "text",
+      "required": false
     },
     "personDetail": {
       "type": "component",
