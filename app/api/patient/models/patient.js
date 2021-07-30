@@ -5,7 +5,16 @@ var jaccard = Jaccard();
 var medicalHXTerms = [];
 var presentUserHXTerms = [];
 var medicalHxScore = 0;
- 
+const axios = require('axios');
+const qs = require('qs');
+// const patient = require('../models/patient');
+var ctxPatientData;
+var ticket = 0;
+var TGT = 0;
+var apiKey = 'ad607547-6cda-4711-acea-ecd3b73bd36c';
+var {
+	id
+} = '';
 /**
  * Read the documentation (https://strapi.io/documentation/developer-docs/latest/development/backend-customization.html#lifecycle-hooks)
  * to customize this model
@@ -16,6 +25,86 @@ module.exports = {
 	 */
 	lifecycles: {
 		async afterCreate(data) {
+			console.log("After Create Data: ", data);
+			ctxPatientData = data;
+			id = data.id;
+			try{
+				let codes = ctxPatientData.healthProfileCodes.split('+');
+				  let terms = ctxPatientData.healthProfile.split('+');
+				  for (let index = 0; index < codes.length; index++) {
+					  const cui = codes[index];
+					  if(cui.includes('undefined')) {
+						  let searchTerm = terms[index];
+						  console.log(searchTerm);
+			
+						  axios({
+							  method: 'post',
+							  url: 'https://utslogin.nlm.nih.gov/cas/v1/api-key',
+							data: qs.stringify({
+							  apikey: apiKey
+							}),
+							headers: {
+							  'content-type': 'application/x-www-form-urlencoded;charset=utf-8'
+							}
+						  }).then(function(response) {
+							  // console.log(response.data)
+							  var myArray = response.data.match("api-key/(.*)\" method=");
+							  TGT = myArray[1];
+							  // console.log(TGT);
+							  axios({
+								  method: 'post',
+								  url: 'https://utslogin.nlm.nih.gov/cas/v1/api-key/'+TGT,
+								data: qs.stringify({
+								  service: 'http://umlsks.nlm.nih.gov'
+								}),
+								headers: {
+								  'content-type': 'application/x-www-form-urlencoded;charset=utf-8'
+								}
+							  }).then(function(response) {
+								  // console.log(response.data)
+								  ticket = response.data;
+								  axios({
+									  method: 'get',
+									  url: 'https://uts-ws.nlm.nih.gov/rest/search/current?string='+ searchTerm + '&ticket='+ticket
+								  }).then(function(response) {
+									  console.log(response.data.result['results']);
+									  for (let index = 0; index < response.data.result['results'].length; index++) {
+										const element = response.data.result['results'][index];
+										var obj = {"CUICode": element.ui, "CUIName": element.name, "CUIRootSource": element.rootSource };
+										(async () => {
+											await strapi.query('medical-terms').create(obj);
+										  })();
+									  }
+									  var item = response.data.result['results'].filter(res => res.name.toString().toLowerCase() === searchTerm.toString().toLowerCase());
+									  console.log(item);
+									  if (item.length > 0) {
+										ctxPatientData.healthProfileCodes = ctxPatientData.healthProfileCodes.replace('undefined', item[0].ui);
+										ctxPatientData.healthProfile = ctxPatientData.healthProfile.replace(searchTerm, item[0].name);
+									  } else {
+										ctxPatientData.healthProfileCodes = ctxPatientData.healthProfileCodes.replace('undefined', response.data.result['results'][0].ui);
+										ctxPatientData.healthProfile = ctxPatientData.healthProfile.replace(searchTerm, response.data.result['results'][0].name);
+									  }
+									  (async () => {
+										await strapi.services.patient.update({
+											id
+										  }, ctxPatientData);
+									  })();
+								  }).catch(function(error) {
+									  console.log(error)
+									})
+								  }).catch(function(error) {
+									  console.log(error)
+								  })
+							  }).catch(function(error) {
+							  console.log(error)
+						  })
+					  }
+				  }
+				
+				 } catch(err) {
+				console.log(err)
+				 }
+
 			const patientUser = await strapi.query('patient').find();
 			// console.log(patientUser);
 			if (+(patientUser.length) > 1) {
