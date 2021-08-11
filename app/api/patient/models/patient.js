@@ -149,7 +149,7 @@ module.exports = {
 						EducationLevel: element.educationalLevel,
 						FamilyIncomeLevel: element.familyIncomeLevel,
 						Insurance: element.insurance,
-						MedicalHxTerm: element.healthProfileCodes
+						MedicalHxTerm: element.healthProfile
 					}
 					patients.push(patientData);
 				});
