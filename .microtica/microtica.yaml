@@ -26,10 +26,11 @@ steps:
   PushDockerImage:
     type: docker-push
     stage: build
-    title: Build and Push Docker Image
-    image_name: microtica/strapi-app
+    title: Build and Push Docker Image on Amazon ECR
+    image_name: microtica/app
     tag: "{{MIC_PIPELINE_EXECUTION_ID}}"
     dockerfile: ./.microtica/Dockerfile
+    registry: ecr
 
   DeployComponent:
     type: deploy
