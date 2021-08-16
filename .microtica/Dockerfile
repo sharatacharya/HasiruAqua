@@ -2,13 +2,12 @@ FROM strapi/base:alpine
 
 WORKDIR /stapi
 
-RUN ls -d
-COPY ./package.json ./
+COPY ./app/package.json ./
 COPY ./yarn.lock ./
 
 RUN yarn install
 
-COPY ./app .
+COPY ./app/ .
 
 ENV NODE_ENV production 
 
