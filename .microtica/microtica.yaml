@@ -27,7 +27,7 @@ steps:
     type: docker-push
     stage: build
     title: Build and Push Docker Image on Amazon ECR
-    image_name: microtica/app
+    image_name: microtica/healthpeers
     tag: "{{MIC_PIPELINE_EXECUTION_ID}}"
     dockerfile: ./.microtica/Dockerfile
     registry: ecr
