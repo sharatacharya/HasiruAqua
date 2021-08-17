@@ -40,11 +40,3 @@ steps:
     partial:
         resource_version_overrides:
           StrapiApp: "{{MIC_PIPELINE_EXECUTION_ID}}"
-
-  DeployToCluster:
-    type: deploy
-    target: kubernetes
-    stage: deploy
-    cluster: HealthpeersKubeCluster
-    service: healthpeers-api
-    tag: "{{MIC_PIPELINE_EXECUTION_ID}}"
