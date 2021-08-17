@@ -2,7 +2,6 @@ stages:
   - clone
   - build
   - deploy
-  - deploy
 
 steps:
   Clone:
@@ -45,6 +44,7 @@ steps:
   DeployToCluster:
     type: deploy
     target: kubernetes
+    stage: deploy
     cluster: HealthpeersKubeCluster
     service: healthpeers-api
     tag: "{{MIC_PIPELINE_EXECUTION_ID}}"
