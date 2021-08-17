@@ -2,6 +2,7 @@ stages:
   - clone
   - build
   - deploy
+  - deploy
 
 steps:
   Clone:
