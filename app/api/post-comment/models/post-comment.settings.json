@@ -20,6 +20,10 @@
     "comment_Name": {
       "type": "string",
       "required": true
+    },
+    "post_comment_likes": {
+      "plugin": "users-permissions",
+      "collection": "user"
     }
   }
 }

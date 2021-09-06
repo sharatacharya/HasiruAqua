@@ -25,9 +25,13 @@ module.exports = {
 	 */
 	lifecycles: {
 		async afterCreate(data) {
-			console.log("After Create Data: ", data);
+			// console.log("After Create Data: ", data);
+			const users = await strapi.plugins['users-permissions'].services.user.fetchAll();
+			const ctxUser = users.filter(user => user.email === data.patientEmailAddress);
 			ctxPatientData = data;
 			id = data.id;
+			// console.log(ctxUser[0].id);
+			strapi.query('community-patients-link').create({patientId: ctxUser[0].id, communityId: 5});
 			try{
 				let codes = ctxPatientData.healthProfileCodes.split('+');
 				  let terms = ctxPatientData.healthProfile.split('+');
@@ -108,7 +112,7 @@ module.exports = {
 			const patientUser = await strapi.query('patient').find();
 			// console.log(patientUser);
 			if (+(patientUser.length) > 1) {
-				const users = await strapi.plugins['users-permissions'].services.user.fetchAll();
+				
 				// console.log(patientUser);
 				// console.log(users);
 				const educationLevelLegend = await strapi.query('education-level-legend').find();

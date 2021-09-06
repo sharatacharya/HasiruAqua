@@ -20,6 +20,14 @@
     "response_Name": {
       "type": "string",
       "required": true
+    },
+    "response_by_userid": {
+      "type": "string",
+      "required": true
+    },
+    "question_response_upvote": {
+      "plugin": "users-permissions",
+      "collection": "user"
     }
   }
 }
