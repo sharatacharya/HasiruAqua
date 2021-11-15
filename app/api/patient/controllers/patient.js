@@ -39,4 +39,17 @@ module.exports = {
           model: strapi.models.patient
         });
   },
+  queryPatient: async ctx => {
+    // const id = ctx.params.id;
+    
+    // console.log("In query Patient");
+    const email = decodeURIComponent(ctx.request.url.split("email=")[1]);
+    // console.log(email);
+    const patient = await strapi.query('patient').find({ patientEmailAddress: email });
+    // console.log(patient);
+    return sanitizeEntity(patient.toJSON 
+      ? patient.toJSON() : patient, {
+      model: strapi.query('patient').model,
+    });;
+  },
 };
