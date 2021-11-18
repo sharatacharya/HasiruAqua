@@ -15,6 +15,56 @@ var apiKey = 'ad607547-6cda-4711-acea-ecd3b73bd36c';
 var {
 	id
 } = '';
+
+function circularLinkedList() {
+  //Node
+  let Node = function(element) {
+    this.element = element;
+    this.next = null;
+  }
+
+  let length = 0;
+  let head = null;
+
+  //Other methods go here
+
+  this.getElementAt = function(index) {
+    if(index >= 0 && index <= length){
+      let node = head;
+      for(let i = 0; i < index && node != null; i++){
+        node = node.next;
+      }
+      return node;
+    }
+    return undefined;
+  }
+
+  //Add new node
+  this.append = function(element) {
+    //Create new node
+    const node = new Node(element);
+    let current;
+    
+    //If head is empty
+    //Then make new node head
+    if(head === null){
+      head = node;
+    }else{
+      //Else add the new node as the next node
+      //And mark the next of new node to the head
+      current = this.getElementAt(length - 1);
+      current.next = node;
+    }
+    
+    node.next = head;
+    length++;
+  }
+}
+
+
+
+
+
 /**
  * Read the documentation (https://strapi.io/documentation/developer-docs/latest/development/backend-customization.html#lifecycle-hooks)
  * to customize this model
@@ -25,12 +75,14 @@ module.exports = {
 	 */
 	lifecycles: {
 		async afterCreate(data) {
-			// console.log("After Create Data: ", data);
+			
 			const users = await strapi.plugins['users-permissions'].services.user.fetchAll();
 			const ctxUser = users.filter(user => user.email === data.patientEmailAddress);
 			ctxPatientData = data;
+			console.log("After Create Data: ", ctxPatientData);
 			id = data.id;
 			// console.log(ctxUser[0].id);
+			//Setting Default community to 5. Multiple Sclerosis.
 			strapi.query('community-patients-link').create({patientId: ctxUser[0].id, communityId: 5});
 			try{
 				let codes = ctxPatientData.healthProfileCodes.split('+');
@@ -119,7 +171,8 @@ module.exports = {
 				const familyIncomeLevelLegend = await strapi.query('family-income-level-legend').find();
 				// console.log(educationLevelLegend);
 				// console.log(familyIncomeLevelLegend);
-				await strapi.query('peer-list').delete();
+				// Deleting all previous peerlist matches. 
+				// await strapi.query('peer-list').delete();
 				//const peerList = await strapi.query('peer-list').find();
 				//const peerListEntry = {
 				//	patientId: 0,
@@ -157,9 +210,11 @@ module.exports = {
 					}
 					patients.push(patientData);
 				});
-				for (let user = 0; user < patients.length; user++) {
-					const element = patients[user];
-					var presentPatient = patients.filter(patient => patient.Name === element.Name);
+				// for (let user = 0; user < patients.length; user++) {
+					// const element = patients[user];
+					// var presentPatient = patients.filter(patient => patient.Name === element.Name);
+					var presentPatient = patients.filter(patient => patient.Name === ctxPatientData.personDetail.displayName);
+					console.log("Present Patient from ctx: ", presentPatient);
 					var presentUser = users.filter(user => user.username === presentPatient[0].Name);
 					presentPatient[0].Id = presentUser[0].id; //replacing patientId by userid
 
@@ -310,7 +365,7 @@ module.exports = {
 							
 					}
 				});
-				}
+				// }
 				// var presentPatient = patients.filter(patient => patient.Name === data.personDetail.displayName);
 				// var presentUser = users.filter(user => user.username === presentPatient[0].Name);
 				// presentPatient[0].Id = presentUser[0].id; //replacing patientId by userid
