@@ -52,4 +52,24 @@ module.exports = {
       model: strapi.query('patient').model,
     });;
   },
+  queryUser: async ctx => {
+    // const id = ctx.params.id;
+    const users = await strapi.plugins['users-permissions'].services.user.fetchAll();
+		
+    // console.log("In query User ctx:", ctx);
+    const email = decodeURIComponent(ctx.request.url.split("email=")[1]);
+    // console.log(email);
+    const ctxUser = users.filter(user => user.email === email);
+    console.log(ctxUser);
+    return sanitizeEntity(ctxUser, {
+      model: strapi.query('user', 'users-permissions').model,
+    });;
+    // console.log(email);
+    // const user = await strapi.query('user').find({ email: email });
+    // console.log(patient);
+    
+    // return sanitizeEntity(user, {
+    //   model: strapi.query('user', 'users-permissions').model,
+    // });;
+  },
 };
