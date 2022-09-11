@@ -1,0 +1,127 @@
+{
+  "kind": "collectionType",
+  "collectionName": "farmers",
+  "info": {
+    "name": "Farmer"
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true,
+    "draftAndPublish": true
+  },
+  "attributes": {
+    "famerDetail": {
+      "type": "component",
+      "repeatable": true,
+      "component": "person.user-detail",
+      "required": true
+    },
+    "fullAddress": {
+      "type": "text",
+      "required": true
+    },
+    "dateOfBirth": {
+      "type": "date",
+      "required": false
+    },
+    "farmRegistrationTimeStamp": {
+      "type": "datetime",
+      "required": true
+    },
+    "dateOfVisit": {
+      "type": "date",
+      "required": true
+    },
+    "occupation": {
+      "type": "string",
+      "required": false
+    },
+    "farmer": {
+      "type": "boolean",
+      "required": true
+    },
+    "yearsOfFarming": {
+      "type": "decimal"
+    },
+    "landSize": {
+      "type": "string"
+    },
+    "annualIncome": {
+      "type": "string"
+    },
+    "borewellOnProperty": {
+      "type": "boolean",
+      "default": false,
+      "required": false
+    },
+    "numberOfBorewells": {
+      "type": "integer",
+      "required": false,
+      "default": 0
+    },
+    "powerConnection": {
+      "type": "boolean",
+      "default": false,
+      "required": true
+    },
+    "krishiHonda": {
+      "type": "boolean",
+      "default": false
+    },
+    "sizeOfKrishiHonda": {
+      "type": "string"
+    },
+    "fishCultivationHistory": {
+      "type": "boolean",
+      "default": false
+    },
+    "krishiHondaOutput": {
+      "type": "string"
+    },
+    "krishiHondaChallenges": {
+      "type": "text"
+    },
+    "fishCultivationKnowledge": {
+      "type": "text"
+    },
+    "governmentSchemeAvailed": {
+      "type": "string"
+    },
+    "krishiHondaInterest": {
+      "type": "boolean",
+      "default": false
+    },
+    "photoID": {
+      "type": "boolean",
+      "default": false
+    },
+    "farmerPicture": {
+      "collection": "file",
+      "via": "related",
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos"
+      ],
+      "plugin": "upload",
+      "required": false,
+      "pluginOptions": {}
+    },
+    "farmPicture": {
+      "collection": "file",
+      "via": "related",
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos"
+      ],
+      "plugin": "upload",
+      "required": false,
+      "pluginOptions": {}
+    },
+    "farmLocation": {
+      "type": "string",
+      "required": true
+    }
+  }
+}

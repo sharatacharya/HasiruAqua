@@ -631,6 +631,178 @@ type deleteCommunityRelatedPersonLinkPayload {
   communityRelatedPersonLink: CommunityRelatedPersonLink
 }
 
+type DeviceSensorParameters {
+  id: ID!
+  created_at: DateTime!
+  updated_at: DateTime!
+  farmID: String!
+  deviceID: String!
+  logTimeStamp: DateTime!
+  surfaceTemp: String!
+  pondTemp: String!
+  tds: String!
+  ph: String!
+  dissolvedOxygen: String
+  nitrite: String
+  lightIntensity: String
+  published_at: DateTime
+}
+
+type DeviceSensorParametersConnection {
+  values: [DeviceSensorParameters]
+  groupBy: DeviceSensorParametersGroupBy
+  aggregate: DeviceSensorParametersAggregator
+}
+
+type DeviceSensorParametersAggregator {
+  count: Int
+  totalCount: Int
+}
+
+type DeviceSensorParametersGroupBy {
+  id: [DeviceSensorParametersConnectionId]
+  created_at: [DeviceSensorParametersConnectionCreated_at]
+  updated_at: [DeviceSensorParametersConnectionUpdated_at]
+  farmID: [DeviceSensorParametersConnectionFarmID]
+  deviceID: [DeviceSensorParametersConnectionDeviceID]
+  logTimeStamp: [DeviceSensorParametersConnectionLogTimeStamp]
+  surfaceTemp: [DeviceSensorParametersConnectionSurfaceTemp]
+  pondTemp: [DeviceSensorParametersConnectionPondTemp]
+  tds: [DeviceSensorParametersConnectionTds]
+  ph: [DeviceSensorParametersConnectionPh]
+  dissolvedOxygen: [DeviceSensorParametersConnectionDissolvedOxygen]
+  nitrite: [DeviceSensorParametersConnectionNitrite]
+  lightIntensity: [DeviceSensorParametersConnectionLightIntensity]
+  published_at: [DeviceSensorParametersConnectionPublished_at]
+}
+
+type DeviceSensorParametersConnectionId {
+  key: ID
+  connection: DeviceSensorParametersConnection
+}
+
+type DeviceSensorParametersConnectionCreated_at {
+  key: DateTime
+  connection: DeviceSensorParametersConnection
+}
+
+type DeviceSensorParametersConnectionUpdated_at {
+  key: DateTime
+  connection: DeviceSensorParametersConnection
+}
+
+type DeviceSensorParametersConnectionFarmID {
+  key: String
+  connection: DeviceSensorParametersConnection
+}
+
+type DeviceSensorParametersConnectionDeviceID {
+  key: String
+  connection: DeviceSensorParametersConnection
+}
+
+type DeviceSensorParametersConnectionLogTimeStamp {
+  key: DateTime
+  connection: DeviceSensorParametersConnection
+}
+
+type DeviceSensorParametersConnectionSurfaceTemp {
+  key: String
+  connection: DeviceSensorParametersConnection
+}
+
+type DeviceSensorParametersConnectionPondTemp {
+  key: String
+  connection: DeviceSensorParametersConnection
+}
+
+type DeviceSensorParametersConnectionTds {
+  key: String
+  connection: DeviceSensorParametersConnection
+}
+
+type DeviceSensorParametersConnectionPh {
+  key: String
+  connection: DeviceSensorParametersConnection
+}
+
+type DeviceSensorParametersConnectionDissolvedOxygen {
+  key: String
+  connection: DeviceSensorParametersConnection
+}
+
+type DeviceSensorParametersConnectionNitrite {
+  key: String
+  connection: DeviceSensorParametersConnection
+}
+
+type DeviceSensorParametersConnectionLightIntensity {
+  key: String
+  connection: DeviceSensorParametersConnection
+}
+
+type DeviceSensorParametersConnectionPublished_at {
+  key: DateTime
+  connection: DeviceSensorParametersConnection
+}
+
+input DeviceSensorParameterInput {
+  farmID: String!
+  deviceID: String!
+  logTimeStamp: DateTime!
+  surfaceTemp: String!
+  pondTemp: String!
+  tds: String!
+  ph: String!
+  dissolvedOxygen: String
+  nitrite: String
+  lightIntensity: String
+  published_at: DateTime
+  created_by: ID
+  updated_by: ID
+}
+
+input editDeviceSensorParameterInput {
+  farmID: String
+  deviceID: String
+  logTimeStamp: DateTime
+  surfaceTemp: String
+  pondTemp: String
+  tds: String
+  ph: String
+  dissolvedOxygen: String
+  nitrite: String
+  lightIntensity: String
+  published_at: DateTime
+  created_by: ID
+  updated_by: ID
+}
+
+input createDeviceSensorParameterInput {
+  data: DeviceSensorParameterInput
+}
+
+type createDeviceSensorParameterPayload {
+  deviceSensorParameter: DeviceSensorParameters
+}
+
+input updateDeviceSensorParameterInput {
+  where: InputID
+  data: editDeviceSensorParameterInput
+}
+
+type updateDeviceSensorParameterPayload {
+  deviceSensorParameter: DeviceSensorParameters
+}
+
+input deleteDeviceSensorParameterInput {
+  where: InputID
+}
+
+type deleteDeviceSensorParameterPayload {
+  deviceSensorParameter: DeviceSensorParameters
+}
+
 enum ENUM_EDUCATIONLEVELLEGEND_VALUE {
   SEC
   HS
@@ -851,6 +1023,319 @@ input deleteFamilyIncomeLevelLegendInput {
 
 type deleteFamilyIncomeLevelLegendPayload {
   familyIncomeLevelLegend: FamilyIncomeLevelLegend
+}
+
+type Farmer {
+  id: ID!
+  created_at: DateTime!
+  updated_at: DateTime!
+  famerDetail: [ComponentPersonUserDetail]
+  fullAddress: String!
+  dateOfBirth: Date
+  farmRegistrationTimeStamp: DateTime!
+  dateOfVisit: Date!
+  occupation: String
+  farmer: Boolean!
+  yearsOfFarming: Float
+  landSize: String
+  annualIncome: String
+  borewellOnProperty: Boolean
+  numberOfBorewells: Int
+  powerConnection: Boolean!
+  krishiHonda: Boolean
+  sizeOfKrishiHonda: String
+  fishCultivationHistory: Boolean
+  krishiHondaOutput: String
+  krishiHondaChallenges: String
+  fishCultivationKnowledge: String
+  governmentSchemeAvailed: String
+  krishiHondaInterest: Boolean
+  photoID: Boolean
+  farmLocation: String!
+  published_at: DateTime
+  farmerPicture(sort: String, limit: Int, start: Int, where: JSON): [UploadFile]
+  farmPicture(sort: String, limit: Int, start: Int, where: JSON): [UploadFile]
+}
+
+type FarmerConnection {
+  values: [Farmer]
+  groupBy: FarmerGroupBy
+  aggregate: FarmerAggregator
+}
+
+type FarmerAggregator {
+  count: Int
+  totalCount: Int
+  sum: FarmerAggregatorSum
+  avg: FarmerAggregatorAvg
+  min: FarmerAggregatorMin
+  max: FarmerAggregatorMax
+}
+
+type FarmerAggregatorSum {
+  yearsOfFarming: Float
+  numberOfBorewells: Float
+}
+
+type FarmerAggregatorAvg {
+  yearsOfFarming: Float
+  numberOfBorewells: Float
+}
+
+type FarmerAggregatorMin {
+  yearsOfFarming: Float
+  numberOfBorewells: Float
+}
+
+type FarmerAggregatorMax {
+  yearsOfFarming: Float
+  numberOfBorewells: Float
+}
+
+type FarmerGroupBy {
+  id: [FarmerConnectionId]
+  created_at: [FarmerConnectionCreated_at]
+  updated_at: [FarmerConnectionUpdated_at]
+  fullAddress: [FarmerConnectionFullAddress]
+  dateOfBirth: [FarmerConnectionDateOfBirth]
+  farmRegistrationTimeStamp: [FarmerConnectionFarmRegistrationTimeStamp]
+  dateOfVisit: [FarmerConnectionDateOfVisit]
+  occupation: [FarmerConnectionOccupation]
+  farmer: [FarmerConnectionFarmer]
+  yearsOfFarming: [FarmerConnectionYearsOfFarming]
+  landSize: [FarmerConnectionLandSize]
+  annualIncome: [FarmerConnectionAnnualIncome]
+  borewellOnProperty: [FarmerConnectionBorewellOnProperty]
+  numberOfBorewells: [FarmerConnectionNumberOfBorewells]
+  powerConnection: [FarmerConnectionPowerConnection]
+  krishiHonda: [FarmerConnectionKrishiHonda]
+  sizeOfKrishiHonda: [FarmerConnectionSizeOfKrishiHonda]
+  fishCultivationHistory: [FarmerConnectionFishCultivationHistory]
+  krishiHondaOutput: [FarmerConnectionKrishiHondaOutput]
+  krishiHondaChallenges: [FarmerConnectionKrishiHondaChallenges]
+  fishCultivationKnowledge: [FarmerConnectionFishCultivationKnowledge]
+  governmentSchemeAvailed: [FarmerConnectionGovernmentSchemeAvailed]
+  krishiHondaInterest: [FarmerConnectionKrishiHondaInterest]
+  photoID: [FarmerConnectionPhotoID]
+  farmLocation: [FarmerConnectionFarmLocation]
+  published_at: [FarmerConnectionPublished_at]
+}
+
+type FarmerConnectionId {
+  key: ID
+  connection: FarmerConnection
+}
+
+type FarmerConnectionCreated_at {
+  key: DateTime
+  connection: FarmerConnection
+}
+
+type FarmerConnectionUpdated_at {
+  key: DateTime
+  connection: FarmerConnection
+}
+
+type FarmerConnectionFullAddress {
+  key: String
+  connection: FarmerConnection
+}
+
+type FarmerConnectionDateOfBirth {
+  key: ID
+  connection: FarmerConnection
+}
+
+type FarmerConnectionFarmRegistrationTimeStamp {
+  key: DateTime
+  connection: FarmerConnection
+}
+
+type FarmerConnectionDateOfVisit {
+  key: ID
+  connection: FarmerConnection
+}
+
+type FarmerConnectionOccupation {
+  key: String
+  connection: FarmerConnection
+}
+
+type FarmerConnectionFarmer {
+  key: Boolean
+  connection: FarmerConnection
+}
+
+type FarmerConnectionYearsOfFarming {
+  key: Float
+  connection: FarmerConnection
+}
+
+type FarmerConnectionLandSize {
+  key: String
+  connection: FarmerConnection
+}
+
+type FarmerConnectionAnnualIncome {
+  key: String
+  connection: FarmerConnection
+}
+
+type FarmerConnectionBorewellOnProperty {
+  key: Boolean
+  connection: FarmerConnection
+}
+
+type FarmerConnectionNumberOfBorewells {
+  key: Int
+  connection: FarmerConnection
+}
+
+type FarmerConnectionPowerConnection {
+  key: Boolean
+  connection: FarmerConnection
+}
+
+type FarmerConnectionKrishiHonda {
+  key: Boolean
+  connection: FarmerConnection
+}
+
+type FarmerConnectionSizeOfKrishiHonda {
+  key: String
+  connection: FarmerConnection
+}
+
+type FarmerConnectionFishCultivationHistory {
+  key: Boolean
+  connection: FarmerConnection
+}
+
+type FarmerConnectionKrishiHondaOutput {
+  key: String
+  connection: FarmerConnection
+}
+
+type FarmerConnectionKrishiHondaChallenges {
+  key: String
+  connection: FarmerConnection
+}
+
+type FarmerConnectionFishCultivationKnowledge {
+  key: String
+  connection: FarmerConnection
+}
+
+type FarmerConnectionGovernmentSchemeAvailed {
+  key: String
+  connection: FarmerConnection
+}
+
+type FarmerConnectionKrishiHondaInterest {
+  key: Boolean
+  connection: FarmerConnection
+}
+
+type FarmerConnectionPhotoID {
+  key: Boolean
+  connection: FarmerConnection
+}
+
+type FarmerConnectionFarmLocation {
+  key: String
+  connection: FarmerConnection
+}
+
+type FarmerConnectionPublished_at {
+  key: DateTime
+  connection: FarmerConnection
+}
+
+input FarmerInput {
+  famerDetail: [ComponentPersonUserDetailInput!]
+  fullAddress: String!
+  dateOfBirth: Date
+  farmRegistrationTimeStamp: DateTime!
+  dateOfVisit: Date!
+  occupation: String
+  farmer: Boolean!
+  yearsOfFarming: Float
+  landSize: String
+  annualIncome: String
+  borewellOnProperty: Boolean
+  numberOfBorewells: Int
+  powerConnection: Boolean
+  krishiHonda: Boolean
+  sizeOfKrishiHonda: String
+  fishCultivationHistory: Boolean
+  krishiHondaOutput: String
+  krishiHondaChallenges: String
+  fishCultivationKnowledge: String
+  governmentSchemeAvailed: String
+  krishiHondaInterest: Boolean
+  photoID: Boolean
+  farmerPicture: [ID]
+  farmPicture: [ID]
+  farmLocation: String!
+  published_at: DateTime
+  created_by: ID
+  updated_by: ID
+}
+
+input editFarmerInput {
+  famerDetail: [editComponentPersonUserDetailInput]
+  fullAddress: String
+  dateOfBirth: Date
+  farmRegistrationTimeStamp: DateTime
+  dateOfVisit: Date
+  occupation: String
+  farmer: Boolean
+  yearsOfFarming: Float
+  landSize: String
+  annualIncome: String
+  borewellOnProperty: Boolean
+  numberOfBorewells: Int
+  powerConnection: Boolean
+  krishiHonda: Boolean
+  sizeOfKrishiHonda: String
+  fishCultivationHistory: Boolean
+  krishiHondaOutput: String
+  krishiHondaChallenges: String
+  fishCultivationKnowledge: String
+  governmentSchemeAvailed: String
+  krishiHondaInterest: Boolean
+  photoID: Boolean
+  farmerPicture: [ID]
+  farmPicture: [ID]
+  farmLocation: String
+  published_at: DateTime
+  created_by: ID
+  updated_by: ID
+}
+
+input createFarmerInput {
+  data: FarmerInput
+}
+
+type createFarmerPayload {
+  farmer: Farmer
+}
+
+input updateFarmerInput {
+  where: InputID
+  data: editFarmerInput
+}
+
+type updateFarmerPayload {
+  farmer: Farmer
+}
+
+input deleteFarmerInput {
+  where: InputID
+}
+
+type deleteFarmerPayload {
+  farmer: Farmer
 }
 
 enum ENUM_GENDERIDENTITYLEGEND_VALUE {
@@ -1728,7 +2213,6 @@ type Post {
   updated_at: DateTime!
   post_Text: String
   post_URL: String
-  users_permissions_user: UsersPermissionsUser
   published_at: DateTime
   post_Attachments(sort: String, limit: Int, start: Int, where: JSON): [UploadFile]
   post_comments(sort: String, limit: Int, start: Int, where: JSON): [PostComment]
@@ -1752,7 +2236,6 @@ type PostGroupBy {
   updated_at: [PostConnectionUpdated_at]
   post_Text: [PostConnectionPost_Text]
   post_URL: [PostConnectionPost_URL]
-  users_permissions_user: [PostConnectionUsers_permissions_user]
   published_at: [PostConnectionPublished_at]
 }
 
@@ -1781,11 +2264,6 @@ type PostConnectionPost_URL {
   connection: PostConnection
 }
 
-type PostConnectionUsers_permissions_user {
-  key: ID
-  connection: PostConnection
-}
-
 type PostConnectionPublished_at {
   key: DateTime
   connection: PostConnection
@@ -1797,7 +2275,6 @@ input PostInput {
   post_Attachments: [ID]
   post_comments: [ID]
   community_lists: [ID]
-  users_permissions_user: ID
   published_at: DateTime
   created_by: ID
   updated_by: ID
@@ -1809,7 +2286,6 @@ input editPostInput {
   post_Attachments: [ID]
   post_comments: [ID]
   community_lists: [ID]
-  users_permissions_user: ID
   published_at: DateTime
   created_by: ID
   updated_by: ID
@@ -2097,7 +2573,6 @@ type Question {
   updated_at: DateTime!
   question_Text: String
   question_URL: String
-  users_permissions_user: UsersPermissionsUser
   published_at: DateTime
   question_Attachments(sort: String, limit: Int, start: Int, where: JSON): [UploadFile]
   question_responses(sort: String, limit: Int, start: Int, where: JSON): [QuestionResponse]
@@ -2120,7 +2595,6 @@ type QuestionGroupBy {
   updated_at: [QuestionConnectionUpdated_at]
   question_Text: [QuestionConnectionQuestion_Text]
   question_URL: [QuestionConnectionQuestion_URL]
-  users_permissions_user: [QuestionConnectionUsers_permissions_user]
   published_at: [QuestionConnectionPublished_at]
 }
 
@@ -2149,11 +2623,6 @@ type QuestionConnectionQuestion_URL {
   connection: QuestionConnection
 }
 
-type QuestionConnectionUsers_permissions_user {
-  key: ID
-  connection: QuestionConnection
-}
-
 type QuestionConnectionPublished_at {
   key: DateTime
   connection: QuestionConnection
@@ -2164,7 +2633,6 @@ input QuestionInput {
   question_URL: String
   question_Attachments: [ID]
   question_responses: [ID]
-  users_permissions_user: ID
   published_at: DateTime
   created_by: ID
   updated_by: ID
@@ -2175,7 +2643,6 @@ input editQuestionInput {
   question_URL: String
   question_Attachments: [ID]
   question_responses: [ID]
-  users_permissions_user: ID
   published_at: DateTime
   created_by: ID
   updated_by: ID
@@ -2740,8 +3207,6 @@ type UsersPermissionsUser {
   confirmed: Boolean
   blocked: Boolean
   role: UsersPermissionsRole
-  posts(sort: String, limit: Int, start: Int, where: JSON): [Post]
-  questions(sort: String, limit: Int, start: Int, where: JSON): [Question]
 }
 
 type UsersPermissionsUserConnection {
@@ -2822,8 +3287,6 @@ input UserInput {
   confirmed: Boolean
   blocked: Boolean
   role: ID
-  posts: [ID]
-  questions: [ID]
   created_by: ID
   updated_by: ID
 }
@@ -2838,8 +3301,6 @@ input editUserInput {
   confirmed: Boolean
   blocked: Boolean
   role: ID
-  posts: [ID]
-  questions: [ID]
   created_by: ID
   updated_by: ID
 }
@@ -2876,6 +3337,7 @@ type ComponentPersonUserDetail {
   mobilePhone: String!
   zipCode: String!
   users_permissions_role: UsersPermissionsRole
+  alternateMobile: String
 }
 
 input ComponentPersonUserDetailInput {
@@ -2884,6 +3346,7 @@ input ComponentPersonUserDetailInput {
   mobilePhone: String!
   zipCode: String!
   users_permissions_role: ID
+  alternateMobile: String
 }
 
 input editComponentPersonUserDetailInput {
@@ -2893,9 +3356,10 @@ input editComponentPersonUserDetailInput {
   mobilePhone: String
   zipCode: String
   users_permissions_role: ID
+  alternateMobile: String
 }
 
-union Morph = UsersPermissionsMe | UsersPermissionsMeRole | UsersPermissionsLoginPayload | UserPermissionsPasswordPayload | role | user | CommentLike | CommentLikeConnection | CommentLikeAggregator | CommentLikeGroupBy | CommentLikeConnectionId | CommentLikeConnectionCreated_at | CommentLikeConnectionUpdated_at | CommentLikeConnectionComment_Liked_By_Name | CommentLikeConnectionPublished_at | createCommentLikePayload | updateCommentLikePayload | deleteCommentLikePayload | CommunityList | CommunityListConnection | CommunityListAggregator | CommunityListGroupBy | CommunityListConnectionId | CommunityListConnectionCreated_at | CommunityListConnectionUpdated_at | CommunityListConnectionCommunityName | CommunityListConnectionCommunityDescription | CommunityListConnectionPublished_at | createCommunityListPayload | updateCommunityListPayload | deleteCommunityListPayload | CommunityPatientsLink | CommunityPatientsLinkConnection | CommunityPatientsLinkAggregator | CommunityPatientsLinkAggregatorSum | CommunityPatientsLinkAggregatorAvg | CommunityPatientsLinkAggregatorMin | CommunityPatientsLinkAggregatorMax | CommunityPatientsLinkGroupBy | CommunityPatientsLinkConnectionId | CommunityPatientsLinkConnectionCreated_at | CommunityPatientsLinkConnectionUpdated_at | CommunityPatientsLinkConnectionCommunityId | CommunityPatientsLinkConnectionPatientId | CommunityPatientsLinkConnectionPublished_at | createCommunityPatientsLinkPayload | updateCommunityPatientsLinkPayload | deleteCommunityPatientsLinkPayload | CommunityProfessionalsLink | CommunityProfessionalsLinkConnection | CommunityProfessionalsLinkAggregator | CommunityProfessionalsLinkAggregatorSum | CommunityProfessionalsLinkAggregatorAvg | CommunityProfessionalsLinkAggregatorMin | CommunityProfessionalsLinkAggregatorMax | CommunityProfessionalsLinkGroupBy | CommunityProfessionalsLinkConnectionId | CommunityProfessionalsLinkConnectionCreated_at | CommunityProfessionalsLinkConnectionUpdated_at | CommunityProfessionalsLinkConnectionCommunityId | CommunityProfessionalsLinkConnectionProfessionalId | CommunityProfessionalsLinkConnectionPublished_at | createCommunityProfessionalsLinkPayload | updateCommunityProfessionalsLinkPayload | deleteCommunityProfessionalsLinkPayload | CommunityRelatedPersonLink | CommunityRelatedPersonLinkConnection | CommunityRelatedPersonLinkAggregator | CommunityRelatedPersonLinkAggregatorSum | CommunityRelatedPersonLinkAggregatorAvg | CommunityRelatedPersonLinkAggregatorMin | CommunityRelatedPersonLinkAggregatorMax | CommunityRelatedPersonLinkGroupBy | CommunityRelatedPersonLinkConnectionId | CommunityRelatedPersonLinkConnectionCreated_at | CommunityRelatedPersonLinkConnectionUpdated_at | CommunityRelatedPersonLinkConnectionCommunityId | CommunityRelatedPersonLinkConnectionRelatedPersonId | CommunityRelatedPersonLinkConnectionPublished_at | createCommunityRelatedPersonLinkPayload | updateCommunityRelatedPersonLinkPayload | deleteCommunityRelatedPersonLinkPayload | EducationLevelLegend | EducationLevelLegendConnection | EducationLevelLegendAggregator | EducationLevelLegendGroupBy | EducationLevelLegendConnectionId | EducationLevelLegendConnectionCreated_at | EducationLevelLegendConnectionUpdated_at | EducationLevelLegendConnectionName | EducationLevelLegendConnectionValue | EducationLevelLegendConnectionPublished_at | createEducationLevelLegendPayload | updateEducationLevelLegendPayload | deleteEducationLevelLegendPayload | FamilyIncomeLevelLegend | FamilyIncomeLevelLegendConnection | FamilyIncomeLevelLegendAggregator | FamilyIncomeLevelLegendGroupBy | FamilyIncomeLevelLegendConnectionId | FamilyIncomeLevelLegendConnectionCreated_at | FamilyIncomeLevelLegendConnectionUpdated_at | FamilyIncomeLevelLegendConnectionName | FamilyIncomeLevelLegendConnectionValue | FamilyIncomeLevelLegendConnectionPublished_at | createFamilyIncomeLevelLegendPayload | updateFamilyIncomeLevelLegendPayload | deleteFamilyIncomeLevelLegendPayload | GenderIdentityLegend | GenderIdentityLegendConnection | GenderIdentityLegendAggregator | GenderIdentityLegendGroupBy | GenderIdentityLegendConnectionId | GenderIdentityLegendConnectionCreated_at | GenderIdentityLegendConnectionUpdated_at | GenderIdentityLegendConnectionName | GenderIdentityLegendConnectionValue | GenderIdentityLegendConnectionPublished_at | createGenderIdentityLegendPayload | updateGenderIdentityLegendPayload | deleteGenderIdentityLegendPayload | InsuranceLegend | InsuranceLegendConnection | InsuranceLegendAggregator | InsuranceLegendGroupBy | InsuranceLegendConnectionId | InsuranceLegendConnectionCreated_at | InsuranceLegendConnectionUpdated_at | InsuranceLegendConnectionName | InsuranceLegendConnectionValue | InsuranceLegendConnectionPublished_at | createInsuranceLegendPayload | updateInsuranceLegendPayload | deleteInsuranceLegendPayload | MedicalTerms | MedicalTermsConnection | MedicalTermsAggregator | MedicalTermsGroupBy | MedicalTermsConnectionId | MedicalTermsConnectionCreated_at | MedicalTermsConnectionUpdated_at | MedicalTermsConnectionCUICode | MedicalTermsConnectionCUIName | MedicalTermsConnectionCUIRootSource | MedicalTermsConnectionPublished_at | createMedicalTermPayload | updateMedicalTermPayload | deleteMedicalTermPayload | Patient | PatientConnection | PatientAggregator | PatientGroupBy | PatientConnectionId | PatientConnectionCreated_at | PatientConnectionUpdated_at | PatientConnectionDateOfBirth | PatientConnectionRace | PatientConnectionEthnicity | PatientConnectionEducationalLevel | PatientConnectionHealthProfile | PatientConnectionHealthProfileCodes | PatientConnectionPersonDetail | PatientConnectionPatientEmailAddress | PatientConnectionPeopleHousehold | PatientConnectionFamilyIncomeLevel | PatientConnectionInsurance | PatientConnectionScreenName | createPatientPayload | updatePatientPayload | deletePatientPayload | PeerList | PeerListConnection | PeerListAggregator | PeerListAggregatorSum | PeerListAggregatorAvg | PeerListAggregatorMin | PeerListAggregatorMax | PeerListGroupBy | PeerListConnectionId | PeerListConnectionCreated_at | PeerListConnectionUpdated_at | PeerListConnectionPatientId | PeerListConnectionPeerId | PeerListConnectionAgeSimilarityScore | PeerListConnectionGenderSimilarityScore | PeerListConnectionRaceSimilarityScore | PeerListConnectionEthnicSimilarityScore | PeerListConnectionEducationSimilarityScore | PeerListConnectionHealthInsuranceSimilarityScore | PeerListConnectionAdjustedIncomeSimilarityScore | PeerListConnectionMedicalHxScore | PeerListConnectionOverallSocioEconomicScore | PeerListConnectionOverallDemographicScore | PeerListConnectionOverallScore | PeerListConnectionPublished_at | createPeerListPayload | updatePeerListPayload | deletePeerListPayload | PostComment | PostCommentConnection | PostCommentAggregator | PostCommentGroupBy | PostCommentConnectionId | PostCommentConnectionCreated_at | PostCommentConnectionUpdated_at | PostCommentConnectionComment_Text | PostCommentConnectionComment_Name | PostCommentConnectionPublished_at | createPostCommentPayload | updatePostCommentPayload | deletePostCommentPayload | Post | PostConnection | PostAggregator | PostGroupBy | PostConnectionId | PostConnectionCreated_at | PostConnectionUpdated_at | PostConnectionPost_Text | PostConnectionPost_URL | PostConnectionUsers_permissions_user | PostConnectionPublished_at | createPostPayload | updatePostPayload | deletePostPayload | Professional | ProfessionalConnection | ProfessionalAggregator | ProfessionalGroupBy | ProfessionalConnectionId | ProfessionalConnectionCreated_at | ProfessionalConnectionUpdated_at | ProfessionalConnectionFirstName | ProfessionalConnectionLastName | ProfessionalConnectionOrganization | ProfessionalConnectionHealthInterestId | ProfessionalConnectionPersonDetail | ProfessionalConnectionProfessionalEmailAddress | ProfessionalConnectionPublished_at | createProfessionalPayload | updateProfessionalPayload | deleteProfessionalPayload | QuestionResponse | QuestionResponseConnection | QuestionResponseAggregator | QuestionResponseGroupBy | QuestionResponseConnectionId | QuestionResponseConnectionCreated_at | QuestionResponseConnectionUpdated_at | QuestionResponseConnectionResponse | QuestionResponseConnectionResponse_Name | QuestionResponseConnectionResponse_by_userid | QuestionResponseConnectionPublished_at | createQuestionResponsePayload | updateQuestionResponsePayload | deleteQuestionResponsePayload | Question | QuestionConnection | QuestionAggregator | QuestionGroupBy | QuestionConnectionId | QuestionConnectionCreated_at | QuestionConnectionUpdated_at | QuestionConnectionQuestion_Text | QuestionConnectionQuestion_URL | QuestionConnectionUsers_permissions_user | QuestionConnectionPublished_at | createQuestionPayload | updateQuestionPayload | deleteQuestionPayload | RelatedPerson | RelatedPersonConnection | RelatedPersonAggregator | RelatedPersonGroupBy | RelatedPersonConnectionId | RelatedPersonConnectionCreated_at | RelatedPersonConnectionUpdated_at | RelatedPersonConnectionPersonDetail | RelatedPersonConnectionPatient | RelatedPersonConnectionRelationshipToPatient | RelatedPersonConnectionRelatedPersonEmailAddress | RelatedPersonConnectionPublished_at | createRelatedPersonPayload | updateRelatedPersonPayload | deleteRelatedPersonPayload | ResponseUpvote | ResponseUpvoteConnection | ResponseUpvoteAggregator | ResponseUpvoteGroupBy | ResponseUpvoteConnectionId | ResponseUpvoteConnectionCreated_at | ResponseUpvoteConnectionUpdated_at | ResponseUpvoteConnectionUpvote_Name | ResponseUpvoteConnectionPublished_at | createResponseUpvotePayload | updateResponseUpvotePayload | deleteResponseUpvotePayload | UploadFile | UploadFileConnection | UploadFileAggregator | UploadFileAggregatorSum | UploadFileAggregatorAvg | UploadFileAggregatorMin | UploadFileAggregatorMax | UploadFileGroupBy | UploadFileConnectionId | UploadFileConnectionCreated_at | UploadFileConnectionUpdated_at | UploadFileConnectionName | UploadFileConnectionAlternativeText | UploadFileConnectionCaption | UploadFileConnectionWidth | UploadFileConnectionHeight | UploadFileConnectionFormats | UploadFileConnectionHash | UploadFileConnectionExt | UploadFileConnectionMime | UploadFileConnectionSize | UploadFileConnectionUrl | UploadFileConnectionPreviewUrl | UploadFileConnectionProvider | UploadFileConnectionProvider_metadata | deleteFilePayload | UsersPermissionsPermission | UsersPermissionsRole | UsersPermissionsRoleConnection | UsersPermissionsRoleAggregator | UsersPermissionsRoleGroupBy | UsersPermissionsRoleConnectionId | UsersPermissionsRoleConnectionName | UsersPermissionsRoleConnectionDescription | UsersPermissionsRoleConnectionType | createRolePayload | updateRolePayload | deleteRolePayload | UsersPermissionsUser | UsersPermissionsUserConnection | UsersPermissionsUserAggregator | UsersPermissionsUserGroupBy | UsersPermissionsUserConnectionId | UsersPermissionsUserConnectionCreated_at | UsersPermissionsUserConnectionUpdated_at | UsersPermissionsUserConnectionUsername | UsersPermissionsUserConnectionEmail | UsersPermissionsUserConnectionProvider | UsersPermissionsUserConnectionConfirmed | UsersPermissionsUserConnectionBlocked | UsersPermissionsUserConnectionRole | createUserPayload | updateUserPayload | deleteUserPayload | ComponentPersonUserDetail
+union Morph = UsersPermissionsMe | UsersPermissionsMeRole | UsersPermissionsLoginPayload | UserPermissionsPasswordPayload | role | user | CommentLike | CommentLikeConnection | CommentLikeAggregator | CommentLikeGroupBy | CommentLikeConnectionId | CommentLikeConnectionCreated_at | CommentLikeConnectionUpdated_at | CommentLikeConnectionComment_Liked_By_Name | CommentLikeConnectionPublished_at | createCommentLikePayload | updateCommentLikePayload | deleteCommentLikePayload | CommunityList | CommunityListConnection | CommunityListAggregator | CommunityListGroupBy | CommunityListConnectionId | CommunityListConnectionCreated_at | CommunityListConnectionUpdated_at | CommunityListConnectionCommunityName | CommunityListConnectionCommunityDescription | CommunityListConnectionPublished_at | createCommunityListPayload | updateCommunityListPayload | deleteCommunityListPayload | CommunityPatientsLink | CommunityPatientsLinkConnection | CommunityPatientsLinkAggregator | CommunityPatientsLinkAggregatorSum | CommunityPatientsLinkAggregatorAvg | CommunityPatientsLinkAggregatorMin | CommunityPatientsLinkAggregatorMax | CommunityPatientsLinkGroupBy | CommunityPatientsLinkConnectionId | CommunityPatientsLinkConnectionCreated_at | CommunityPatientsLinkConnectionUpdated_at | CommunityPatientsLinkConnectionCommunityId | CommunityPatientsLinkConnectionPatientId | CommunityPatientsLinkConnectionPublished_at | createCommunityPatientsLinkPayload | updateCommunityPatientsLinkPayload | deleteCommunityPatientsLinkPayload | CommunityProfessionalsLink | CommunityProfessionalsLinkConnection | CommunityProfessionalsLinkAggregator | CommunityProfessionalsLinkAggregatorSum | CommunityProfessionalsLinkAggregatorAvg | CommunityProfessionalsLinkAggregatorMin | CommunityProfessionalsLinkAggregatorMax | CommunityProfessionalsLinkGroupBy | CommunityProfessionalsLinkConnectionId | CommunityProfessionalsLinkConnectionCreated_at | CommunityProfessionalsLinkConnectionUpdated_at | CommunityProfessionalsLinkConnectionCommunityId | CommunityProfessionalsLinkConnectionProfessionalId | CommunityProfessionalsLinkConnectionPublished_at | createCommunityProfessionalsLinkPayload | updateCommunityProfessionalsLinkPayload | deleteCommunityProfessionalsLinkPayload | CommunityRelatedPersonLink | CommunityRelatedPersonLinkConnection | CommunityRelatedPersonLinkAggregator | CommunityRelatedPersonLinkAggregatorSum | CommunityRelatedPersonLinkAggregatorAvg | CommunityRelatedPersonLinkAggregatorMin | CommunityRelatedPersonLinkAggregatorMax | CommunityRelatedPersonLinkGroupBy | CommunityRelatedPersonLinkConnectionId | CommunityRelatedPersonLinkConnectionCreated_at | CommunityRelatedPersonLinkConnectionUpdated_at | CommunityRelatedPersonLinkConnectionCommunityId | CommunityRelatedPersonLinkConnectionRelatedPersonId | CommunityRelatedPersonLinkConnectionPublished_at | createCommunityRelatedPersonLinkPayload | updateCommunityRelatedPersonLinkPayload | deleteCommunityRelatedPersonLinkPayload | DeviceSensorParameters | DeviceSensorParametersConnection | DeviceSensorParametersAggregator | DeviceSensorParametersGroupBy | DeviceSensorParametersConnectionId | DeviceSensorParametersConnectionCreated_at | DeviceSensorParametersConnectionUpdated_at | DeviceSensorParametersConnectionFarmID | DeviceSensorParametersConnectionDeviceID | DeviceSensorParametersConnectionLogTimeStamp | DeviceSensorParametersConnectionSurfaceTemp | DeviceSensorParametersConnectionPondTemp | DeviceSensorParametersConnectionTds | DeviceSensorParametersConnectionPh | DeviceSensorParametersConnectionDissolvedOxygen | DeviceSensorParametersConnectionNitrite | DeviceSensorParametersConnectionLightIntensity | DeviceSensorParametersConnectionPublished_at | createDeviceSensorParameterPayload | updateDeviceSensorParameterPayload | deleteDeviceSensorParameterPayload | EducationLevelLegend | EducationLevelLegendConnection | EducationLevelLegendAggregator | EducationLevelLegendGroupBy | EducationLevelLegendConnectionId | EducationLevelLegendConnectionCreated_at | EducationLevelLegendConnectionUpdated_at | EducationLevelLegendConnectionName | EducationLevelLegendConnectionValue | EducationLevelLegendConnectionPublished_at | createEducationLevelLegendPayload | updateEducationLevelLegendPayload | deleteEducationLevelLegendPayload | FamilyIncomeLevelLegend | FamilyIncomeLevelLegendConnection | FamilyIncomeLevelLegendAggregator | FamilyIncomeLevelLegendGroupBy | FamilyIncomeLevelLegendConnectionId | FamilyIncomeLevelLegendConnectionCreated_at | FamilyIncomeLevelLegendConnectionUpdated_at | FamilyIncomeLevelLegendConnectionName | FamilyIncomeLevelLegendConnectionValue | FamilyIncomeLevelLegendConnectionPublished_at | createFamilyIncomeLevelLegendPayload | updateFamilyIncomeLevelLegendPayload | deleteFamilyIncomeLevelLegendPayload | Farmer | FarmerConnection | FarmerAggregator | FarmerAggregatorSum | FarmerAggregatorAvg | FarmerAggregatorMin | FarmerAggregatorMax | FarmerGroupBy | FarmerConnectionId | FarmerConnectionCreated_at | FarmerConnectionUpdated_at | FarmerConnectionFullAddress | FarmerConnectionDateOfBirth | FarmerConnectionFarmRegistrationTimeStamp | FarmerConnectionDateOfVisit | FarmerConnectionOccupation | FarmerConnectionFarmer | FarmerConnectionYearsOfFarming | FarmerConnectionLandSize | FarmerConnectionAnnualIncome | FarmerConnectionBorewellOnProperty | FarmerConnectionNumberOfBorewells | FarmerConnectionPowerConnection | FarmerConnectionKrishiHonda | FarmerConnectionSizeOfKrishiHonda | FarmerConnectionFishCultivationHistory | FarmerConnectionKrishiHondaOutput | FarmerConnectionKrishiHondaChallenges | FarmerConnectionFishCultivationKnowledge | FarmerConnectionGovernmentSchemeAvailed | FarmerConnectionKrishiHondaInterest | FarmerConnectionPhotoID | FarmerConnectionFarmLocation | FarmerConnectionPublished_at | createFarmerPayload | updateFarmerPayload | deleteFarmerPayload | GenderIdentityLegend | GenderIdentityLegendConnection | GenderIdentityLegendAggregator | GenderIdentityLegendGroupBy | GenderIdentityLegendConnectionId | GenderIdentityLegendConnectionCreated_at | GenderIdentityLegendConnectionUpdated_at | GenderIdentityLegendConnectionName | GenderIdentityLegendConnectionValue | GenderIdentityLegendConnectionPublished_at | createGenderIdentityLegendPayload | updateGenderIdentityLegendPayload | deleteGenderIdentityLegendPayload | InsuranceLegend | InsuranceLegendConnection | InsuranceLegendAggregator | InsuranceLegendGroupBy | InsuranceLegendConnectionId | InsuranceLegendConnectionCreated_at | InsuranceLegendConnectionUpdated_at | InsuranceLegendConnectionName | InsuranceLegendConnectionValue | InsuranceLegendConnectionPublished_at | createInsuranceLegendPayload | updateInsuranceLegendPayload | deleteInsuranceLegendPayload | MedicalTerms | MedicalTermsConnection | MedicalTermsAggregator | MedicalTermsGroupBy | MedicalTermsConnectionId | MedicalTermsConnectionCreated_at | MedicalTermsConnectionUpdated_at | MedicalTermsConnectionCUICode | MedicalTermsConnectionCUIName | MedicalTermsConnectionCUIRootSource | MedicalTermsConnectionPublished_at | createMedicalTermPayload | updateMedicalTermPayload | deleteMedicalTermPayload | Patient | PatientConnection | PatientAggregator | PatientGroupBy | PatientConnectionId | PatientConnectionCreated_at | PatientConnectionUpdated_at | PatientConnectionDateOfBirth | PatientConnectionRace | PatientConnectionEthnicity | PatientConnectionEducationalLevel | PatientConnectionHealthProfile | PatientConnectionHealthProfileCodes | PatientConnectionPersonDetail | PatientConnectionPatientEmailAddress | PatientConnectionPeopleHousehold | PatientConnectionFamilyIncomeLevel | PatientConnectionInsurance | PatientConnectionScreenName | createPatientPayload | updatePatientPayload | deletePatientPayload | PeerList | PeerListConnection | PeerListAggregator | PeerListAggregatorSum | PeerListAggregatorAvg | PeerListAggregatorMin | PeerListAggregatorMax | PeerListGroupBy | PeerListConnectionId | PeerListConnectionCreated_at | PeerListConnectionUpdated_at | PeerListConnectionPatientId | PeerListConnectionPeerId | PeerListConnectionAgeSimilarityScore | PeerListConnectionGenderSimilarityScore | PeerListConnectionRaceSimilarityScore | PeerListConnectionEthnicSimilarityScore | PeerListConnectionEducationSimilarityScore | PeerListConnectionHealthInsuranceSimilarityScore | PeerListConnectionAdjustedIncomeSimilarityScore | PeerListConnectionMedicalHxScore | PeerListConnectionOverallSocioEconomicScore | PeerListConnectionOverallDemographicScore | PeerListConnectionOverallScore | PeerListConnectionPublished_at | createPeerListPayload | updatePeerListPayload | deletePeerListPayload | PostComment | PostCommentConnection | PostCommentAggregator | PostCommentGroupBy | PostCommentConnectionId | PostCommentConnectionCreated_at | PostCommentConnectionUpdated_at | PostCommentConnectionComment_Text | PostCommentConnectionComment_Name | PostCommentConnectionPublished_at | createPostCommentPayload | updatePostCommentPayload | deletePostCommentPayload | Post | PostConnection | PostAggregator | PostGroupBy | PostConnectionId | PostConnectionCreated_at | PostConnectionUpdated_at | PostConnectionPost_Text | PostConnectionPost_URL | PostConnectionPublished_at | createPostPayload | updatePostPayload | deletePostPayload | Professional | ProfessionalConnection | ProfessionalAggregator | ProfessionalGroupBy | ProfessionalConnectionId | ProfessionalConnectionCreated_at | ProfessionalConnectionUpdated_at | ProfessionalConnectionFirstName | ProfessionalConnectionLastName | ProfessionalConnectionOrganization | ProfessionalConnectionHealthInterestId | ProfessionalConnectionPersonDetail | ProfessionalConnectionProfessionalEmailAddress | ProfessionalConnectionPublished_at | createProfessionalPayload | updateProfessionalPayload | deleteProfessionalPayload | QuestionResponse | QuestionResponseConnection | QuestionResponseAggregator | QuestionResponseGroupBy | QuestionResponseConnectionId | QuestionResponseConnectionCreated_at | QuestionResponseConnectionUpdated_at | QuestionResponseConnectionResponse | QuestionResponseConnectionResponse_Name | QuestionResponseConnectionResponse_by_userid | QuestionResponseConnectionPublished_at | createQuestionResponsePayload | updateQuestionResponsePayload | deleteQuestionResponsePayload | Question | QuestionConnection | QuestionAggregator | QuestionGroupBy | QuestionConnectionId | QuestionConnectionCreated_at | QuestionConnectionUpdated_at | QuestionConnectionQuestion_Text | QuestionConnectionQuestion_URL | QuestionConnectionPublished_at | createQuestionPayload | updateQuestionPayload | deleteQuestionPayload | RelatedPerson | RelatedPersonConnection | RelatedPersonAggregator | RelatedPersonGroupBy | RelatedPersonConnectionId | RelatedPersonConnectionCreated_at | RelatedPersonConnectionUpdated_at | RelatedPersonConnectionPersonDetail | RelatedPersonConnectionPatient | RelatedPersonConnectionRelationshipToPatient | RelatedPersonConnectionRelatedPersonEmailAddress | RelatedPersonConnectionPublished_at | createRelatedPersonPayload | updateRelatedPersonPayload | deleteRelatedPersonPayload | ResponseUpvote | ResponseUpvoteConnection | ResponseUpvoteAggregator | ResponseUpvoteGroupBy | ResponseUpvoteConnectionId | ResponseUpvoteConnectionCreated_at | ResponseUpvoteConnectionUpdated_at | ResponseUpvoteConnectionUpvote_Name | ResponseUpvoteConnectionPublished_at | createResponseUpvotePayload | updateResponseUpvotePayload | deleteResponseUpvotePayload | UploadFile | UploadFileConnection | UploadFileAggregator | UploadFileAggregatorSum | UploadFileAggregatorAvg | UploadFileAggregatorMin | UploadFileAggregatorMax | UploadFileGroupBy | UploadFileConnectionId | UploadFileConnectionCreated_at | UploadFileConnectionUpdated_at | UploadFileConnectionName | UploadFileConnectionAlternativeText | UploadFileConnectionCaption | UploadFileConnectionWidth | UploadFileConnectionHeight | UploadFileConnectionFormats | UploadFileConnectionHash | UploadFileConnectionExt | UploadFileConnectionMime | UploadFileConnectionSize | UploadFileConnectionUrl | UploadFileConnectionPreviewUrl | UploadFileConnectionProvider | UploadFileConnectionProvider_metadata | deleteFilePayload | UsersPermissionsPermission | UsersPermissionsRole | UsersPermissionsRoleConnection | UsersPermissionsRoleAggregator | UsersPermissionsRoleGroupBy | UsersPermissionsRoleConnectionId | UsersPermissionsRoleConnectionName | UsersPermissionsRoleConnectionDescription | UsersPermissionsRoleConnectionType | createRolePayload | updateRolePayload | deleteRolePayload | UsersPermissionsUser | UsersPermissionsUserConnection | UsersPermissionsUserAggregator | UsersPermissionsUserGroupBy | UsersPermissionsUserConnectionId | UsersPermissionsUserConnectionCreated_at | UsersPermissionsUserConnectionUpdated_at | UsersPermissionsUserConnectionUsername | UsersPermissionsUserConnectionEmail | UsersPermissionsUserConnectionProvider | UsersPermissionsUserConnectionConfirmed | UsersPermissionsUserConnectionBlocked | UsersPermissionsUserConnectionRole | createUserPayload | updateUserPayload | deleteUserPayload | ComponentPersonUserDetail
 
 input InputID {
   id: ID!
@@ -2929,12 +3393,18 @@ type Query {
   communityRelatedPersonLink(id: ID!, publicationState: PublicationState): CommunityRelatedPersonLink
   communityRelatedPersonLinks(sort: String, limit: Int, start: Int, where: JSON, publicationState: PublicationState): [CommunityRelatedPersonLink]
   communityRelatedPersonLinksConnection(sort: String, limit: Int, start: Int, where: JSON): CommunityRelatedPersonLinkConnection
+  deviceSensorParameter(id: ID!, publicationState: PublicationState): DeviceSensorParameters
+  deviceSensorParameters(sort: String, limit: Int, start: Int, where: JSON, publicationState: PublicationState): [DeviceSensorParameters]
+  deviceSensorParametersConnection(sort: String, limit: Int, start: Int, where: JSON): DeviceSensorParametersConnection
   educationLevelLegend(id: ID!, publicationState: PublicationState): EducationLevelLegend
   educationLevelLegends(sort: String, limit: Int, start: Int, where: JSON, publicationState: PublicationState): [EducationLevelLegend]
   educationLevelLegendsConnection(sort: String, limit: Int, start: Int, where: JSON): EducationLevelLegendConnection
   familyIncomeLevelLegend(id: ID!, publicationState: PublicationState): FamilyIncomeLevelLegend
   familyIncomeLevelLegends(sort: String, limit: Int, start: Int, where: JSON, publicationState: PublicationState): [FamilyIncomeLevelLegend]
   familyIncomeLevelLegendsConnection(sort: String, limit: Int, start: Int, where: JSON): FamilyIncomeLevelLegendConnection
+  farmer(id: ID!, publicationState: PublicationState): Farmer
+  farmers(sort: String, limit: Int, start: Int, where: JSON, publicationState: PublicationState): [Farmer]
+  farmersConnection(sort: String, limit: Int, start: Int, where: JSON): FarmerConnection
   genderIdentityLegend(id: ID!, publicationState: PublicationState): GenderIdentityLegend
   genderIdentityLegends(sort: String, limit: Int, start: Int, where: JSON, publicationState: PublicationState): [GenderIdentityLegend]
   genderIdentityLegendsConnection(sort: String, limit: Int, start: Int, where: JSON): GenderIdentityLegendConnection
@@ -3007,12 +3477,18 @@ type Mutation {
   createCommunityRelatedPersonLink(input: createCommunityRelatedPersonLinkInput): createCommunityRelatedPersonLinkPayload
   updateCommunityRelatedPersonLink(input: updateCommunityRelatedPersonLinkInput): updateCommunityRelatedPersonLinkPayload
   deleteCommunityRelatedPersonLink(input: deleteCommunityRelatedPersonLinkInput): deleteCommunityRelatedPersonLinkPayload
+  createDeviceSensorParameter(input: createDeviceSensorParameterInput): createDeviceSensorParameterPayload
+  updateDeviceSensorParameter(input: updateDeviceSensorParameterInput): updateDeviceSensorParameterPayload
+  deleteDeviceSensorParameter(input: deleteDeviceSensorParameterInput): deleteDeviceSensorParameterPayload
   createEducationLevelLegend(input: createEducationLevelLegendInput): createEducationLevelLegendPayload
   updateEducationLevelLegend(input: updateEducationLevelLegendInput): updateEducationLevelLegendPayload
   deleteEducationLevelLegend(input: deleteEducationLevelLegendInput): deleteEducationLevelLegendPayload
   createFamilyIncomeLevelLegend(input: createFamilyIncomeLevelLegendInput): createFamilyIncomeLevelLegendPayload
   updateFamilyIncomeLevelLegend(input: updateFamilyIncomeLevelLegendInput): updateFamilyIncomeLevelLegendPayload
   deleteFamilyIncomeLevelLegend(input: deleteFamilyIncomeLevelLegendInput): deleteFamilyIncomeLevelLegendPayload
+  createFarmer(input: createFarmerInput): createFarmerPayload
+  updateFarmer(input: updateFarmerInput): updateFarmerPayload
+  deleteFarmer(input: deleteFarmerInput): deleteFarmerPayload
   createGenderIdentityLegend(input: createGenderIdentityLegendInput): createGenderIdentityLegendPayload
   updateGenderIdentityLegend(input: updateGenderIdentityLegendInput): updateGenderIdentityLegendPayload
   deleteGenderIdentityLegend(input: deleteGenderIdentityLegendInput): deleteGenderIdentityLegendPayload

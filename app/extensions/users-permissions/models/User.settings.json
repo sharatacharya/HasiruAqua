@@ -58,14 +58,6 @@
       "via": "users",
       "plugin": "users-permissions",
       "configurable": false
-    },
-    "posts": {
-      "via": "users_permissions_user",
-      "collection": "post"
-    },
-    "questions": {
-      "via": "users_permissions_user",
-      "collection": "question"
     }
   }
 }

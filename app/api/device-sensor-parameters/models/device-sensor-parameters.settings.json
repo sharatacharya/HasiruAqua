@@ -1,0 +1,52 @@
+{
+  "kind": "collectionType",
+  "collectionName": "device_sensor_parameters",
+  "info": {
+    "name": "deviceSensorParameters",
+    "description": ""
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true,
+    "draftAndPublish": true
+  },
+  "attributes": {
+    "farmID": {
+      "type": "string",
+      "required": true
+    },
+    "deviceID": {
+      "type": "string",
+      "required": true
+    },
+    "logTimeStamp": {
+      "type": "datetime",
+      "required": true
+    },
+    "surfaceTemp": {
+      "type": "string",
+      "required": true
+    },
+    "pondTemp": {
+      "type": "string",
+      "required": true
+    },
+    "tds": {
+      "type": "string",
+      "required": true
+    },
+    "ph": {
+      "type": "string",
+      "required": true
+    },
+    "dissolvedOxygen": {
+      "type": "string"
+    },
+    "nitrite": {
+      "type": "string"
+    },
+    "lightIntensity": {
+      "type": "string"
+    }
+  }
+}

@@ -27,6 +27,9 @@
     "users_permissions_role": {
       "plugin": "users-permissions",
       "model": "role"
+    },
+    "alternateMobile": {
+      "type": "string"
     }
   }
 }

@@ -30,11 +30,6 @@
     },
     "question_responses": {
       "collection": "question-response"
-    },
-    "users_permissions_user": {
-      "plugin": "users-permissions",
-      "model": "user",
-      "via": "questions"
     }
   }
 }

@@ -35,11 +35,6 @@
       "collection": "community-list",
       "via": "posts",
       "dominant": true
-    },
-    "users_permissions_user": {
-      "plugin": "users-permissions",
-      "model": "user",
-      "via": "posts"
     }
   }
 }

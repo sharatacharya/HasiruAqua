@@ -1,0 +1,60 @@
+{
+  "routes": [
+    {
+      "method": "GET",
+      "path": "/device-sensor-parameters",
+      "handler": "device-sensor-parameters.find",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/device-sensor-parameters/uploadParams",
+      "handler": "device-sensor-parameters.uploadParams",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/device-sensor-parameters/count",
+      "handler": "device-sensor-parameters.count",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/device-sensor-parameters/:id",
+      "handler": "device-sensor-parameters.findOne",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/device-sensor-parameters",
+      "handler": "device-sensor-parameters.create",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "PUT",
+      "path": "/device-sensor-parameters/:id",
+      "handler": "device-sensor-parameters.update",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "DELETE",
+      "path": "/device-sensor-parameters/:id",
+      "handler": "device-sensor-parameters.delete",
+      "config": {
+        "policies": []
+      }
+    }
+  ]
+}
