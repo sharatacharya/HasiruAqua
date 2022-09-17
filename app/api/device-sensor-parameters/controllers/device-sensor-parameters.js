@@ -11,9 +11,9 @@ module.exports = {
     	// const id = ctx.params.id;
     
     	//console.log(ctx.request.url);
-    	const farmid = ctx.request.url.split("farm=").pop().split("&")[0];
+    	const farmid = ctx.request.url.split("farmID=").pop().split("&")[0];
 	//const mySubString = ctx.request.url.substring(ctr.request.url.indexOf("farm=") + 1, ctr.request.url.lastIndexOf("&"));
-    	const deviceid = ctx.request.url.split("device=").pop().split("&")[0];
+    	const deviceid = ctx.request.url.split("deviceID=").pop().split("&")[0];
     	const ph = ctx.request.url.split("ph=").pop().split("&")[0];
     	const tds = ctx.request.url.split("tds=").pop().split("&")[0];
     	const pondTemp = ctx.request.url.split("pondTemp=").pop().split("&")[0];
@@ -40,7 +40,7 @@ module.exports = {
 	const entity = await strapi.query("device-sensor-parameters").create({farmID: farmid, deviceID: deviceid, 
 		logTimeStamp: today, surfaceTemp: surfaceTemp, pondTemp: pondTemp, tds: tds, ph: ph});
 	console.log(entity);
-	//return true;
+	return true;
     } catch (err) {
           ctx.badRequest("uploadParams controller error", { moreDetails: err });
     }
